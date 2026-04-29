@@ -4,18 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#000000" />
-  <title>STEPHAN RÖTTGER</title>
+  <title>BUY ME — Stephan Röttger</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='black'/%3E%3Ctext x='50' y='75' font-family='monospace' font-size='80' font-weight='900' fill='%23ff0033' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=JetBrains+Mono:wght@400;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
-  <audio id="track" src="/track.mp3" preload="auto" crossorigin="anonymous"></audio>
+<body data-theme="kaufmich">
 
-  <!-- WORLD: shakes / zooms / chromatic-splits on beat -->
-  <div id="world">
+  <!-- ============================================================
+       1) PASSWORT-GATE — vor allem anderen
+       ============================================================ -->
+  <div id="gate">
+    <div class="gate-inner">
+      <div class="gate-tag mono">↓ zugang</div>
+      <div class="gate-name">BUY ME</div>
+      <form id="gate-form">
+        <input id="gate-pw" type="password" inputmode="numeric" autocomplete="off"
+               placeholder="••••" maxlength="6" autofocus />
+        <button type="submit" id="gate-btn">ENTER</button>
+      </form>
+      <div class="gate-hint mono">stephan röttger · 2026</div>
+      <div id="gate-err" class="mono"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       2) SONG-AUSWAHL — nach erfolgreichem Login
+       ============================================================ -->
+  <div id="picker" hidden>
+    <div class="picker-inner">
+      <div class="picker-tag mono">wähle deinen track</div>
+      <div class="picker-name">BUY <span>ME</span></div>
+      <div class="picker-grid">
+        <button class="track-card" data-song="kaufmich">
+          <div class="tc-num mono">01</div>
+          <div class="tc-title">KAUF MICH</div>
+          <div class="tc-meta mono">die toten hosen · 1993 · 03:45</div>
+          <div class="tc-vibe mono">→ punk · rot · knall</div>
+        </button>
+        <button class="track-card cyan" data-song="unmoeglich">
+          <div class="tc-num mono">02</div>
+          <div class="tc-title">UNMÖGLICH</div>
+          <div class="tc-meta mono">die toten hosen · 2008 · 04:11</div>
+          <div class="tc-vibe mono">→ trotz · cyan · ruhig</div>
+        </button>
+      </div>
+      <div class="picker-foot mono">kopfhörer rein · licht aus · fullscreen empfohlen</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       3) SHOW — die eigentliche Animation
+       ============================================================ -->
+  <audio id="track" preload="auto" crossorigin="anonymous"></audio>
+
+  <div id="world" hidden>
     <canvas id="bg"></canvas>
     <div class="grain"></div>
     <div class="scanlines"></div>
@@ -29,8 +74,8 @@
     <!-- HUD -->
     <div id="hud">
       <div class="hud-l">
-        <div class="hud-row"><span class="dot"></span> LIVE</div>
-        <div class="hud-row mono">SR // 2026 // PUNK.OS</div>
+        <div class="hud-row"><span class="dot"></span> LIVE · <span id="track-name">—</span></div>
+        <div class="hud-row mono">SR // 2026 // <span id="theme-tag">PUNK.OS</span></div>
       </div>
       <div class="hud-r">
         <div class="hud-row mono"><span id="bpm">000</span> BPM</div>
@@ -39,229 +84,30 @@
     </div>
 
     <!-- TIMELINE -->
-    <div id="timeline"><div id="progress"></div><div id="time">00:00 / 03:45</div></div>
+    <div id="timeline"><div id="progress"></div><div id="time">00:00 / 00:00</div></div>
 
-    <!-- PERMANENTER TICKER -->
+    <!-- TICKER -->
     <div id="ticker">
       <div class="ticker-inner mono">
-        <span>· KEIN HYPE · NUR OUTPUT · WENN ETWAS ZWEIMAL PASSIERT, SCHREIB ICH EIN SKRIPT · 24/7 · TELEGRAM · CLOUDFLARE · SUPABASE · PLAYWRIGHT · CLAUDE · GPT · GLM · GEBAUT MIT KI &amp; KOFFEIN · </span>
-        <span>· KEIN HYPE · NUR OUTPUT · WENN ETWAS ZWEIMAL PASSIERT, SCHREIB ICH EIN SKRIPT · 24/7 · TELEGRAM · CLOUDFLARE · SUPABASE · PLAYWRIGHT · CLAUDE · GPT · GLM · GEBAUT MIT KI &amp; KOFFEIN · </span>
+        <span id="ticker-text">· KEIN HYPE · NUR OUTPUT · WENN ETWAS ZWEIMAL PASSIERT, SCHREIB ICH EIN SKRIPT · </span>
+        <span id="ticker-text-2">· KEIN HYPE · NUR OUTPUT · WENN ETWAS ZWEIMAL PASSIERT, SCHREIB ICH EIN SKRIPT · </span>
       </div>
     </div>
 
-    <!-- SCENES -->
-    <main id="scenes">
+    <!-- LYRICS-LAYER (live mitsingend, am unteren Rand groß) -->
+    <div id="lyrics-layer">
+      <div id="lyrics-line" class="mono"></div>
+    </div>
 
-      <!-- 0–6 BOOT (terminal typewriter) -->
-      <section class="scene scene-boot" data-from="0" data-to="6">
-        <div class="boot">
-          <div class="boot-line mono" data-i="0" data-text="> sr.os // boot…"></div>
-          <div class="boot-line mono" data-i="1" data-text="> lade identität.dat"></div>
-          <div class="boot-line mono" data-i="2" data-text="> patche kommerz.exe"></div>
-          <div class="boot-line mono" data-i="3" data-text="> bereit."></div>
-          <div class="cursor" aria-hidden="true">█</div>
-        </div>
-      </section>
-
-      <!-- 6–14 NAME (chromatic split + zoom) -->
-      <section class="scene scene-name" data-from="6" data-to="14">
-        <div class="name-stack">
-          <div class="huge split" data-text="STEPHAN">
-            <span class="layer base">STEPHAN</span>
-            <span class="layer cyan">STEPHAN</span>
-            <span class="layer red">STEPHAN</span>
-          </div>
-          <div class="huge outline split" data-text="RÖTTGER">
-            <span class="layer base">RÖTTGER</span>
-            <span class="layer cyan">RÖTTGER</span>
-            <span class="layer red">RÖTTGER</span>
-          </div>
-          <div class="role mono">operator · builder · signal</div>
-        </div>
-      </section>
-
-      <!-- 14–24 TRIO BAU/LIEFER/SCHWEIG (slammed punches) -->
-      <section class="scene scene-trio" data-from="14" data-to="24">
-        <div class="trio">
-          <div class="trio-line slam" data-i="0">ICH BAU.</div>
-          <div class="trio-line slam red" data-i="1">ICH LIEFER.</div>
-          <div class="trio-line slam quiet" data-i="2">ich schweig.</div>
-        </div>
-      </section>
-
-      <!-- 24–34 WER? (scramble + machine glitch) -->
-      <section class="scene scene-qa" data-from="24" data-to="34">
-        <div class="qa">
-          <div class="qa-q mono">// wer</div>
-          <h1 class="qa-a glitch" data-scramble="EIN MENSCH MIT MASCHINEN.">EIN MENSCH MIT MASCHINEN.</h1>
-        </div>
-      </section>
-
-      <!-- 34–46 BIO (heavy stamp) -->
-      <section class="scene scene-bio" data-from="34" data-to="46">
-        <div class="bio">
-          <h2 class="bio-h">
-            <span class="stamp">Builder.</span>
-            <span class="stamp red">Operator.</span>
-            <span class="stamp">Orchestrator.</span>
-          </h2>
-          <p class="bio-p">
-            Andere reden über KI. Ich lass sie <span class="hl">arbeiten</span>.
-          </p>
-        </div>
-      </section>
-
-      <!-- 46–58 STATS (digit roulette) -->
-      <section class="scene scene-stats" data-from="46" data-to="58">
-        <div class="stats">
-          <div class="stat" data-i="0"><div class="stat-num" data-final="∞">0</div><div class="stat-l mono">skripte statt klicks</div></div>
-          <div class="stat" data-i="1"><div class="stat-num slot" data-final="247" data-num="247">000</div><div class="stat-l mono">agenten-stunden / woche</div></div>
-          <div class="stat" data-i="2"><div class="stat-num" data-final="0" data-num="0">0</div><div class="stat-l mono">bullshit toleriert</div></div>
-          <div class="stat" data-i="3"><div class="stat-num" data-final="1" data-num="1">0</div><div class="stat-l mono">prinzip: ship it</div></div>
-        </div>
-      </section>
-
-      <!-- 58–70 WAS? (running letters) -->
-      <section class="scene scene-qa" data-from="58" data-to="70">
-        <div class="qa">
-          <div class="qa-q mono">// was</div>
-          <h1 class="qa-a run" data-text="AGENTEN, DIE LAUFEN."></h1>
-        </div>
-      </section>
-
-      <!-- 70–82 STACK LIST (slam from right) -->
-      <section class="scene scene-stack" data-from="70" data-to="82">
-        <div class="stack-list">
-          <div class="sl-row" data-i="0">TELEGRAM</div>
-          <div class="sl-row red" data-i="1">CLOUDFLARE</div>
-          <div class="sl-row" data-i="2">SUPABASE</div>
-          <div class="sl-row red" data-i="3">PLAYWRIGHT</div>
-          <div class="sl-row" data-i="4">CLAUDE · GPT · GLM</div>
-        </div>
-      </section>
-
-      <!-- 82–94 QUOTE 1 (zweimal duplicates) -->
-      <section class="scene scene-quote" data-from="82" data-to="94">
-        <div class="quote">
-          <div class="q-mark">»</div>
-          <div class="q-text">Wenn etwas <span class="dup">zweimal</span> passiert,<br>schreib ich ein <span class="codeword">Skript</span>.</div>
-        </div>
-      </section>
-
-      <!-- 94–106 WIE? (DENKEN holds, SHIPPEN fires) -->
-      <section class="scene scene-qa" data-from="94" data-to="106">
-        <div class="qa">
-          <div class="qa-q mono">// wie</div>
-          <h1 class="qa-a two-beat">
-            <span class="hold">ERST DENKEN.</span>
-            <span class="fire">DANN SHIPPEN.</span>
-          </h1>
-        </div>
-      </section>
-
-      <!-- 106–118 QUOTE 2 (Plan stays · Drauflos crashes) -->
-      <section class="scene scene-quote" data-from="106" data-to="118">
-        <div class="quote">
-          <div class="q-mark">»</div>
-          <div class="q-text"><span class="stay">Plan-Modus</span> schlägt<br><span class="crash">Drauflos-Modus.</span></div>
-        </div>
-      </section>
-
-      <!-- 118–132 ANTI HYPE -->
-      <section class="scene scene-anti" data-from="118" data-to="132">
-        <div class="anti">
-          <div class="anti-line strike" data-i="0">kein pitch deck.</div>
-          <div class="anti-line strike" data-i="1">kein linkedin-buzzword.</div>
-          <div class="anti-line strike" data-i="2">kein „lass uns mal syncen".</div>
-          <div class="anti-line big explode" data-i="3">NUR OUTPUT.</div>
-        </div>
-      </section>
-
-      <!-- 132–148 BIG MARQUEE -->
-      <section class="scene scene-marquee" data-from="132" data-to="148">
-        <div class="big-marquee">
-          <div class="bm-row">BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·</div>
-          <div class="bm-row reverse">2026 · 2026 · 2026 · 2026 · 2026 · 2026 · 2026 · 2026 ·</div>
-          <div class="bm-row">BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·</div>
-        </div>
-      </section>
-
-      <!-- 148–160 QUOTE 3 (zehnmal repeats + shakes) -->
-      <section class="scene scene-quote" data-from="148" data-to="160">
-        <div class="quote">
-          <div class="q-mark">»</div>
-          <div class="q-text">Lieber einmal <span class="think">denken</span><br>als <span class="repeat">zehnmal</span> debuggen.</div>
-        </div>
-      </section>
-
-      <!-- 160–174 WARUM? (letters drop one by one — niemand wartet) -->
-      <section class="scene scene-qa" data-from="160" data-to="174">
-        <div class="qa">
-          <div class="qa-q mono">// warum</div>
-          <h1 class="qa-a fall" data-text="WEIL NIEMAND AUF DICH WARTET."></h1>
-        </div>
-      </section>
-
-      <!-- 174–188 BUILDUP -->
-      <section class="scene scene-buildup" data-from="174" data-to="188">
-        <div class="buildup">
-          <div class="bu-line" data-i="0">DAS HIER</div>
-          <div class="bu-line" data-i="1">IST</div>
-          <div class="bu-line" data-i="2">KEIN</div>
-          <div class="bu-line red explode" data-i="3">PRODUKT.</div>
-        </div>
-      </section>
-
-      <!-- 188–212 CLIMAX (KAUF MICH appear, NICHT smashes them) -->
-      <section class="scene scene-climax" data-from="188" data-to="212">
-        <div class="climax">
-          <div class="climax-text">
-            <span class="lt">K</span><span class="lt">A</span><span class="lt">U</span><span class="lt">F</span>
-            <span class="sp"> </span>
-            <span class="lt">M</span><span class="lt">I</span><span class="lt">C</span><span class="lt">H</span>
-            <span class="sp"> </span>
-            <span class="bang">N</span><span class="bang">I</span><span class="bang">C</span><span class="bang">H</span><span class="bang">T</span>
-          </div>
-          <div class="climax-sub mono">→ bau mit mir.</div>
-        </div>
-      </section>
-
-      <!-- 212–230 OUTRO -->
-      <section class="scene scene-outro" data-from="212" data-to="230">
-        <div class="outro">
-          <div class="sig-name">— Stephan</div>
-          <div class="sig-meta mono">
-            <span>gebaut zuhause · 2026</span>
-            <span>musik · die toten hosen — kauf mich!</span>
-            <span>code · ki &amp; koffein</span>
-            <span>signiert · stepharo</span>
-          </div>
-        </div>
-      </section>
-
-    </main>
+    <!-- DYNAMISCHE SZENEN — werden von app.js generiert -->
+    <main id="scenes"></main>
 
     <!-- CONTROLS -->
     <div id="controls">
-      <button id="mute"><span class="ic">🔊</span></button>
-      <button id="restart"><span class="ic">⟲</span></button>
-      <button id="fs"><span class="ic">⛶</span></button>
-    </div>
-  </div>
-
-  <!-- PRESS PLAY OVERLAY -->
-  <div id="overlay">
-    <div class="ov-inner">
-      <div class="ov-tag mono">↓ press to begin</div>
-      <div class="ov-name">STEPHAN<span>RÖTTGER</span></div>
-      <button id="start">
-        <span class="play-icon">▶</span>
-        <span class="play-text">PLAY</span>
-      </button>
-      <div class="ov-foot mono">
-        <span>kopfhörer rein. licht aus. fullscreen.</span>
-        <span>· die toten hosen — kauf mich!</span>
-      </div>
+      <button id="back" title="Track wechseln (B)"><span class="ic">←</span></button>
+      <button id="mute" title="Mute (M)"><span class="ic">🔊</span></button>
+      <button id="restart" title="Neustart (R)"><span class="ic">⟲</span></button>
+      <button id="fs" title="Fullscreen (F)"><span class="ic">⛶</span></button>
     </div>
   </div>
 
