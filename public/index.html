@@ -14,13 +14,14 @@
 <body>
   <audio id="track" src="/track.mp3" preload="auto" crossorigin="anonymous"></audio>
 
-  <!-- WORLD: this whole thing shakes/zooms on beat -->
+  <!-- WORLD: shakes / zooms / chromatic-splits on beat -->
   <div id="world">
     <canvas id="bg"></canvas>
     <div class="grain"></div>
     <div class="scanlines"></div>
     <div class="vignette"></div>
     <div id="flash"></div>
+    <div id="redwash"></div>
 
     <!-- HUD -->
     <div id="hud">
@@ -48,49 +49,58 @@
     <!-- SCENES -->
     <main id="scenes">
 
-      <!-- 0–6 -->
-      <section class="scene" data-from="0" data-to="6">
+      <!-- 0–6 BOOT (terminal typewriter) -->
+      <section class="scene scene-boot" data-from="0" data-to="6">
         <div class="boot">
-          <div class="boot-line mono" data-i="0">&gt; sr.os booting…</div>
-          <div class="boot-line mono" data-i="1">&gt; lade bio.dat</div>
-          <div class="boot-line mono" data-i="2">&gt; patche kommerz.exe</div>
-          <div class="boot-line mono" data-i="3">&gt; bereit_</div>
+          <div class="boot-line mono" data-i="0" data-text="> sr.os booting…"></div>
+          <div class="boot-line mono" data-i="1" data-text="> lade bio.dat"></div>
+          <div class="boot-line mono" data-i="2" data-text="> patche kommerz.exe"></div>
+          <div class="boot-line mono" data-i="3" data-text="> bereit_"></div>
+          <div class="cursor" aria-hidden="true">█</div>
         </div>
       </section>
 
-      <!-- 6–14: NAME -->
-      <section class="scene" data-from="6" data-to="14">
+      <!-- 6–14 NAME (chromatic split + zoom) -->
+      <section class="scene scene-name" data-from="6" data-to="14">
         <div class="name-stack">
-          <div class="huge" data-scramble="STEPHAN">STEPHAN</div>
-          <div class="huge outline" data-scramble="RÖTTGER">RÖTTGER</div>
+          <div class="huge split" data-text="STEPHAN">
+            <span class="layer base">STEPHAN</span>
+            <span class="layer cyan">STEPHAN</span>
+            <span class="layer red">STEPHAN</span>
+          </div>
+          <div class="huge outline split" data-text="RÖTTGER">
+            <span class="layer base">RÖTTGER</span>
+            <span class="layer cyan">RÖTTGER</span>
+            <span class="layer red">RÖTTGER</span>
+          </div>
           <div class="role mono">operator · builder · signal</div>
         </div>
       </section>
 
-      <!-- 14–24: TRIO BAU/LIEFER/SCHWEIG -->
-      <section class="scene" data-from="14" data-to="24">
+      <!-- 14–24 TRIO BAU/LIEFER/SCHWEIG (slammed punches) -->
+      <section class="scene scene-trio" data-from="14" data-to="24">
         <div class="trio">
-          <div class="trio-line" data-i="0">ICH BAU.</div>
-          <div class="trio-line red" data-i="1">ICH LIEFER.</div>
-          <div class="trio-line" data-i="2">ICH SCHWEIG.</div>
+          <div class="trio-line slam" data-i="0">ICH BAU.</div>
+          <div class="trio-line slam red" data-i="1">ICH LIEFER.</div>
+          <div class="trio-line slam quiet" data-i="2">ich schweig.</div>
         </div>
       </section>
 
-      <!-- 24–34: WER? -->
-      <section class="scene" data-from="24" data-to="34">
+      <!-- 24–34 WER? (scramble + machine glitch) -->
+      <section class="scene scene-qa" data-from="24" data-to="34">
         <div class="qa">
           <div class="qa-q mono">// wer</div>
-          <h1 class="qa-a" data-scramble="EIN MENSCH MIT MASCHINEN.">EIN MENSCH MIT MASCHINEN.</h1>
+          <h1 class="qa-a glitch" data-scramble="EIN MENSCH MIT MASCHINEN.">EIN MENSCH MIT MASCHINEN.</h1>
         </div>
       </section>
 
-      <!-- 34–46: BIO -->
-      <section class="scene" data-from="34" data-to="46">
+      <!-- 34–46 BIO (heavy stamp) -->
+      <section class="scene scene-bio" data-from="34" data-to="46">
         <div class="bio">
           <h2 class="bio-h">
-            <span>Builder.</span>
-            <span class="red">Operator.</span>
-            <span>Orchestrator.</span>
+            <span class="stamp">Builder.</span>
+            <span class="stamp red">Operator.</span>
+            <span class="stamp">Orchestrator.</span>
           </h2>
           <p class="bio-p">
             Andere reden über KI. Ich lass sie <span class="hl">arbeiten</span>.
@@ -98,8 +108,8 @@
         </div>
       </section>
 
-      <!-- 46–58: STATS -->
-      <section class="scene" data-from="46" data-to="58">
+      <!-- 46–58 STATS (digit roulette) -->
+      <section class="scene scene-stats" data-from="46" data-to="58">
         <div class="stats">
           <div class="stat" data-i="0"><div class="stat-num" data-final="∞">0</div><div class="stat-l mono">skripte statt klicks</div></div>
           <div class="stat" data-i="1"><div class="stat-num" data-final="247" data-num="247">0</div><div class="stat-l mono">stunden agents/woche</div></div>
@@ -108,16 +118,16 @@
         </div>
       </section>
 
-      <!-- 58–70: WAS? -->
-      <section class="scene" data-from="58" data-to="70">
+      <!-- 58–70 WAS? (running letters) -->
+      <section class="scene scene-qa" data-from="58" data-to="70">
         <div class="qa">
           <div class="qa-q mono">// was</div>
-          <h1 class="qa-a" data-scramble="AGENTEN. DIE WIRKLICH LAUFEN.">AGENTEN. DIE WIRKLICH LAUFEN.</h1>
+          <h1 class="qa-a run" data-text="AGENTEN. DIE WIRKLICH LAUFEN."></h1>
         </div>
       </section>
 
-      <!-- 70–82: STACK LIST -->
-      <section class="scene" data-from="70" data-to="82">
+      <!-- 70–82 STACK LIST (slam from right) -->
+      <section class="scene scene-stack" data-from="70" data-to="82">
         <div class="stack-list">
           <div class="sl-row" data-i="0">TELEGRAM</div>
           <div class="sl-row red" data-i="1">CLOUDFLARE</div>
@@ -127,42 +137,45 @@
         </div>
       </section>
 
-      <!-- 82–94: QUOTE 1 -->
-      <section class="scene" data-from="82" data-to="94">
+      <!-- 82–94 QUOTE 1 (zweimal duplicates) -->
+      <section class="scene scene-quote" data-from="82" data-to="94">
         <div class="quote">
           <div class="q-mark">»</div>
-          <div class="q-text">Wenn etwas zweimal passiert,<br>schreib ich ein Skript.</div>
+          <div class="q-text">Wenn etwas <span class="dup">zweimal</span> passiert,<br>schreib ich ein <span class="codeword">Skript</span>.</div>
         </div>
       </section>
 
-      <!-- 94–106: WIE? -->
-      <section class="scene" data-from="94" data-to="106">
+      <!-- 94–106 WIE? (DENKEN holds, SHIPPEN fires) -->
+      <section class="scene scene-qa" data-from="94" data-to="106">
         <div class="qa">
           <div class="qa-q mono">// wie</div>
-          <h1 class="qa-a" data-scramble="ERST DENKEN. DANN SHIPPEN.">ERST DENKEN. DANN SHIPPEN.</h1>
+          <h1 class="qa-a two-beat">
+            <span class="hold">ERST DENKEN.</span>
+            <span class="fire">DANN SHIPPEN.</span>
+          </h1>
         </div>
       </section>
 
-      <!-- 106–118: QUOTE 2 -->
-      <section class="scene" data-from="106" data-to="118">
+      <!-- 106–118 QUOTE 2 (Plan stays · Drauflos crashes) -->
+      <section class="scene scene-quote" data-from="106" data-to="118">
         <div class="quote">
           <div class="q-mark">»</div>
-          <div class="q-text">Plan-Modus schlägt<br>Drauflos-Modus.</div>
+          <div class="q-text"><span class="stay">Plan-Modus</span> schlägt<br><span class="crash">Drauflos-Modus.</span></div>
         </div>
       </section>
 
-      <!-- 118–132: ANTI HYPE -->
-      <section class="scene" data-from="118" data-to="132">
+      <!-- 118–132 ANTI HYPE -->
+      <section class="scene scene-anti" data-from="118" data-to="132">
         <div class="anti">
           <div class="anti-line strike" data-i="0">kein pitch deck.</div>
           <div class="anti-line strike" data-i="1">kein linkedin-buzzword.</div>
           <div class="anti-line strike" data-i="2">kein „lass uns kurz syncen".</div>
-          <div class="anti-line big" data-i="3">NUR OUTPUT.</div>
+          <div class="anti-line big explode" data-i="3">NUR OUTPUT.</div>
         </div>
       </section>
 
-      <!-- 132–148: BIG MARQUEE -->
-      <section class="scene" data-from="132" data-to="148">
+      <!-- 132–148 BIG MARQUEE -->
+      <section class="scene scene-marquee" data-from="132" data-to="148">
         <div class="big-marquee">
           <div class="bm-row">BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·</div>
           <div class="bm-row reverse">2026 · 2026 · 2026 · 2026 · 2026 · 2026 · 2026 · 2026 ·</div>
@@ -170,39 +183,39 @@
         </div>
       </section>
 
-      <!-- 148–160: QUOTE 3 -->
-      <section class="scene" data-from="148" data-to="160">
+      <!-- 148–160 QUOTE 3 (zehnmal repeats + shakes) -->
+      <section class="scene scene-quote" data-from="148" data-to="160">
         <div class="quote">
           <div class="q-mark">»</div>
-          <div class="q-text">Lieber einmal denken<br>als zehnmal debuggen.</div>
+          <div class="q-text">Lieber einmal <span class="think">denken</span><br>als <span class="repeat">zehnmal</span> debuggen.</div>
         </div>
       </section>
 
-      <!-- 160–174: WARUM? -->
-      <section class="scene" data-from="160" data-to="174">
+      <!-- 160–174 WARUM? (letters drop one by one — niemand wartet) -->
+      <section class="scene scene-qa" data-from="160" data-to="174">
         <div class="qa">
           <div class="qa-q mono">// warum</div>
-          <h1 class="qa-a" data-scramble="WEIL NIEMAND AUF DICH WARTET.">WEIL NIEMAND AUF DICH WARTET.</h1>
+          <h1 class="qa-a fall" data-text="WEIL NIEMAND AUF DICH WARTET."></h1>
         </div>
       </section>
 
-      <!-- 174–188: BUILDUP -->
-      <section class="scene" data-from="174" data-to="188">
+      <!-- 174–188 BUILDUP -->
+      <section class="scene scene-buildup" data-from="174" data-to="188">
         <div class="buildup">
           <div class="bu-line" data-i="0">DAS HIER</div>
           <div class="bu-line" data-i="1">IST</div>
           <div class="bu-line" data-i="2">KEIN</div>
-          <div class="bu-line red" data-i="3">PRODUKT.</div>
+          <div class="bu-line red explode" data-i="3">PRODUKT.</div>
         </div>
       </section>
 
-      <!-- 188–212: CLIMAX -->
-      <section class="scene" data-from="188" data-to="212">
+      <!-- 188–212 CLIMAX (KAUF MICH appear, NICHT smashes them) -->
+      <section class="scene scene-climax" data-from="188" data-to="212">
         <div class="climax">
           <div class="climax-text">
-            <span>K</span><span>A</span><span>U</span><span>F</span>
+            <span class="lt">K</span><span class="lt">A</span><span class="lt">U</span><span class="lt">F</span>
             <span class="sp"> </span>
-            <span>M</span><span>I</span><span>C</span><span>H</span>
+            <span class="lt">M</span><span class="lt">I</span><span class="lt">C</span><span class="lt">H</span>
             <span class="sp"> </span>
             <span class="bang">N</span><span class="bang">I</span><span class="bang">C</span><span class="bang">H</span><span class="bang">T</span>
           </div>
@@ -210,8 +223,8 @@
         </div>
       </section>
 
-      <!-- 212–230: OUTRO -->
-      <section class="scene" data-from="212" data-to="230">
+      <!-- 212–230 OUTRO -->
+      <section class="scene scene-outro" data-from="212" data-to="230">
         <div class="outro">
           <div class="sig-name">— Stephan</div>
           <div class="sig-meta mono">
@@ -233,7 +246,7 @@
     </div>
   </div>
 
-  <!-- PRESS PLAY OVERLAY (outside #world so it doesn't shake) -->
+  <!-- PRESS PLAY OVERLAY -->
   <div id="overlay">
     <div class="ov-inner">
       <div class="ov-tag mono">↓ press to begin</div>

@@ -1,7 +1,7 @@
 // =============================================================
-// STEPHAN RÖTTGER — music-video engine v2
-// Audio-reactive particle BG · scene timeline · text-scramble ·
-// counter · beat-triggered shake/flash · permanent micro-motion
+// STEPHAN RÖTTGER — music-video engine v3
+// per-scene impact animations · typewriter · letter splitter ·
+// beat-synced cuts · camera moves · redwash · zoom-punch
 // =============================================================
 
 const $ = (s) => document.querySelector(s);
@@ -20,7 +20,7 @@ const fsBtn = $('#fs');
 const scenes = $$('.scene');
 
 // =============================================================
-// AUDIO ANALYSIS
+// AUDIO
 // =============================================================
 let actx, analyser, source, freqData;
 function setupAudio() {
@@ -39,7 +39,7 @@ function getAudioData() {
   analyser.getByteFrequencyData(freqData);
   const len = freqData.length;
   const bassEnd = Math.floor(len * 0.06);
-  const midEnd  = Math.floor(len * 0.35);
+  const midEnd = Math.floor(len * 0.35);
   let bass = 0, mid = 0, treble = 0;
   for (let i = 0; i < bassEnd; i++) bass += freqData[i];
   for (let i = bassEnd; i < midEnd; i++) mid += freqData[i];
@@ -51,7 +51,7 @@ function getAudioData() {
 }
 
 // =============================================================
-// PARTICLE BG (canvas)
+// PARTICLE BG
 // =============================================================
 const canvas = $('#bg');
 const ctx = canvas.getContext('2d');
@@ -66,7 +66,7 @@ function resize() {
 }
 window.addEventListener('resize', resize);
 
-const PARTICLE_COUNT = 160;
+const PARTICLE_COUNT = 180;
 let particles = [];
 function initParticles() {
   particles = [];
@@ -93,7 +93,7 @@ function drawBG(t) {
 
   // Beat detection
   const now = performance.now();
-  if (bass > 0.68 && bass > lastBass * 1.13 && now - bassPeakTime > 220) {
+  if (bass > 0.66 && bass > lastBass * 1.12 && now - bassPeakTime > 200) {
     bassPeakTime = now;
     triggerKick();
     if (lastBeatTime > 0) {
@@ -114,7 +114,7 @@ function drawBG(t) {
   ctx.fillRect(0, 0, W, H);
 
   // Audio-reactive grid
-  const gridA = 0.04 + bass * 0.22;
+  const gridA = 0.04 + bass * 0.24;
   ctx.strokeStyle = `rgba(255, 0, 51, ${gridA})`;
   ctx.lineWidth = 1 * dpr;
   const gs = 80 * dpr;
@@ -127,10 +127,10 @@ function drawBG(t) {
   // Bass radial pulse
   if (bass > 0.4) {
     const cx = W / 2, cy = H / 2;
-    const radius = bass * Math.max(W, H) * 0.5;
+    const radius = bass * Math.max(W, H) * 0.55;
     const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-    grad.addColorStop(0, `rgba(255, 0, 51, ${bass * 0.20})`);
-    grad.addColorStop(0.5, `rgba(255, 0, 51, ${bass * 0.07})`);
+    grad.addColorStop(0, `rgba(255, 0, 51, ${bass * 0.22})`);
+    grad.addColorStop(0.5, `rgba(255, 0, 51, ${bass * 0.08})`);
     grad.addColorStop(1, 'rgba(255, 0, 51, 0)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
@@ -151,8 +151,8 @@ function drawBG(t) {
     if (bass > 0.5) {
       const ddx = p.x - W / 2, ddy = p.y - H / 2;
       const dd = Math.sqrt(ddx * ddx + ddy * ddy) || 1;
-      p.vx += (ddx / dd) * bass * 0.7;
-      p.vy += (ddy / dd) * bass * 0.7;
+      p.vx += (ddx / dd) * bass * 0.8;
+      p.vy += (ddy / dd) * bass * 0.8;
     }
     p.x += p.vx * speedBoost;
     p.y += p.vy * speedBoost;
@@ -162,7 +162,7 @@ function drawBG(t) {
     if (p.x < 0) p.x = W; else if (p.x > W) p.x = 0;
     if (p.y < 0) p.y = H; else if (p.y > H) p.y = 0;
     const alpha = p.base + treble * 0.5;
-    const size = p.r * (1 + bass * 1.5);
+    const size = p.r * (1 + bass * 1.6);
     ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
     ctx.beginPath();
     ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
@@ -178,7 +178,7 @@ function drawBG(t) {
       const dx = a.x - b.x, dy = a.y - b.y;
       const d = Math.sqrt(dx * dx + dy * dy);
       if (d < connectDist) {
-        const alpha = (1 - d / connectDist) * (0.15 + mid * 0.5);
+        const alpha = (1 - d / connectDist) * (0.18 + mid * 0.55);
         ctx.strokeStyle = `rgba(255, 0, 51, ${alpha})`;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       }
@@ -191,40 +191,37 @@ function drawBG(t) {
     const baseY = H - 40 * dpr;
     for (let i = 0; i < 64; i++) {
       const v = freqData[i * 2] / 255;
-      const bh = v * 80 * dpr;
-      ctx.fillStyle = `rgba(255, 0, 51, ${v * 0.6})`;
+      const bh = v * 90 * dpr;
+      ctx.fillStyle = `rgba(255, 0, 51, ${v * 0.65})`;
       ctx.fillRect(i * barW, baseY - bh, barW - 2, bh);
     }
   }
 }
 
 // =============================================================
-// BEAT EFFECTS
+// BEAT EFFECTS — flash, shake, zoom, redwash, aberrate
 // =============================================================
-let kickTO = null, flashTO = null, shakeTO = null;
-function triggerKick() {
-  document.body.classList.add('kick');
-  clearTimeout(kickTO);
-  kickTO = setTimeout(() => document.body.classList.remove('kick'), 200);
+const FX_TIMERS = {};
+function fxFire(name, ms) {
+  document.body.classList.add(name);
+  clearTimeout(FX_TIMERS[name]);
+  FX_TIMERS[name] = setTimeout(() => document.body.classList.remove(name), ms);
 }
-function triggerFlash() {
-  document.body.classList.add('flash');
-  clearTimeout(flashTO);
-  flashTO = setTimeout(() => document.body.classList.remove('flash'), 180);
-}
-function triggerShake() {
-  document.body.classList.add('shake');
-  clearTimeout(shakeTO);
-  shakeTO = setTimeout(() => document.body.classList.remove('shake'), 300);
-}
+function triggerKick()    { fxFire('kick',     200); }
+function triggerFlash()   { fxFire('flash',    180); }
+function triggerShake()   { fxFire('shake',    360); }
+function triggerZoom()    { fxFire('zoom',     560); }
+function triggerRedwash() { fxFire('redwash',  440); }
+function triggerAberrate(){ fxFire('aberrate', 520); }
+
 function onBeat(n) {
-  // Every 4th beat: small shake. Every 8th: flash.
-  if (n % 8 === 0) triggerFlash();
-  else if (n % 4 === 0) triggerShake();
+  if (n % 16 === 0)      { triggerRedwash(); triggerShake(); }
+  else if (n % 8 === 0)  { triggerFlash(); triggerAberrate(); }
+  else if (n % 4 === 0)  { triggerShake(); }
 }
 
 // =============================================================
-// TEXT SCRAMBLE (Mr. Robot style)
+// TEXT SCRAMBLE (Mr. Robot)
 // =============================================================
 const SCRAMBLE_CHARS = '!<>-_\\/[]{}—=+*^?#0123456789ABCDEF';
 class Scrambler {
@@ -238,16 +235,14 @@ class Scrambler {
   start() {
     if (this.running) return;
     this.running = true;
-    const oldText = '';
     const newText = this.target;
-    const length = Math.max(oldText.length, newText.length);
+    const length = newText.length;
     this.queue = [];
     for (let i = 0; i < length; i++) {
-      const from = oldText[i] || '';
       const to = newText[i] || '';
       const start = Math.floor(Math.random() * 30);
       const end = start + Math.floor(Math.random() * 30) + 10;
-      this.queue.push({ from, to, start, end, char: '' });
+      this.queue.push({ to, start, end, char: '' });
     }
     this.frame = 0;
     this.update();
@@ -257,7 +252,7 @@ class Scrambler {
     let output = '';
     let complete = 0;
     for (let i = 0; i < this.queue.length; i++) {
-      let { from, to, start, end, char } = this.queue[i];
+      let { to, start, end, char } = this.queue[i];
       if (this.frame >= end) { complete++; output += to; }
       else if (this.frame >= start) {
         if (!char || Math.random() < 0.28) {
@@ -265,7 +260,7 @@ class Scrambler {
           this.queue[i].char = char;
         }
         output += `<span style="color:#ff0033;opacity:.7">${char}</span>`;
-      } else { output += from; }
+      } else { output += '&nbsp;'; }
     }
     this.el.innerHTML = output;
     if (complete === this.queue.length) {
@@ -281,22 +276,76 @@ const scramblers = new Map();
 $$('[data-scramble]').forEach((el) => scramblers.set(el, new Scrambler(el)));
 
 // =============================================================
-// COUNTER (for stats)
+// LETTER SPLITTER — for .qa-a.run and .qa-a.fall
+// Splits text into per-letter spans with stagger delays so CSS
+// keyframes fire one-by-one.
+// =============================================================
+function splitLetters(el, baseDelay = 0, stagger = 0.06) {
+  const text = el.dataset.text || el.textContent;
+  el.dataset.original = text;
+  el.innerHTML = '';
+  let idx = 0;
+  for (const ch of text) {
+    const span = document.createElement('span');
+    span.className = 'ch';
+    if (ch === ' ') {
+      span.innerHTML = '&nbsp;';
+      span.style.width = '0.35em';
+    } else {
+      span.textContent = ch;
+    }
+    span.style.animationDelay = (baseDelay + idx * stagger) + 's';
+    el.appendChild(span);
+    idx++;
+  }
+}
+$$('.qa-a.run').forEach((el) => splitLetters(el, 0.1, 0.05));
+$$('.qa-a.fall').forEach((el) => splitLetters(el, 0.15, 0.09));
+
+// =============================================================
+// TYPEWRITER — for .scene-boot lines
+// =============================================================
+function typeLine(el, text, charDelay = 45) {
+  return new Promise((resolve) => {
+    el.textContent = '';
+    el.style.opacity = '1';
+    let i = 0;
+    const tick = () => {
+      if (i <= text.length) {
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(tick, charDelay + Math.random() * 30);
+      } else {
+        resolve();
+      }
+    };
+    tick();
+  });
+}
+async function runBootSequence(scene) {
+  const lines = [...scene.querySelectorAll('.boot-line')];
+  for (const ln of lines) {
+    await typeLine(ln, ln.dataset.text || ln.textContent, 38);
+    await new Promise((r) => setTimeout(r, 280));
+  }
+}
+
+// =============================================================
+// COUNTERS
 // =============================================================
 function animateCounter(el) {
   const final = el.dataset.final;
   const num = parseInt(el.dataset.num, 10);
   if (isNaN(num)) {
-    // non-numeric like ∞ — flicker chars then settle
     let i = 0;
     const flicker = () => {
       el.textContent = SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
-      if (i++ < 20) setTimeout(flicker, 35); else el.textContent = final;
+      if (i++ < 22) setTimeout(flicker, 35); else el.textContent = final;
     };
     flicker();
     return;
   }
-  const dur = 1100;
+  const dur = 1200;
   const start = performance.now();
   const step = (now) => {
     const t = Math.min(1, (now - start) / dur);
@@ -309,7 +358,7 @@ function animateCounter(el) {
 }
 
 // =============================================================
-// SCENE TRANSITIONS
+// SCENE TRANSITIONS — flash + per-scene kick
 // =============================================================
 let currentScene = -1;
 function updateScenes(time) {
@@ -324,27 +373,78 @@ function updateScenes(time) {
     if (currentScene >= 0) scenes[currentScene].classList.remove('active');
     if (active >= 0) {
       scenes[active].classList.add('active');
-      // hard cut on scene change → flash
+      // hard cut → flash + zoom punch
       triggerFlash();
+      triggerZoom();
       onSceneEnter(scenes[active]);
     }
     currentScene = active;
   }
 }
+
 function onSceneEnter(scene) {
-  // Trigger scramblers
+  // Scramblers
   scene.querySelectorAll('[data-scramble]').forEach((el) => {
     const s = scramblers.get(el);
     if (s) {
-      // reset & restart
       s.frame = 0; s.queue = []; s.running = false;
       el.textContent = '';
       requestAnimationFrame(() => s.start());
     }
   });
-  // Trigger counters
+
+  // Counters
   scene.querySelectorAll('.stat-num[data-final]').forEach((el) => {
-    setTimeout(() => animateCounter(el), 200 + (parseInt(el.closest('.stat').dataset.i, 10) * 200));
+    const stat = el.closest('.stat');
+    const idx = stat ? parseInt(stat.dataset.i, 10) : 0;
+    setTimeout(() => animateCounter(el), 250 + idx * 220);
+  });
+
+  // Per-scene custom triggers
+  if (scene.classList.contains('scene-boot')) {
+    runBootSequence(scene);
+  }
+  if (scene.classList.contains('scene-trio')) {
+    // sync impact: red wash on "ICH LIEFER." (1.6s + ~0.3s)
+    setTimeout(() => { triggerShake(); triggerRedwash(); }, 100);
+    setTimeout(() => { triggerShake(); triggerRedwash(); triggerAberrate(); }, 1700);
+    setTimeout(() => { triggerFlash(); }, 3300);
+  }
+  if (scene.classList.contains('scene-bio')) {
+    setTimeout(() => triggerShake(), 250);
+    setTimeout(() => { triggerShake(); triggerRedwash(); }, 1650);
+    setTimeout(() => triggerShake(), 3050);
+  }
+  if (scene.classList.contains('scene-stack')) {
+    [100, 500, 900, 1300, 1700].forEach((d, i) => {
+      setTimeout(() => { triggerShake(); if (i % 2 === 1) triggerRedwash(); }, d);
+    });
+  }
+  if (scene.classList.contains('scene-anti')) {
+    [200, 1600, 3200].forEach((d) => setTimeout(triggerShake, d + 500));
+    setTimeout(() => { triggerZoom(); triggerRedwash(); triggerAberrate(); }, 5050);
+  }
+  if (scene.classList.contains('scene-buildup')) {
+    setTimeout(() => { triggerZoom(); triggerRedwash(); triggerAberrate(); }, 4450);
+  }
+  if (scene.classList.contains('scene-climax')) {
+    // KAUF MICH lands
+    setTimeout(() => triggerShake(), 850);
+    // NICHT smashes
+    setTimeout(() => { triggerZoom(); triggerRedwash(); triggerAberrate(); triggerShake(); }, 1650);
+    setTimeout(() => { triggerFlash(); triggerRedwash(); }, 2050);
+  }
+  // re-trigger letter animations on .run / .fall
+  scene.querySelectorAll('.qa-a.run, .qa-a.fall').forEach((el) => {
+    // Force reflow to restart animations
+    const chs = el.querySelectorAll('.ch');
+    chs.forEach((ch) => {
+      const d = ch.style.animationDelay;
+      ch.style.animation = 'none';
+      void ch.offsetWidth;
+      ch.style.animation = '';
+      ch.style.animationDelay = d;
+    });
   });
 }
 
