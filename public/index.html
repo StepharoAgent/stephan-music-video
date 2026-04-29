@@ -4,203 +4,249 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#000000" />
-  <title>STEPHAN RÖTTGER — operator / builder / signal</title>
-  <meta name="description" content="Stephan Röttger. Builds machines. Ships signal. No noise." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='black'/%3E%3Ctext x='50' y='70' font-family='monospace' font-size='70' font-weight='900' fill='%23ff0033' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E" />
+  <title>STEPHAN RÖTTGER</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='black'/%3E%3Ctext x='50' y='75' font-family='monospace' font-size='80' font-weight='900' fill='%23ff0033' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=JetBrains+Mono:wght@400;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <!-- AUDIO -->
   <audio id="track" src="/track.mp3" preload="auto" crossorigin="anonymous"></audio>
 
-  <!-- WEBGL/CANVAS BG -->
-  <canvas id="bg"></canvas>
+  <!-- WORLD: this whole thing shakes/zooms on beat -->
+  <div id="world">
+    <canvas id="bg"></canvas>
+    <div class="grain"></div>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div id="flash"></div>
 
-  <!-- GRAIN / SCANLINES OVERLAY -->
-  <div class="grain" aria-hidden="true"></div>
-  <div class="scanlines" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-
-  <!-- TIMELINE PROGRESS -->
-  <div id="timeline" aria-hidden="true">
-    <div id="progress"></div>
-    <div id="time">00:00 / 03:45</div>
-  </div>
-
-  <!-- HUD -->
-  <div id="hud">
-    <div class="hud-l">
-      <div class="hud-row"><span class="dot"></span> REC</div>
-      <div class="hud-row mono">SR-2026 // PUNK.OS</div>
-    </div>
-    <div class="hud-r">
-      <div class="hud-row mono"><span id="bpm">000</span> BPM</div>
-      <div class="hud-row mono">CH 01 — STEREO</div>
-    </div>
-  </div>
-
-  <!-- PRESS PLAY OVERLAY -->
-  <div id="overlay">
-    <div class="ov-inner">
-      <div class="ov-name">STEPHAN<span>RÖTTGER</span></div>
-      <div class="ov-sub mono">a music video for one human</div>
-      <button id="start" aria-label="Start">
-        <span class="play-icon">▶</span>
-        <span class="play-text">PRESS PLAY</span>
-      </button>
-      <div class="ov-foot mono">
-        <span>↑ Sound on, lights off, full screen empfohlen</span>
-        <span>· Die Toten Hosen — Kauf Mich!</span>
+    <!-- HUD -->
+    <div id="hud">
+      <div class="hud-l">
+        <div class="hud-row"><span class="dot"></span> LIVE</div>
+        <div class="hud-row mono">SR // 2026 // PUNK.OS</div>
+      </div>
+      <div class="hud-r">
+        <div class="hud-row mono"><span id="bpm">000</span> BPM</div>
+        <div class="hud-row mono">FRAMES <span id="frames">000000</span></div>
       </div>
     </div>
-  </div>
 
-  <!-- SCENES -->
-  <main id="scenes">
-    <!-- SCENE 1: HEARTBEAT INTRO -->
-    <section class="scene" data-from="0" data-to="11">
-      <div class="heartbeat">
-        <div class="hb-line"></div>
-        <div class="hb-text mono">SYSTEM BOOT // SR.OS v2026.4</div>
-        <div class="hb-typing mono"></div>
+    <!-- TIMELINE -->
+    <div id="timeline"><div id="progress"></div><div id="time">00:00 / 03:45</div></div>
+
+    <!-- PERMANENTER TICKER -->
+    <div id="ticker">
+      <div class="ticker-inner mono">
+        <span>· STEPHAN RÖTTGER · OPERATOR · BUILDER · NO HYPE · NUR OUTPUT · SHIP IT · 24/7 · WENN ETWAS ZWEIMAL PASSIERT — SCHREIB ICH EIN SKRIPT · TELEGRAM · CLOUDFLARE · BROWSER · APIs · BUILT WITH AI &amp; KOFFEIN · </span>
+        <span>· STEPHAN RÖTTGER · OPERATOR · BUILDER · NO HYPE · NUR OUTPUT · SHIP IT · 24/7 · WENN ETWAS ZWEIMAL PASSIERT — SCHREIB ICH EIN SKRIPT · TELEGRAM · CLOUDFLARE · BROWSER · APIs · BUILT WITH AI &amp; KOFFEIN · </span>
       </div>
-    </section>
+    </div>
 
-    <!-- SCENE 2: NAME EXPLOSION -->
-    <section class="scene" data-from="11" data-to="26">
-      <div class="explode">
-        <div class="big stack">
-          <span class="big-line" data-text="STEPHAN">STEPHAN</span>
-          <span class="big-line outline" data-text="RÖTTGER">RÖTTGER</span>
+    <!-- SCENES -->
+    <main id="scenes">
+
+      <!-- 0–6 -->
+      <section class="scene" data-from="0" data-to="6">
+        <div class="boot">
+          <div class="boot-line mono" data-i="0">&gt; sr.os booting…</div>
+          <div class="boot-line mono" data-i="1">&gt; lade bio.dat</div>
+          <div class="boot-line mono" data-i="2">&gt; patche kommerz.exe</div>
+          <div class="boot-line mono" data-i="3">&gt; bereit_</div>
         </div>
-        <div class="role mono">— operator · builder · signal —</div>
-      </div>
-    </section>
+      </section>
 
-    <!-- SCENE 3: MANIFESTO 1 -->
-    <section class="scene" data-from="26" data-to="46">
-      <div class="manifesto">
-        <p class="m-line" data-i="0">Ich</p>
-        <p class="m-line big-red" data-i="1">BAU.</p>
-        <p class="m-line" data-i="2">Ich</p>
-        <p class="m-line big-red" data-i="3">SCHIFF.</p>
-        <p class="m-line" data-i="4">Ich</p>
-        <p class="m-line big-red" data-i="5">REDE NICHT.</p>
-      </div>
-    </section>
-
-    <!-- SCENE 4: BIO -->
-    <section class="scene" data-from="46" data-to="76">
-      <div class="bio">
-        <div class="bio-tag mono">// who</div>
-        <h2 class="bio-h">
-          <span class="g">Builder.</span>
-          <span class="g">Operator.</span>
-          <span class="g">Orchestrator.</span>
-        </h2>
-        <p class="bio-p">
-          Wenn andere von KI <em>reden</em>, lasse ich sie <strong>arbeiten</strong>.
-          Ich verbinde Modelle mit echten Systemen — Telegram, Cloudflare,
-          Browser, Datenbanken, APIs — bis aus „cool wäre wenn" ein
-          <strong class="hl">"läuft seit 6 Wochen autonom"</strong> wird.
-        </p>
-      </div>
-    </section>
-
-    <!-- SCENE 5: STATS -->
-    <section class="scene" data-from="76" data-to="106">
-      <div class="stats">
-        <div class="stat" data-i="0">
-          <div class="stat-num">∞</div>
-          <div class="stat-l mono">scripts statt prozesse</div>
+      <!-- 6–14: NAME -->
+      <section class="scene" data-from="6" data-to="14">
+        <div class="name-stack">
+          <div class="huge" data-scramble="STEPHAN">STEPHAN</div>
+          <div class="huge outline" data-scramble="RÖTTGER">RÖTTGER</div>
+          <div class="role mono">operator · builder · signal</div>
         </div>
-        <div class="stat" data-i="1">
-          <div class="stat-num">24/7</div>
-          <div class="stat-l mono">agents am laufen</div>
-        </div>
-        <div class="stat" data-i="2">
-          <div class="stat-num">0</div>
-          <div class="stat-l mono">bullshit toleriert</div>
-        </div>
-        <div class="stat" data-i="3">
-          <div class="stat-num">1</div>
-          <div class="stat-l mono">prinzip: ship it</div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- SCENE 6: WHAT I BUILD -->
-    <section class="scene" data-from="106" data-to="136">
-      <div class="bio">
-        <div class="bio-tag mono">// what</div>
-        <h2 class="bio-h">
-          <span class="g">Telegram-native</span>
-          <span class="g">AI-Agents.</span>
-          <span class="g">Real shit.</span>
-        </h2>
-        <p class="bio-p">
-          Sub-Agenten, die Cron-Jobs laufen. Browser, die selbst klicken.
-          Bilder, die aus Prompts fallen. Cloudflare-Workers, die nie schlafen.
-          <strong class="hl">Ein Bot-Account, der wie ein zweites Ich Code committed.</strong>
-        </p>
-      </div>
-    </section>
-
-    <!-- SCENE 7: QUOTE WALL -->
-    <section class="scene" data-from="136" data-to="180">
-      <div class="quotes">
-        <blockquote class="q" data-i="0">
-          <span class="qm">»</span>
-          Wenn etwas zweimal passiert, schreib ich ein Script.
-        </blockquote>
-        <blockquote class="q" data-i="1">
-          <span class="qm">»</span>
-          Plan-Modus &gt; Drauflos-Modus.
-        </blockquote>
-        <blockquote class="q" data-i="2">
-          <span class="qm">»</span>
-          Lieber eine Runde Denken als zehn Runden Debuggen.
-        </blockquote>
-      </div>
-    </section>
-
-    <!-- SCENE 8: VISUAL CLIMAX -->
-    <section class="scene" data-from="180" data-to="210">
-      <div class="climax">
-        <div class="climax-text">
-          <span>K</span><span>A</span><span>U</span><span>F</span>
-          <span class="sp"> </span>
-          <span>D</span><span>I</span><span>C</span><span>H</span>
-          <span class="sp"> </span>
-          <span class="bang">N</span><span class="bang">I</span><span class="bang">C</span><span class="bang">H</span><span class="bang">T</span>
+      <!-- 14–24: TRIO BAU/LIEFER/SCHWEIG -->
+      <section class="scene" data-from="14" data-to="24">
+        <div class="trio">
+          <div class="trio-line" data-i="0">ICH BAU.</div>
+          <div class="trio-line red" data-i="1">ICH LIEFER.</div>
+          <div class="trio-line" data-i="2">ICH SCHWEIG.</div>
         </div>
-        <div class="climax-sub mono">→ OWN YOUR OUTPUT.</div>
-      </div>
-    </section>
+      </section>
 
-    <!-- SCENE 9: OUTRO -->
-    <section class="scene" data-from="210" data-to="226">
-      <div class="outro">
-        <div class="signature">
+      <!-- 24–34: WER? -->
+      <section class="scene" data-from="24" data-to="34">
+        <div class="qa">
+          <div class="qa-q mono">// wer</div>
+          <h1 class="qa-a" data-scramble="EIN MENSCH MIT MASCHINEN.">EIN MENSCH MIT MASCHINEN.</h1>
+        </div>
+      </section>
+
+      <!-- 34–46: BIO -->
+      <section class="scene" data-from="34" data-to="46">
+        <div class="bio">
+          <h2 class="bio-h">
+            <span>Builder.</span>
+            <span class="red">Operator.</span>
+            <span>Orchestrator.</span>
+          </h2>
+          <p class="bio-p">
+            Andere reden über KI. Ich lass sie <span class="hl">arbeiten</span>.
+          </p>
+        </div>
+      </section>
+
+      <!-- 46–58: STATS -->
+      <section class="scene" data-from="46" data-to="58">
+        <div class="stats">
+          <div class="stat" data-i="0"><div class="stat-num" data-final="∞">0</div><div class="stat-l mono">skripte statt klicks</div></div>
+          <div class="stat" data-i="1"><div class="stat-num" data-final="247" data-num="247">0</div><div class="stat-l mono">stunden agents/woche</div></div>
+          <div class="stat" data-i="2"><div class="stat-num" data-final="0" data-num="0">0</div><div class="stat-l mono">bullshit toleriert</div></div>
+          <div class="stat" data-i="3"><div class="stat-num" data-final="1" data-num="1">0</div><div class="stat-l mono">prinzip: ship it</div></div>
+        </div>
+      </section>
+
+      <!-- 58–70: WAS? -->
+      <section class="scene" data-from="58" data-to="70">
+        <div class="qa">
+          <div class="qa-q mono">// was</div>
+          <h1 class="qa-a" data-scramble="AGENTEN. DIE WIRKLICH LAUFEN.">AGENTEN. DIE WIRKLICH LAUFEN.</h1>
+        </div>
+      </section>
+
+      <!-- 70–82: STACK LIST -->
+      <section class="scene" data-from="70" data-to="82">
+        <div class="stack-list">
+          <div class="sl-row" data-i="0">TELEGRAM</div>
+          <div class="sl-row red" data-i="1">CLOUDFLARE</div>
+          <div class="sl-row" data-i="2">SUPABASE</div>
+          <div class="sl-row red" data-i="3">PLAYWRIGHT</div>
+          <div class="sl-row" data-i="4">CLAUDE · GPT · GLM</div>
+        </div>
+      </section>
+
+      <!-- 82–94: QUOTE 1 -->
+      <section class="scene" data-from="82" data-to="94">
+        <div class="quote">
+          <div class="q-mark">»</div>
+          <div class="q-text">Wenn etwas zweimal passiert,<br>schreib ich ein Skript.</div>
+        </div>
+      </section>
+
+      <!-- 94–106: WIE? -->
+      <section class="scene" data-from="94" data-to="106">
+        <div class="qa">
+          <div class="qa-q mono">// wie</div>
+          <h1 class="qa-a" data-scramble="ERST DENKEN. DANN SHIPPEN.">ERST DENKEN. DANN SHIPPEN.</h1>
+        </div>
+      </section>
+
+      <!-- 106–118: QUOTE 2 -->
+      <section class="scene" data-from="106" data-to="118">
+        <div class="quote">
+          <div class="q-mark">»</div>
+          <div class="q-text">Plan-Modus schlägt<br>Drauflos-Modus.</div>
+        </div>
+      </section>
+
+      <!-- 118–132: ANTI HYPE -->
+      <section class="scene" data-from="118" data-to="132">
+        <div class="anti">
+          <div class="anti-line strike" data-i="0">kein pitch deck.</div>
+          <div class="anti-line strike" data-i="1">kein linkedin-buzzword.</div>
+          <div class="anti-line strike" data-i="2">kein „lass uns kurz syncen".</div>
+          <div class="anti-line big" data-i="3">NUR OUTPUT.</div>
+        </div>
+      </section>
+
+      <!-- 132–148: BIG MARQUEE -->
+      <section class="scene" data-from="132" data-to="148">
+        <div class="big-marquee">
+          <div class="bm-row">BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·</div>
+          <div class="bm-row reverse">2026 · 2026 · 2026 · 2026 · 2026 · 2026 · 2026 · 2026 ·</div>
+          <div class="bm-row">BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·&nbsp; BUILT BY STEPHAN ·</div>
+        </div>
+      </section>
+
+      <!-- 148–160: QUOTE 3 -->
+      <section class="scene" data-from="148" data-to="160">
+        <div class="quote">
+          <div class="q-mark">»</div>
+          <div class="q-text">Lieber einmal denken<br>als zehnmal debuggen.</div>
+        </div>
+      </section>
+
+      <!-- 160–174: WARUM? -->
+      <section class="scene" data-from="160" data-to="174">
+        <div class="qa">
+          <div class="qa-q mono">// warum</div>
+          <h1 class="qa-a" data-scramble="WEIL NIEMAND AUF DICH WARTET.">WEIL NIEMAND AUF DICH WARTET.</h1>
+        </div>
+      </section>
+
+      <!-- 174–188: BUILDUP -->
+      <section class="scene" data-from="174" data-to="188">
+        <div class="buildup">
+          <div class="bu-line" data-i="0">DAS HIER</div>
+          <div class="bu-line" data-i="1">IST</div>
+          <div class="bu-line" data-i="2">KEIN</div>
+          <div class="bu-line red" data-i="3">PRODUKT.</div>
+        </div>
+      </section>
+
+      <!-- 188–212: CLIMAX -->
+      <section class="scene" data-from="188" data-to="212">
+        <div class="climax">
+          <div class="climax-text">
+            <span>K</span><span>A</span><span>U</span><span>F</span>
+            <span class="sp"> </span>
+            <span>M</span><span>I</span><span>C</span><span>H</span>
+            <span class="sp"> </span>
+            <span class="bang">N</span><span class="bang">I</span><span class="bang">C</span><span class="bang">H</span><span class="bang">T</span>
+          </div>
+          <div class="climax-sub mono">→ build with me.</div>
+        </div>
+      </section>
+
+      <!-- 212–230: OUTRO -->
+      <section class="scene" data-from="212" data-to="230">
+        <div class="outro">
           <div class="sig-name">— Stephan</div>
           <div class="sig-meta mono">
             <span>made @ home / 2026</span>
-            <span>music: Die Toten Hosen — Kauf Mich!</span>
-            <span>built by: AI &amp; coffee</span>
+            <span>music: die toten hosen — kauf mich!</span>
+            <span>code: ai &amp; koffein</span>
+            <span>signed: stepharo agent</span>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <!-- CONTROLS -->
-  <div id="controls">
-    <button id="mute" aria-label="Mute"><span class="ic">🔊</span></button>
-    <button id="restart" aria-label="Restart"><span class="ic">⟲</span></button>
-    <button id="fs" aria-label="Fullscreen"><span class="ic">⛶</span></button>
+    </main>
+
+    <!-- CONTROLS -->
+    <div id="controls">
+      <button id="mute"><span class="ic">🔊</span></button>
+      <button id="restart"><span class="ic">⟲</span></button>
+      <button id="fs"><span class="ic">⛶</span></button>
+    </div>
+  </div>
+
+  <!-- PRESS PLAY OVERLAY (outside #world so it doesn't shake) -->
+  <div id="overlay">
+    <div class="ov-inner">
+      <div class="ov-tag mono">↓ press to begin</div>
+      <div class="ov-name">STEPHAN<span>RÖTTGER</span></div>
+      <button id="start">
+        <span class="play-icon">▶</span>
+        <span class="play-text">PLAY</span>
+      </button>
+      <div class="ov-foot mono">
+        <span>kopfhörer rein. licht aus. fullscreen.</span>
+        <span>· die toten hosen — kauf mich!</span>
+      </div>
+    </div>
   </div>
 
   <script src="/app.js" type="module"></script>
