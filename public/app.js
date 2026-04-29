@@ -207,16 +207,19 @@ function fxFire(name, ms) {
   clearTimeout(FX_TIMERS[name]);
   FX_TIMERS[name] = setTimeout(() => document.body.classList.remove(name), ms);
 }
-function triggerKick()    { fxFire('kick',     200); }
-function triggerFlash()   { fxFire('flash',    180); }
-function triggerShake()   { fxFire('shake',    360); }
-function triggerZoom()    { fxFire('zoom',     560); }
-function triggerRedwash() { fxFire('redwash',  440); }
-function triggerAberrate(){ fxFire('aberrate', 520); }
+function triggerKick()      { fxFire('kick',      200); }
+function triggerFlash()     { fxFire('flash',     180); }
+function triggerShake()     { fxFire('shake',     360); }
+function triggerZoom()      { fxFire('zoom',      560); }
+function triggerRedwash()   { fxFire('redwash',   440); }
+function triggerAberrate()  { fxFire('aberrate',  520); }
+function triggerShockwave() { fxFire('shockwave', 860); }
+function triggerVhs()       { fxFire('vhs',       340); }
+function triggerInvert()    { fxFire('invert',    180); }
 
 function onBeat(n) {
-  if (n % 16 === 0)      { triggerRedwash(); triggerShake(); }
-  else if (n % 8 === 0)  { triggerFlash(); triggerAberrate(); }
+  if (n % 16 === 0)      { triggerRedwash(); triggerShake(); triggerShockwave(); }
+  else if (n % 8 === 0)  { triggerFlash(); triggerAberrate(); triggerVhs(); }
   else if (n % 4 === 0)  { triggerShake(); }
 }
 
@@ -336,6 +339,41 @@ async function runBootSequence(scene) {
 function animateCounter(el) {
   const final = el.dataset.final;
   const num = parseInt(el.dataset.num, 10);
+
+  // Slot-machine variant: each digit reels independently
+  if (el.classList.contains('slot') && !isNaN(num)) {
+    const target = String(num);
+    const padded = target.padStart(el.textContent.length || target.length, '0');
+    el.innerHTML = '';
+    [...padded].forEach((targetDigit, i) => {
+      const tgt = parseInt(targetDigit, 10);
+      const digitWrap = document.createElement('span');
+      digitWrap.className = 'digit';
+      const reel = document.createElement('span');
+      reel.className = 'reel';
+      // Build reel: many random digits then the target
+      const cycles = 4 + i; // each digit spins more
+      for (let c = 0; c < cycles; c++) {
+        for (let d = 0; d < 10; d++) {
+          const s = document.createElement('span');
+          s.textContent = d;
+          reel.appendChild(s);
+        }
+      }
+      const finalSpan = document.createElement('span');
+      finalSpan.textContent = tgt;
+      reel.appendChild(finalSpan);
+      digitWrap.appendChild(reel);
+      el.appendChild(digitWrap);
+      // Trigger the spin
+      requestAnimationFrame(() => {
+        const offset = (cycles * 10 + tgt);
+        reel.style.transform = `translateY(-${offset}em)`;
+      });
+    });
+    return;
+  }
+
   if (isNaN(num)) {
     let i = 0;
     const flicker = () => {
@@ -373,9 +411,10 @@ function updateScenes(time) {
     if (currentScene >= 0) scenes[currentScene].classList.remove('active');
     if (active >= 0) {
       scenes[active].classList.add('active');
-      // hard cut → flash + zoom punch
+      // hard cut → flash + zoom punch + brief vhs glitch for cinematic cut
       triggerFlash();
       triggerZoom();
+      triggerVhs();
       onSceneEnter(scenes[active]);
     }
     currentScene = active;
@@ -425,14 +464,30 @@ function onSceneEnter(scene) {
     setTimeout(() => { triggerZoom(); triggerRedwash(); triggerAberrate(); }, 5050);
   }
   if (scene.classList.contains('scene-buildup')) {
-    setTimeout(() => { triggerZoom(); triggerRedwash(); triggerAberrate(); }, 4450);
+    setTimeout(() => { triggerZoom(); triggerRedwash(); triggerAberrate(); triggerShockwave(); }, 4450);
   }
   if (scene.classList.contains('scene-climax')) {
-    // KAUF MICH lands
+    // KAUF MICH lands progressively
+    setTimeout(() => triggerShake(), 200);
     setTimeout(() => triggerShake(), 850);
-    // NICHT smashes
-    setTimeout(() => { triggerZoom(); triggerRedwash(); triggerAberrate(); triggerShake(); }, 1650);
-    setTimeout(() => { triggerFlash(); triggerRedwash(); }, 2050);
+    // NICHT smashes — full shock combo
+    setTimeout(() => {
+      triggerZoom(); triggerRedwash(); triggerAberrate();
+      triggerShake(); triggerShockwave(); triggerInvert();
+    }, 1650);
+    setTimeout(() => { triggerFlash(); triggerShockwave(); }, 2050);
+    setTimeout(() => { triggerVhs(); }, 2400);
+  }
+  if (scene.classList.contains('scene-name')) {
+    setTimeout(() => { triggerVhs(); triggerAberrate(); }, 600);
+    setTimeout(() => { triggerVhs(); }, 2400);
+    setTimeout(() => { triggerShockwave(); }, 4200);
+  }
+  if (scene.classList.contains('scene-marquee')) {
+    setTimeout(() => triggerShake(), 200);
+    setTimeout(() => { triggerShake(); triggerVhs(); }, 1800);
+    setTimeout(() => { triggerShake(); triggerRedwash(); }, 3600);
+    setTimeout(() => { triggerShake(); triggerVhs(); }, 5400);
   }
   // re-trigger letter animations on .run / .fall
   scene.querySelectorAll('.qa-a.run, .qa-a.fall').forEach((el) => {
@@ -457,11 +512,24 @@ function fmt(s) {
   const ss = Math.floor(s % 60);
   return `${String(m).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
 }
+// Apply live bass-reactive variables to body — CSS reads them for glow boost
+function pulseHeadlines() {
+  if (!analyser) return;
+  const { bass, mid, treble } = getAudioData();
+  const root = document.documentElement;
+  root.style.setProperty('--bass', bass.toFixed(3));
+  root.style.setProperty('--mid', mid.toFixed(3));
+  root.style.setProperty('--treble', treble.toFixed(3));
+  root.style.setProperty('--bass-glow', (40 + bass * 80).toFixed(0) + 'px');
+  root.style.setProperty('--bass-thick', (1 + bass * 8).toFixed(1) + 'px');
+}
+
 function loop() {
   const t = audio.currentTime || 0;
   const total = audio.duration || 226;
   drawBG(performance.now());
   updateScenes(t);
+  pulseHeadlines();
   progress.style.width = ((t / total) * 100) + '%';
   timeEl.textContent = `${fmt(t)} / ${fmt(total)}`;
   frameCount++;

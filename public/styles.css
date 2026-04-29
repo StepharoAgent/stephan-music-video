@@ -106,6 +106,52 @@ body.flash #flash { animation: flashPulse 0.14s ease-out; }
 body.redwash #redwash { animation: redwash 0.42s ease-out; }
 @keyframes redwash { 0% { opacity: 0; } 20% { opacity: 0.55; } 100% { opacity: 0; } }
 
+/* SHOCKWAVE — expanding ring on heavy beats */
+#shockwave {
+  position: fixed; left: 50%; top: 50%; z-index: 56;
+  width: 30vmin; height: 30vmin; margin-left: -15vmin; margin-top: -15vmin;
+  border-radius: 50%;
+  border: 4px solid var(--red);
+  opacity: 0; pointer-events: none;
+  box-shadow: 0 0 60px var(--red), inset 0 0 60px var(--red);
+}
+body.shockwave #shockwave { animation: shockwave 0.85s cubic-bezier(.2,.7,.3,1); }
+@keyframes shockwave {
+  0%   { opacity: 0; transform: scale(0.05); border-width: 12px; }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(8); border-width: 1px; }
+}
+
+/* COLOR INVERT — quick neg flash on climax smash */
+#invert {
+  position: fixed; inset: 0; z-index: 57;
+  background: #fff; opacity: 0; pointer-events: none;
+  mix-blend-mode: difference;
+}
+body.invert #invert { animation: invertFlash 0.18s ease-out; }
+@keyframes invertFlash { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+
+/* VHS GLITCH — periodic tracking error */
+#vhsglitch {
+  position: fixed; inset: 0; z-index: 58;
+  pointer-events: none; opacity: 0;
+  background:
+    repeating-linear-gradient(180deg,
+      transparent 0px, transparent 6px,
+      rgba(255,0,51,0.5) 6px, rgba(255,0,51,0.5) 7px,
+      transparent 7px, transparent 14px,
+      rgba(0,247,255,0.5) 14px, rgba(0,247,255,0.5) 15px);
+  mix-blend-mode: screen;
+}
+body.vhs #vhsglitch { animation: vhsGlitch 0.32s steps(3); }
+@keyframes vhsGlitch {
+  0%   { opacity: 0; transform: translateY(0); }
+  20%  { opacity: 0.8; transform: translateY(-12px) skewX(2deg); }
+  40%  { opacity: 0.6; transform: translateY(8px) skewX(-3deg); }
+  60%  { opacity: 0.9; transform: translateY(-4px) skewX(1deg); }
+  100% { opacity: 0; transform: translateY(0); }
+}
+
 /* ============================================================
    HUD / TIMELINE / TICKER / CONTROLS
    ============================================================ */
@@ -182,10 +228,10 @@ body.playing #controls { opacity: 1; }
 .ov-tag { color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 1.2rem; }
 .ov-name {
   font-family: var(--f-display); font-weight: 400;
-  font-size: clamp(3.5rem, 12vw, 11rem); line-height: 0.85;
+  font-size: clamp(3.5rem, 12vw, 11rem); line-height: 1.0;
   letter-spacing: 0.02em; color: var(--fg); margin-bottom: 2.5rem;
 }
-.ov-name span { display: block; color: var(--red); text-shadow: 0 0 32px var(--red-glow); }
+.ov-name span { display: block; color: var(--red); text-shadow: 0 0 32px var(--red-glow); margin-top: 0.05em; }
 #start {
   display: inline-flex; align-items: center; gap: 1rem;
   padding: 1rem 2.2rem;
@@ -249,7 +295,7 @@ body.playing #controls { opacity: 1; }
 .name-stack { text-align: center; }
 .huge {
   font-family: var(--f-display); font-weight: 400;
-  font-size: clamp(4.5rem, 18vw, 17rem); line-height: 0.85;
+  font-size: clamp(4.5rem, 18vw, 17rem); line-height: 1.0;
   letter-spacing: 0.005em;
   color: var(--fg);
   text-shadow: 0 0 40px rgba(255,255,255,0.18);
@@ -420,7 +466,19 @@ body.playing #controls { opacity: 1; }
   font-family: var(--f-display); font-weight: 400;
   font-size: clamp(3.5rem, 7vw, 6.5rem); line-height: 1;
   color: var(--red); text-shadow: 0 0 24px var(--red-glow);
+  font-variant-numeric: tabular-nums;
 }
+/* slot-machine digit roulette wrapper */
+.stat-num.slot { display: inline-flex; gap: 0.04em; justify-content: center; overflow: hidden; }
+.stat-num.slot .digit {
+  display: inline-block; min-width: 0.6em; height: 1em; line-height: 1; overflow: hidden;
+  position: relative;
+}
+.stat-num.slot .reel {
+  display: flex; flex-direction: column; align-items: center;
+  transition: transform 1.4s cubic-bezier(.2,.6,.2,1);
+}
+.stat-num.slot .reel span { display: block; height: 1em; line-height: 1; }
 .stat-l { font-size: 0.7rem; margin-top: 0.8rem; color: rgba(255,255,255,0.5); letter-spacing: 0.25em; text-transform: uppercase; }
 
 /* ============================================================
@@ -629,7 +687,11 @@ body.playing #controls { opacity: 1; }
   80%  { transform: scale(1.08) rotate(1deg); }
   100% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
 }
-.climax-sub { margin-top: 2rem; font-size: 1.1rem; letter-spacing: 0.4em; color: rgba(255,255,255,0.7); opacity: 0; animation: fadeIn 1s 3s forwards; }
+.climax-sub {
+  margin-top: 2.5rem; font-size: clamp(1.2rem, 2vw, 1.6rem); letter-spacing: 0.4em;
+  color: var(--cyan); opacity: 0; animation: fadeIn 1s 3s forwards;
+  text-shadow: 0 0 20px rgba(0,247,255,0.6);
+}
 @keyframes fadeIn { to { opacity: 1; } }
 
 /* ============================================================
@@ -644,6 +706,35 @@ body.playing #controls { opacity: 1; }
 }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 .sig-meta { display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.75rem; color: rgba(255,255,255,0.45); letter-spacing: 0.25em; text-transform: uppercase; opacity: 0; animation: fadeIn 1s 1.2s forwards; }
+
+/* ============================================================
+   BASS-REACTIVE PULSE — driven by JS via --bass / --bass-glow
+   Only modifies text-shadow/filter intensity → never touches
+   transform → never collides with entry animations.
+   ============================================================ */
+:root { --bass: 0; --mid: 0; --treble: 0; --bass-glow: 40px; --bass-thick: 1px; }
+.trio-line.red {
+  text-shadow:
+    0 0 var(--bass-glow) var(--red),
+    0 0 calc(var(--bass-glow) * 1.5) var(--red-glow);
+}
+.bu-line[data-i="3"] {
+  text-shadow:
+    0 0 var(--bass-glow) var(--red),
+    0 0 calc(var(--bass-glow) * 2) var(--red-glow);
+}
+.climax-text .bang {
+  text-shadow:
+    0 0 var(--bass-glow) var(--red),
+    0 0 calc(var(--bass-glow) * 2) var(--red-glow);
+}
+.anti-line.big {
+  text-shadow:
+    0 0 var(--bass-glow) var(--red),
+    0 0 calc(var(--bass-glow) * 2) var(--red-glow);
+}
+#progress { box-shadow: 0 0 calc(8px + var(--bass) * 30px) var(--red); }
+.dot { box-shadow: 0 0 calc(8px + var(--bass) * 20px) var(--red); }
 
 /* ============================================================
    RESPONSIVE
