@@ -1,0 +1,708 @@
+/* ============================================================
+   STEPHAN RÖTTGER — music-video site
+   Design language: Punk + Cinematic + Cyber-grit
+   ============================================================ */
+
+:root {
+  --bg: #000;
+  --fg: #f6f6f6;
+  --red: #ff0033;
+  --red-glow: #ff003344;
+  --cyan: #00f7ff;
+  --yellow: #fff200;
+  --grey: #6b6b6b;
+  --grid: rgba(255, 255, 255, 0.04);
+
+  --f-display: 'Bebas Neue', 'Helvetica Neue', sans-serif;
+  --f-body: 'Space Grotesk', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', 'Menlo', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--f-body);
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  cursor: default;
+}
+
+body {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.mono { font-family: var(--f-mono); letter-spacing: 0.05em; }
+
+/* ============================================================
+   BACKGROUND CANVAS
+   ============================================================ */
+#bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+}
+
+/* ============================================================
+   GRAIN / SCANLINES / VIGNETTE
+   ============================================================ */
+.grain {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grainShift 0.6s steps(4) infinite;
+}
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-2%, 1%); }
+  50%  { transform: translate(1%, -1%); }
+  75%  { transform: translate(-1%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+
+.scanlines {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 51;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255,255,255,0) 0px,
+    rgba(255,255,255,0) 2px,
+    rgba(0,0,0,0.18) 3px,
+    rgba(0,0,0,0.18) 4px
+  );
+  opacity: 0.4;
+}
+
+.vignette {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 49;
+  background: radial-gradient(ellipse at center,
+    transparent 30%,
+    rgba(0,0,0,0.4) 80%,
+    rgba(0,0,0,0.85) 100%);
+}
+
+/* ============================================================
+   HUD
+   ============================================================ */
+#hud {
+  position: fixed;
+  top: 1.2rem;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  pointer-events: none;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+body.playing #hud { opacity: 1; }
+.hud-row { display: flex; align-items: center; gap: 0.5rem; line-height: 1.4; }
+.hud-r { text-align: right; }
+.hud-r .hud-row { justify-content: flex-end; }
+
+.dot {
+  width: 0.55rem; height: 0.55rem; border-radius: 50%;
+  background: var(--red); box-shadow: 0 0 8px var(--red);
+  animation: blink 1.5s infinite ease;
+}
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
+}
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+#timeline {
+  position: fixed;
+  bottom: 1.2rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 60;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+body.playing #timeline { opacity: 1; }
+#progress {
+  height: 100%;
+  width: 0%;
+  background: var(--red);
+  box-shadow: 0 0 12px var(--red), 0 0 4px var(--red);
+  transition: width 0.1s linear;
+}
+#time {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.1em;
+}
+
+/* ============================================================
+   CONTROLS
+   ============================================================ */
+#controls {
+  position: fixed;
+  bottom: 2.6rem;
+  right: 1.5rem;
+  z-index: 60;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+body.playing #controls { opacity: 1; }
+#controls button {
+  width: 2.4rem; height: 2.4rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.6);
+  color: rgba(255,255,255,0.7);
+  font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+#controls button:hover {
+  border-color: var(--red);
+  color: var(--red);
+  box-shadow: 0 0 12px var(--red-glow);
+}
+
+/* ============================================================
+   PRESS-PLAY OVERLAY
+   ============================================================ */
+#overlay {
+  position: fixed; inset: 0;
+  z-index: 100;
+  background: radial-gradient(ellipse at center, #110000 0%, #000 70%);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+#overlay.gone {
+  opacity: 0;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+.ov-inner {
+  text-align: center;
+  padding: 2rem;
+  max-width: 90vw;
+}
+.ov-name {
+  font-family: var(--f-display);
+  font-size: clamp(3.5rem, 12vw, 11rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: var(--fg);
+  margin-bottom: 0.4rem;
+}
+.ov-name span {
+  display: block;
+  color: var(--red);
+  text-shadow: 0 0 32px var(--red-glow);
+}
+.ov-sub {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+#start {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2.2rem;
+  border: 2px solid var(--fg);
+  font-family: var(--f-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--fg);
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+#start::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--red);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  z-index: -1;
+}
+#start:hover { color: #000; border-color: var(--red); }
+#start:hover::before { transform: translateX(0); }
+.play-icon {
+  font-size: 0.7em;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.92); }
+}
+.ov-foot {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   SCENES
+   ============================================================ */
+#scenes {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+.scene.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s ease, visibility 0s linear 0s;
+}
+
+/* ============================================================
+   SCENE 1 — HEARTBEAT
+   ============================================================ */
+.heartbeat {
+  text-align: center;
+  font-family: var(--f-mono);
+  color: rgba(255,255,255,0.7);
+}
+.hb-line {
+  width: 60vw; max-width: 600px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  margin: 0 auto 2rem;
+  animation: pulseLine 1.2s infinite;
+}
+@keyframes pulseLine {
+  0%, 100% { opacity: 0.2; transform: scaleX(0.3); }
+  50%      { opacity: 1; transform: scaleX(1); }
+}
+.hb-text {
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: var(--red);
+}
+.hb-typing {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.5);
+  min-height: 1.2em;
+}
+.hb-typing::after {
+  content: '_';
+  animation: cursor 0.8s infinite;
+  color: var(--red);
+}
+@keyframes cursor { 50% { opacity: 0; } }
+
+/* ============================================================
+   SCENE 2 — NAME EXPLOSION
+   ============================================================ */
+.explode {
+  text-align: center;
+  width: 100%;
+}
+.big.stack { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.big-line {
+  font-family: var(--f-display);
+  font-size: clamp(4.5rem, 18vw, 18rem);
+  line-height: 0.85;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 40px rgba(255,255,255,0.2);
+}
+.big-line.outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--red);
+  text-shadow: none;
+}
+.big-line::before,
+.big-line::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.scene.active .big-line::before {
+  color: var(--cyan);
+  transform: translate(-3px, 0);
+  opacity: 0.6;
+  animation: glitchA 4s infinite steps(1);
+  mix-blend-mode: screen;
+}
+.scene.active .big-line::after {
+  color: var(--red);
+  transform: translate(3px, 0);
+  opacity: 0.6;
+  animation: glitchB 4s infinite steps(1);
+  mix-blend-mode: screen;
+}
+@keyframes glitchA {
+  0%, 88%, 100% { transform: translate(0, 0); opacity: 0; }
+  90%  { transform: translate(-4px, 1px); opacity: 0.8; }
+  92%  { transform: translate(2px, -2px); opacity: 0.6; }
+  94%  { transform: translate(-1px, 2px); opacity: 0.4; }
+}
+@keyframes glitchB {
+  0%, 87%, 100% { transform: translate(0, 0); opacity: 0; }
+  91%  { transform: translate(3px, -1px); opacity: 0.8; }
+  93%  { transform: translate(-2px, 2px); opacity: 0.6; }
+  95%  { transform: translate(1px, -2px); opacity: 0.4; }
+}
+
+.role {
+  margin-top: 1.5rem;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   SCENE 3 — MANIFESTO
+   ============================================================ */
+.manifesto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  padding-left: 8vw;
+}
+.m-line {
+  font-family: var(--f-display);
+  font-size: clamp(2.5rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.m-line.big-red {
+  color: var(--red);
+  font-size: clamp(4rem, 12vw, 12rem);
+  text-shadow: 0 0 30px var(--red-glow);
+  letter-spacing: -0.02em;
+}
+.scene.active .m-line {
+  opacity: 1;
+  transform: translateX(0);
+}
+.scene.active .m-line[data-i="0"] { transition-delay: 0.0s; }
+.scene.active .m-line[data-i="1"] { transition-delay: 0.4s; }
+.scene.active .m-line[data-i="2"] { transition-delay: 1.4s; }
+.scene.active .m-line[data-i="3"] { transition-delay: 1.8s; }
+.scene.active .m-line[data-i="4"] { transition-delay: 2.8s; }
+.scene.active .m-line[data-i="5"] { transition-delay: 3.2s; }
+
+/* ============================================================
+   SCENE 4 / 6 — BIO
+   ============================================================ */
+.bio {
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.bio-tag {
+  font-size: 0.8rem;
+  color: var(--red);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+}
+.bio-h {
+  font-family: var(--f-display);
+  font-size: clamp(2.6rem, 7vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.005em;
+  color: var(--fg);
+  margin-bottom: 2.2rem;
+  font-weight: 400;
+}
+.bio-h .g {
+  display: block;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.bio-h .g:nth-child(1) { transition-delay: 0.2s; }
+.bio-h .g:nth-child(2) { transition-delay: 0.5s; color: var(--red); }
+.bio-h .g:nth-child(3) { transition-delay: 0.8s; }
+.scene.active .bio-tag,
+.scene.active .bio-h .g {
+  opacity: 1;
+  transform: translateY(0);
+}
+.bio-p {
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  line-height: 1.6;
+  color: rgba(255,255,255,0.8);
+  max-width: 720px;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 1.2s, transform 0.7s ease 1.2s;
+}
+.scene.active .bio-p { opacity: 1; transform: translateY(0); }
+.bio-p strong { color: var(--fg); font-weight: 700; }
+.bio-p .hl {
+  background: linear-gradient(180deg, transparent 60%, var(--red) 60%);
+  padding: 0 0.15em;
+  color: #fff;
+}
+.bio-p em { color: rgba(255,255,255,0.5); font-style: normal; text-decoration: line-through; }
+
+/* ============================================================
+   SCENE 5 — STATS
+   ============================================================ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  width: min(900px, 90vw);
+  background: rgba(255,255,255,0.08);
+  padding: 2px;
+}
+@media (min-width: 720px) {
+  .stats { grid-template-columns: repeat(4, 1fr); }
+}
+.stat {
+  background: #050505;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.scene.active .stat { opacity: 1; transform: scale(1); }
+.scene.active .stat[data-i="0"] { transition-delay: 0.1s; }
+.scene.active .stat[data-i="1"] { transition-delay: 0.3s; }
+.scene.active .stat[data-i="2"] { transition-delay: 0.5s; }
+.scene.active .stat[data-i="3"] { transition-delay: 0.7s; }
+.stat-num {
+  font-family: var(--f-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1;
+  color: var(--red);
+  text-shadow: 0 0 24px var(--red-glow);
+}
+.stat-l {
+  font-size: 0.7rem;
+  margin-top: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   SCENE 7 — QUOTES
+   ============================================================ */
+.quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 900px;
+  width: 100%;
+  padding: 0 1rem;
+}
+.q {
+  font-family: var(--f-display);
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  line-height: 1.05;
+  color: var(--fg);
+  position: relative;
+  padding-left: 3rem;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  font-weight: 400;
+}
+.q .qm {
+  position: absolute;
+  left: 0;
+  top: -0.3em;
+  font-size: 1.5em;
+  color: var(--red);
+  line-height: 1;
+}
+.scene.active .q { opacity: 1; transform: translateX(0); }
+.scene.active .q[data-i="0"] { transition-delay: 0.2s; }
+.scene.active .q[data-i="1"] { transition-delay: 1.6s; }
+.scene.active .q[data-i="2"] { transition-delay: 3.0s; }
+
+/* ============================================================
+   SCENE 8 — CLIMAX
+   ============================================================ */
+.climax {
+  text-align: center;
+}
+.climax-text {
+  font-family: var(--f-display);
+  font-size: clamp(4rem, 14vw, 13rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.05em;
+}
+.climax-text span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(60px) rotate(-8deg);
+  animation: dropIn 0.5s forwards;
+}
+.climax-text .sp { width: 0.4em; }
+.scene.active .climax-text span {
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+.climax-text span:nth-child(1) { --i: 1; }
+.climax-text span:nth-child(2) { --i: 2; }
+.climax-text span:nth-child(3) { --i: 3; }
+.climax-text span:nth-child(4) { --i: 4; }
+.climax-text span:nth-child(5) { --i: 5; }
+.climax-text span:nth-child(6) { --i: 6; }
+.climax-text span:nth-child(7) { --i: 7; }
+.climax-text span:nth-child(8) { --i: 8; }
+.climax-text span:nth-child(9) { --i: 9; }
+.climax-text span:nth-child(10) { --i: 10; }
+.climax-text span:nth-child(11) { --i: 11; }
+.climax-text span:nth-child(12) { --i: 12; }
+.climax-text span:nth-child(13) { --i: 13; }
+.climax-text span:nth-child(14) { --i: 14; }
+.climax-text span:nth-child(15) { --i: 15; }
+.climax-text .bang {
+  color: var(--red);
+  text-shadow: 0 0 30px var(--red-glow), 0 0 60px var(--red-glow);
+}
+@keyframes dropIn {
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+.climax-sub {
+  margin-top: 2rem;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.6);
+  opacity: 0;
+  animation: fadeIn 1s 1.5s forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ============================================================
+   SCENE 9 — OUTRO
+   ============================================================ */
+.outro { text-align: center; }
+.signature { display: inline-block; }
+.sig-name {
+  font-family: var(--f-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  color: var(--fg);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 1.2s 0.3s forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.sig-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeIn 1s 1.2s forwards;
+}
+
+/* ============================================================
+   AUDIO-REACTIVE BOOST CLASS
+   ============================================================ */
+body.bass {
+  animation: bassKick 0.18s ease;
+}
+@keyframes bassKick {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.008); }
+  100% { transform: scale(1); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  #hud { font-size: 0.62rem; padding: 0 0.8rem; }
+  #timeline { left: 0.8rem; right: 0.8rem; }
+  #controls { right: 0.8rem; }
+  .manifesto { padding-left: 1.5rem; }
+}

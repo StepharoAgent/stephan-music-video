@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <title>STEPHAN RÖTTGER — operator / builder / signal</title>
+  <meta name="description" content="Stephan Röttger. Builds machines. Ships signal. No noise." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='black'/%3E%3Ctext x='50' y='70' font-family='monospace' font-size='70' font-weight='900' fill='%23ff0033' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- AUDIO -->
+  <audio id="track" src="/track.mp3" preload="auto" crossorigin="anonymous"></audio>
+
+  <!-- WEBGL/CANVAS BG -->
+  <canvas id="bg"></canvas>
+
+  <!-- GRAIN / SCANLINES OVERLAY -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- TIMELINE PROGRESS -->
+  <div id="timeline" aria-hidden="true">
+    <div id="progress"></div>
+    <div id="time">00:00 / 03:45</div>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud">
+    <div class="hud-l">
+      <div class="hud-row"><span class="dot"></span> REC</div>
+      <div class="hud-row mono">SR-2026 // PUNK.OS</div>
+    </div>
+    <div class="hud-r">
+      <div class="hud-row mono"><span id="bpm">000</span> BPM</div>
+      <div class="hud-row mono">CH 01 — STEREO</div>
+    </div>
+  </div>
+
+  <!-- PRESS PLAY OVERLAY -->
+  <div id="overlay">
+    <div class="ov-inner">
+      <div class="ov-name">STEPHAN<span>RÖTTGER</span></div>
+      <div class="ov-sub mono">a music video for one human</div>
+      <button id="start" aria-label="Start">
+        <span class="play-icon">▶</span>
+        <span class="play-text">PRESS PLAY</span>
+      </button>
+      <div class="ov-foot mono">
+        <span>↑ Sound on, lights off, full screen empfohlen</span>
+        <span>· Die Toten Hosen — Kauf Mich!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENES -->
+  <main id="scenes">
+    <!-- SCENE 1: HEARTBEAT INTRO -->
+    <section class="scene" data-from="0" data-to="11">
+      <div class="heartbeat">
+        <div class="hb-line"></div>
+        <div class="hb-text mono">SYSTEM BOOT // SR.OS v2026.4</div>
+        <div class="hb-typing mono"></div>
+      </div>
+    </section>
+
+    <!-- SCENE 2: NAME EXPLOSION -->
+    <section class="scene" data-from="11" data-to="26">
+      <div class="explode">
+        <div class="big stack">
+          <span class="big-line" data-text="STEPHAN">STEPHAN</span>
+          <span class="big-line outline" data-text="RÖTTGER">RÖTTGER</span>
+        </div>
+        <div class="role mono">— operator · builder · signal —</div>
+      </div>
+    </section>
+
+    <!-- SCENE 3: MANIFESTO 1 -->
+    <section class="scene" data-from="26" data-to="46">
+      <div class="manifesto">
+        <p class="m-line" data-i="0">Ich</p>
+        <p class="m-line big-red" data-i="1">BAU.</p>
+        <p class="m-line" data-i="2">Ich</p>
+        <p class="m-line big-red" data-i="3">SCHIFF.</p>
+        <p class="m-line" data-i="4">Ich</p>
+        <p class="m-line big-red" data-i="5">REDE NICHT.</p>
+      </div>
+    </section>
+
+    <!-- SCENE 4: BIO -->
+    <section class="scene" data-from="46" data-to="76">
+      <div class="bio">
+        <div class="bio-tag mono">// who</div>
+        <h2 class="bio-h">
+          <span class="g">Builder.</span>
+          <span class="g">Operator.</span>
+          <span class="g">Orchestrator.</span>
+        </h2>
+        <p class="bio-p">
+          Wenn andere von KI <em>reden</em>, lasse ich sie <strong>arbeiten</strong>.
+          Ich verbinde Modelle mit echten Systemen — Telegram, Cloudflare,
+          Browser, Datenbanken, APIs — bis aus „cool wäre wenn" ein
+          <strong class="hl">"läuft seit 6 Wochen autonom"</strong> wird.
+        </p>
+      </div>
+    </section>
+
+    <!-- SCENE 5: STATS -->
+    <section class="scene" data-from="76" data-to="106">
+      <div class="stats">
+        <div class="stat" data-i="0">
+          <div class="stat-num">∞</div>
+          <div class="stat-l mono">scripts statt prozesse</div>
+        </div>
+        <div class="stat" data-i="1">
+          <div class="stat-num">24/7</div>
+          <div class="stat-l mono">agents am laufen</div>
+        </div>
+        <div class="stat" data-i="2">
+          <div class="stat-num">0</div>
+          <div class="stat-l mono">bullshit toleriert</div>
+        </div>
+        <div class="stat" data-i="3">
+          <div class="stat-num">1</div>
+          <div class="stat-l mono">prinzip: ship it</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 6: WHAT I BUILD -->
+    <section class="scene" data-from="106" data-to="136">
+      <div class="bio">
+        <div class="bio-tag mono">// what</div>
+        <h2 class="bio-h">
+          <span class="g">Telegram-native</span>
+          <span class="g">AI-Agents.</span>
+          <span class="g">Real shit.</span>
+        </h2>
+        <p class="bio-p">
+          Sub-Agenten, die Cron-Jobs laufen. Browser, die selbst klicken.
+          Bilder, die aus Prompts fallen. Cloudflare-Workers, die nie schlafen.
+          <strong class="hl">Ein Bot-Account, der wie ein zweites Ich Code committed.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- SCENE 7: QUOTE WALL -->
+    <section class="scene" data-from="136" data-to="180">
+      <div class="quotes">
+        <blockquote class="q" data-i="0">
+          <span class="qm">»</span>
+          Wenn etwas zweimal passiert, schreib ich ein Script.
+        </blockquote>
+        <blockquote class="q" data-i="1">
+          <span class="qm">»</span>
+          Plan-Modus &gt; Drauflos-Modus.
+        </blockquote>
+        <blockquote class="q" data-i="2">
+          <span class="qm">»</span>
+          Lieber eine Runde Denken als zehn Runden Debuggen.
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- SCENE 8: VISUAL CLIMAX -->
+    <section class="scene" data-from="180" data-to="210">
+      <div class="climax">
+        <div class="climax-text">
+          <span>K</span><span>A</span><span>U</span><span>F</span>
+          <span class="sp"> </span>
+          <span>D</span><span>I</span><span>C</span><span>H</span>
+          <span class="sp"> </span>
+          <span class="bang">N</span><span class="bang">I</span><span class="bang">C</span><span class="bang">H</span><span class="bang">T</span>
+        </div>
+        <div class="climax-sub mono">→ OWN YOUR OUTPUT.</div>
+      </div>
+    </section>
+
+    <!-- SCENE 9: OUTRO -->
+    <section class="scene" data-from="210" data-to="226">
+      <div class="outro">
+        <div class="signature">
+          <div class="sig-name">— Stephan</div>
+          <div class="sig-meta mono">
+            <span>made @ home / 2026</span>
+            <span>music: Die Toten Hosen — Kauf Mich!</span>
+            <span>built by: AI &amp; coffee</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CONTROLS -->
+  <div id="controls">
+    <button id="mute" aria-label="Mute"><span class="ic">🔊</span></button>
+    <button id="restart" aria-label="Restart"><span class="ic">⟲</span></button>
+    <button id="fs" aria-label="Fullscreen"><span class="ic">⛶</span></button>
+  </div>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
