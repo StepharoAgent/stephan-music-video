@@ -47,7 +47,7 @@ const TRACKS = {
 
       // PHASE 6 — Hintergrund (indirekt: stationen, nicht eigenleistung)
       { from: 66,   to: 70,   type: 'stamp', text: 'STATIONEN.', color: 'red' },
-      { from: 70,   to: 75,   type: 'subline', text: 'wo gelernt:', sub: '11TEAMSPORTS · NIKE · JAKO.' },
+      { from: 70,   to: 75,   type: 'subline', text: 'wo gelernt:', sub: '11TS · NIKE · JAKO.' },
       { from: 75,   to: 82,   type: 'stats', items: [
         { num: 1000, final: '1000%', slot: true, label: 'wachstum · 11ts' },
         { num: 22,   final: '22',    slot: true, label: 'länder · online' },
@@ -117,21 +117,27 @@ const TRACKS = {
       // 14f: repeat-twist auf den Songtitel
       { from: 204, to: 208,  type: 'repeatquote', a: 'kauf mich nicht —', b: 'HOL MICH AN BORD.' },
 
-      // 14g: closing marquee mit email
-      { from: 208, to: 215,  type: 'marquee', rows: [
+      // 14g: closing marquee mit email (CTO/ARCHITEKT raus)
+      { from: 208, to: 213,  type: 'marquee', rows: [
         '→ AGENT.STEPHARO@GMAIL.COM ·  → AGENT.STEPHARO@GMAIL.COM ·',
         'KAUF MICH NICHT · STELL MICH EIN · KAUF MICH NICHT · STELL MICH EIN ·',
-        'CTO · ARCHITEKT · POLYMATH · OPERATOR · MULTIPLIKATOR ·'
+        'DENKEN · BAUEN · LIEFERN · DENKEN · BAUEN · LIEFERN ·'
       ]},
 
-      // 14h: drei finale stamps als outro-puls
-      { from: 215, to: 217,  type: 'stamp', text: 'STEPHAN.',  color: 'white' },
-      { from: 217, to: 219,  type: 'stamp', text: 'RÖTTGER.',  color: 'red' },
-      { from: 219, to: 221,  type: 'stamp', text: '· 2026 ·',   color: 'white' },
+      // 14h: kinetische 4-puls-folge (kein name-spam, kürzere cuts)
+      { from: 213, to: 214.5, type: 'stamp', text: 'GO.',          color: 'red' },
+      { from: 214.5, to: 216, type: 'stamp', text: 'NOW.',         color: 'white' },
+      { from: 216, to: 218,   type: 'stamp', text: 'NICHT MORGEN.', color: 'red' },
 
-      // 14i: kurze signature (4s, dann fade ins schwarze)
-      { from: 221, to: 226,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','signiert · stepharo · 2026'] },
+      // 14i: crash-line statt totem screen
+      { from: 218, to: 221,   type: 'crash', stay: 'eine entscheidung —', crash: 'JETZT TREFFEN.' },
+
+      // 14j: big email-flash (gross, kinetisch)
+      { from: 221, to: 224,   type: 'big', text: 'AGENT.STEPHARO@GMAIL.COM' },
+
+      // 14k: ultra-kurze signature (2s zum fade)
+      { from: 224, to: 226,   type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','· 2026 ·'] },
     ],
   },
 
@@ -186,7 +192,7 @@ const TRACKS = {
 
       // PHASE 9 — Hintergrund (indirekt: stationen, nicht eigenleistung)
       { from: 88,   to: 92,   type: 'stamp', text: 'STAZIONI.', color: 'cyan' },
-      { from: 92,   to: 97,   type: 'subline', text: 'dove imparato:', sub: '11TEAMSPORTS · NIKE · JAKO.' },
+      { from: 92,   to: 97,   type: 'subline', text: 'dove imparato:', sub: '11TS · NIKE · JAKO.' },
       { from: 97,   to: 102,  type: 'quote1', mark: '»', text: 'grande squadra. grande risultato.', text2: 'io <span class="codeword">c\'ero</span>. ho imparato.' },
 
       // PHASE 10 — marquee (hook-phrasen, ohne eigenpose)
@@ -244,27 +250,41 @@ const TRACKS = {
         'PENSARE · COSTRUIRE · FARE · PENSARE · COSTRUIRE · FARE ·'
       ]},
 
-      // 15h: drei finale stamps
-      { from: 208, to: 210,  type: 'stamp', text: 'STEPHAN.',  color: 'white' },
-      { from: 210, to: 212,  type: 'stamp', text: 'RÖTTGER.',  color: 'cyan' },
-      { from: 212, to: 214,  type: 'stamp', text: 'GRAZIE.',   color: 'white' },
+      // 15h: action-stamps statt name-spam (cyan/white wechsel)
+      { from: 208, to: 210,  type: 'stamp', text: 'ORA.',           color: 'cyan' },
+      { from: 210, to: 212,  type: 'stamp', text: 'NON DOMANI.',    color: 'white' },
+      { from: 212, to: 214,  type: 'stamp', text: 'GRAZIE GIANNA.', color: 'cyan' },
 
-      // 15i: zwischen-quote (gianna nannini hommage)
+      // 15i: gianna nannini hommage-quote
       { from: 214, to: 219,  type: 'quote1', mark: '»', text: 'grazie a gianna nannini —', text2: '1986 → <span class="codeword">2026</span>.' },
 
-      // 15j: nochmal endcard 3 (final cta)
-      { from: 219, to: 230,  type: 'endcard', cta: 'BELLO E IMPOSSIBILE.', mail: 'agent.stepharo@gmail.com', tag: '→ ma già fatto.', cyan: true },
+      // 15j: endcard auf 6s gekürzt (war 11s tot)
+      { from: 219, to: 225,  type: 'endcard', cta: 'BELLO E IMPOSSIBILE.', mail: 'agent.stepharo@gmail.com', tag: '→ ma già fatto.', cyan: true },
 
-      // 15k: marquee final loop
-      { from: 230, to: 240,  type: 'marquee', rows: [
-        '· STEPHAN RÖTTGER · STEPHAN RÖTTGER · STEPHAN RÖTTGER ·',
+      // 15k: crash-reprise (nicht statisch — bewegt)
+      { from: 225, to: 229,  type: 'crash', stay: 'dicono impossibile —', crash: 'GIÀ FATTO.' },
+
+      // 15l: zweite kinetische puls-folge
+      { from: 229, to: 231,  type: 'stamp', text: 'CHIAMAMI.',      color: 'cyan' },
+      { from: 231, to: 233,  type: 'stamp', text: 'OGGI.',          color: 'white' },
+      { from: 233, to: 235,  type: 'stamp', text: 'PROTOTIPO.',     color: 'cyan' },
+
+      // 15m: big email-flash
+      { from: 235, to: 239,  type: 'big', text: 'AGENT.STEPHARO@GMAIL.COM' },
+
+      // 15n: marquee final loop (verkürzt, name raus)
+      { from: 239, to: 245,  type: 'marquee', rows: [
         '→ AGENT.STEPHARO@GMAIL.COM ·  → AGENT.STEPHARO@GMAIL.COM ·',
-        '· MA FATTO · MA FATTO · MA FATTO · MA FATTO · MA FATTO ·'
+        '· MA FATTO · MA FATTO · MA FATTO · MA FATTO · MA FATTO ·',
+        'BELLO E IMPOSSIBILE · BELLO E IMPOSSIBILE · BELLO E IMPOSSIBILE ·'
       ]},
 
-      // 15l: kurze signature (8s, dann fade)
-      { from: 240, to: 251,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','bello e impossibile · ma fatto','grazie a gianna nannini · 1986','signiert · stepharo · 2026'] },
+      // 15o: letzter slam vor outro
+      { from: 245, to: 248,  type: 'big', text: 'MA FATTO.' },
+
+      // 15p: ultra-kurze signature (3s zum fade)
+      { from: 248, to: 251,  type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','bello e impossibile · ma fatto','grazie · gianna nannini · 1986'] },
     ],
   }
 };
