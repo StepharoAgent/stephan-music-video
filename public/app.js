@@ -142,149 +142,147 @@ const TRACKS = {
   },
 
   // ============================================================
-  // UNMÖGLICH — die Mindset-Variante: Trotz, Skill-Triade, Wandel
-  // 4:11 / 251s
-  // ============================================================
-  // ============================================================
-  // BELLO E IMPOSSIBILE — Gianna Nannini, 1986 → Stephan-Edit, 2026
+  // UNMÖGLICH — deutsche mindset-variante, hommage an
+  // gianna nannini · "bello e impossibile" · 1986
+  // 4:11 / 251s — alle texte deutsch, songtitel nur als hommage
   // intern key bleibt 'unmoeglich' wegen file path
   // ============================================================
   unmoeglich: {
     file: '/track-unmoeglich.mp3',
-    name: 'BELLO E IMPOSSIBILE',
+    name: 'UNMÖGLICH',
     theme: 'NANNINI.86',
     bodyClass: 'theme-cyan',
-    ticker: '· GIANNA NANNINI · BELLO E IMPOSSIBILE · 1986 → 2026 · STEPHAN RÖTTGER · DICONO IMPOSSIBILE — IO RISPONDO: GIÀ FATTO · UNA PERSONA · OUTPUT DI DIECI · MA FATTO · ',
+    ticker: '· STEPHAN RÖTTGER · UNMÖGLICH? — SCHON GEMACHT · DENKEN · BAUEN · MACHEN · EINE PERSON — OUTPUT VON ZEHN · TROTZDEM GEMACHT · FREI NACH GIANNA NANNINI · BELLO E IMPOSSIBILE · 1986 · ',
     scenes: [
-      // PHASE 1 — boot + name (italienisch eingestimmt)
-      { from: 0,    to: 4,    type: 'boot', lines: ['> nannini.sys // boot…','> caricamento bello.dat','> 1986 → 2026','> pronto.'] },
-      { from: 4,    to: 10,   type: 'name', name1: 'STEPHAN', name2: 'RÖTTGER', sub: 'bello e impossibile · ma fatto.' },
+      // PHASE 1 — boot + name (deutsch)
+      { from: 0,    to: 4,    type: 'boot', lines: ['> unmoeglich.sys // boot…','> lade trotz.dat','> alle sagen: nicht machbar','> ich sage: schon gemacht.'] },
+      { from: 4,    to: 10,   type: 'name', name1: 'STEPHAN', name2: 'RÖTTGER', sub: 'unmöglich? — schon gemacht.' },
 
-      // PHASE 2 — Title-Drop (Songtitel als Statement, italienisch)
-      { from: 10,   to: 15,   type: 'slam', text: 'BELLO.',         color: 'cyan' },
-      { from: 15,   to: 20,   type: 'slam', text: 'E IMPOSSIBILE.', color: 'white' },
-      { from: 20,   to: 25,   type: 'subline', text: 'gianna nannini, 1986 —', sub: 'STEPHAN RÖTTGER, 2026.' },
+      // PHASE 2 — Title-Drop (deutsch, songtitel als hommage in subline)
+      { from: 10,   to: 15,   type: 'slam', text: 'UN.',       color: 'cyan' },
+      { from: 15,   to: 20,   type: 'slam', text: 'MÖGLICH.',  color: 'white' },
+      { from: 20,   to: 25,   type: 'subline', text: 'frei nach gianna nannini —', sub: '„BELLO E IMPOSSIBILE“ · 1986.' },
 
-      // PHASE 3 — die Provokation (italienisch / kontert das „impossibile")
-      { from: 25,   to: 29,   type: 'qa', q: '// dicono',       a: 'IMPOSSIBILE.', mode: 'glitch' },
-      { from: 29,   to: 33,   type: 'qa', q: '// io rispondo',  a: 'GIÀ FATTO.',   mode: 'glitch' },
+      // PHASE 3 — die Provokation
+      { from: 25,   to: 29,   type: 'qa', q: '// alle sagen', a: 'UNMÖGLICH.',     mode: 'glitch' },
+      { from: 29,   to: 33,   type: 'qa', q: '// ich sage',   a: 'SCHON GEMACHT.', mode: 'glitch' },
 
-      // PHASE 4 — Lyric-Hooks aus dem Song (visuell eingebaut)
-      { from: 33,   to: 38,   type: 'quote1', mark: '»', text: 'forte come un airbag —', text2: 'fest wie ein <span class="codeword">airbag</span>.' },
-      { from: 38,   to: 43,   type: 'quote1', mark: '»', text: 'tu sei un\'autostrada —', text2: 'eine <span class="codeword">autobahn</span>, kein umweg.' },
+      // PHASE 4 — Lyric-Hooks (Songbezug, aber komplett deutsch)
+      { from: 33,   to: 38,   type: 'quote1', mark: '»', text: 'fest wie ein airbag —', text2: 'beim aufprall <span class="codeword">halten</span>.' },
+      { from: 38,   to: 43,   type: 'quote1', mark: '»', text: 'eine autobahn —', text2: 'kein <span class="codeword">umweg</span>.' },
 
-      // PHASE 5 — Skill-Triade italienisch
-      { from: 43,   to: 49,   type: 'slam', text: '(i.) PENSARE.',   color: 'cyan'  }, // denken
-      { from: 49,   to: 55,   type: 'slam', text: '(ii.) COSTRUIRE.', color: 'white' }, // bauen
-      { from: 55,   to: 61,   type: 'slam', text: '(iii.) FARE.',     color: 'cyan'  }, // machen
+      // PHASE 5 — Skill-Triade DEUTSCH
+      { from: 43,   to: 49,   type: 'slam', text: '(i.) DENKEN.',  color: 'cyan'  },
+      { from: 49,   to: 55,   type: 'slam', text: '(ii.) BAUEN.',  color: 'white' },
+      { from: 55,   to: 61,   type: 'slam', text: '(iii.) MACHEN.', color: 'cyan'  },
 
       // PHASE 6 — die Kernaussage
-      { from: 61,   to: 67,   type: 'crash', stay: 'una persona —', crash: 'OUTPUT DI DIECI.' },
-      { from: 67,   to: 72,   type: 'subline', text: 'live im einsatz —', sub: 'NON NEL SLIDEDECK.' },
+      { from: 61,   to: 67,   type: 'crash', stay: 'eine person —', crash: 'OUTPUT VON ZEHN.' },
+      { from: 67,   to: 72,   type: 'subline', text: 'live im einsatz —', sub: 'NICHT IM SLIDEDECK.' },
 
-      // PHASE 7 — Anti-Ausreden (italianisiert)
-      { from: 72,   to: 75,   type: 'antiline', text: 'niente „non si può“.' },
-      { from: 75,   to: 78,   type: 'antiline', text: 'niente „ci serve un team di dieci“.' },
-      { from: 78,   to: 81,   type: 'antiline', text: 'niente „chiediamo a un\'agenzia“.' },
+      // PHASE 7 — Anti-Ausreden (deutsch)
+      { from: 72,   to: 75,   type: 'antiline', text: 'kein „geht nicht“.' },
+      { from: 75,   to: 78,   type: 'antiline', text: 'kein „brauchen wir ein team von zehn“.' },
+      { from: 78,   to: 81,   type: 'antiline', text: 'kein „fragen wir mal eine agentur“.' },
 
-      // PHASE 8 — die Haltung (groß, einfach, hart)
-      { from: 81,   to: 88,   type: 'big', text: 'MA FATTO.' },
+      // PHASE 8 — die Haltung (gross, einfach, hart)
+      { from: 81,   to: 88,   type: 'big', text: 'TROTZDEM GEMACHT.' },
 
-      // PHASE 9 — Hintergrund (indirekt: stationen, nicht eigenleistung)
-      { from: 88,   to: 92,   type: 'stamp', text: 'STAZIONI.', color: 'cyan' },
-      { from: 92,   to: 97,   type: 'subline', text: 'dove imparato:', sub: '11TS · NIKE · JAKO.' },
-      { from: 97,   to: 102,  type: 'quote1', mark: '»', text: 'grande squadra. grande risultato.', text2: 'io <span class="codeword">c\'ero</span>. ho imparato.' },
+      // PHASE 9 — Hintergrund (indirekt)
+      { from: 88,   to: 92,   type: 'stamp', text: 'STATIONEN.', color: 'cyan' },
+      { from: 92,   to: 97,   type: 'subline', text: 'wo gelernt:', sub: '11TS · NIKE · JAKO.' },
+      { from: 97,   to: 102,  type: 'quote1', mark: '»', text: 'großes team. großes ergebnis.', text2: '<span class="codeword">dabei</span> gewesen. davon gelernt.' },
 
-      // PHASE 10 — marquee (hook-phrasen, ohne eigenpose)
+      // PHASE 10 — marquee (deutsche hook-phrasen)
       { from: 102,  to: 110,  type: 'marquee', rows: [
-        'BELLO ·  E ·  IMPOSSIBILE ·  BELLO ·  E ·  IMPOSSIBILE ·',
-        'MA FATTO · MA FATTO · MA FATTO · MA FATTO · MA FATTO ·',
-        '11TEAMSPORTS · NIKE · JAKO · 11TEAMSPORTS · NIKE · JAKO ·'
+        'UNMÖGLICH ·  SCHON GEMACHT ·  UNMÖGLICH ·  SCHON GEMACHT ·',
+        'DENKEN · BAUEN · MACHEN · DENKEN · BAUEN · MACHEN ·',
+        '11TS · NIKE · JAKO · 11TS · NIKE · JAKO ·'
       ]},
 
-      // PHASE 11 — die Kernfrage
-      { from: 110,  to: 118,  type: 'qa', q: '// perché funziona', a: 'PERCHÉ LO FACCIO IO.', mode: 'fall' },
+      // PHASE 11 — Kernfrage
+      { from: 110,  to: 118,  type: 'qa', q: '// warum funktioniert es', a: 'WEIL ICH ES MACHE.', mode: 'fall' },
 
       // PHASE 12 — Verstärkung
-      { from: 118,  to: 124,  type: 'repeatquote', a: 'dicono che è impossibile —', b: 'IO L\'HO GIÀ DEPLOYATO.' },
+      { from: 118,  to: 124,  type: 'repeatquote', a: 'sie sagen unmöglich —', b: 'ICH HAB ES SCHON DEPLOYED.' },
 
       // PHASE 13 — buildup
-      { from: 124,  to: 128,  type: 'buildup', text: 'NIENTE',        size: 'sm' },
-      { from: 128,  to: 132,  type: 'buildup', text: 'È',             size: 'md' },
-      { from: 132,  to: 136,  type: 'buildup', text: 'DAVVERO',       size: 'lg' },
-      { from: 136,  to: 146,  type: 'buildup', text: 'IMPOSSIBILE.',  size: 'xl', cyan: true },
+      { from: 124,  to: 128,  type: 'buildup', text: 'NICHTS',     size: 'sm' },
+      { from: 128,  to: 132,  type: 'buildup', text: 'IST',        size: 'md' },
+      { from: 132,  to: 136,  type: 'buildup', text: 'WIRKLICH',   size: 'lg' },
+      { from: 136,  to: 146,  type: 'buildup', text: 'UNMÖGLICH.', size: 'xl', cyan: true },
 
-      // PHASE 14 — climax (auf den Songtitel)
-      { from: 146,  to: 162,  type: 'climax', a: 'BELLO E', b: 'IMPOSSIBILE.', sub: '→ MA FATTO.', cyan: true },
+      // PHASE 14 — climax (deutsch, songtitel als reverenz)
+      { from: 146,  to: 162,  type: 'climax', a: 'SCHÖN UND', b: 'UNMÖGLICH.', sub: '→ TROTZDEM GEMACHT.', cyan: true },
 
       // ============================================================
       // LETZTE PHASE — viele kurze cuts, kein toter screen
       // ============================================================
 
-      // 15a: erste endcard, kurz
-      { from: 162, to: 170,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'una persona · disponibile subito', cyan: true },
+      // 15a: erste endcard
+      { from: 162, to: 170,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'eine person · sofort verfügbar', cyan: true },
 
-      // 15b: drei kurze stamps in folge — outro-puls
-      { from: 170, to: 172,  type: 'stamp', text: 'BELLO.',       color: 'cyan' },
-      { from: 172, to: 174,  type: 'stamp', text: 'E.',           color: 'white' },
-      { from: 174, to: 176,  type: 'stamp', text: 'IMPOSSIBILE.', color: 'cyan' },
-      { from: 176, to: 178,  type: 'stamp', text: 'MA FATTO.',    color: 'white' },
+      // 15b: vier kurze stamps — outro-puls (auf den deutschen titel)
+      { from: 170, to: 172,  type: 'stamp', text: 'SCHÖN.',     color: 'cyan' },
+      { from: 172, to: 174,  type: 'stamp', text: 'UND.',       color: 'white' },
+      { from: 174, to: 176,  type: 'stamp', text: 'UNMÖGLICH.', color: 'cyan' },
+      { from: 176, to: 178,  type: 'stamp', text: 'GEMACHT.',   color: 'white' },
 
       // 15c: punchline mini-quote
-      { from: 178, to: 182,  type: 'quote1', mark: '»', text: 'una settimana —', text2: '<span class="codeword">prototipo</span> in produzione.' },
+      { from: 178, to: 182,  type: 'quote1', mark: '»', text: 'eine woche —', text2: '<span class="codeword">prototyp</span> live.' },
 
-      // 15d: anti-zeilen (warum nicht Agentur)
-      { from: 182, to: 185,  type: 'antiline', text: 'niente onboarding di sei mesi.' },
-      { from: 185, to: 188,  type: 'antiline', text: 'niente comitato di steering.' },
+      // 15d: anti-zeilen
+      { from: 182, to: 185,  type: 'antiline', text: 'kein onboarding-marathon.' },
+      { from: 185, to: 188,  type: 'antiline', text: 'kein steering-comittee.' },
 
-      // 15e: zweite endcard, italo CTA
-      { from: 188, to: 196,  type: 'endcard', cta: 'CHIAMAMI.', mail: 'agent.stepharo@gmail.com', tag: 'disponibile subito · remoto o on-site', cyan: true },
+      // 15e: zweite endcard
+      { from: 188, to: 196,  type: 'endcard', cta: 'STELL MICH EIN.', mail: 'agent.stepharo@gmail.com', tag: 'sofort verfügbar · remote oder vor ort', cyan: true },
 
-      // 15f: repeat-twist auf den Songtitel
-      { from: 196, to: 200,  type: 'repeatquote', a: 'bello e impossibile —', b: 'MA GIÀ FATTO.' },
+      // 15f: repeat-twist
+      { from: 196, to: 200,  type: 'repeatquote', a: 'unmöglich —', b: 'TROTZDEM GEMACHT.' },
 
       // 15g: closing marquee
       { from: 200, to: 208,  type: 'marquee', rows: [
         '→ AGENT.STEPHARO@GMAIL.COM ·  → AGENT.STEPHARO@GMAIL.COM ·',
-        'BELLO E IMPOSSIBILE · MA FATTO · BELLO E IMPOSSIBILE · MA FATTO ·',
-        'PENSARE · COSTRUIRE · FARE · PENSARE · COSTRUIRE · FARE ·'
+        'UNMÖGLICH · TROTZDEM GEMACHT · UNMÖGLICH · TROTZDEM GEMACHT ·',
+        'DENKEN · BAUEN · MACHEN · DENKEN · BAUEN · MACHEN ·'
       ]},
 
-      // 15h: action-stamps statt name-spam (cyan/white wechsel)
-      { from: 208, to: 210,  type: 'stamp', text: 'ORA.',           color: 'cyan' },
-      { from: 210, to: 212,  type: 'stamp', text: 'NON DOMANI.',    color: 'white' },
-      { from: 212, to: 214,  type: 'stamp', text: 'GRAZIE GIANNA.', color: 'cyan' },
+      // 15h: action-stamps (deutsch)
+      { from: 208, to: 210,  type: 'stamp', text: 'JETZT.',         color: 'cyan' },
+      { from: 210, to: 212,  type: 'stamp', text: 'NICHT MORGEN.',  color: 'white' },
+      { from: 212, to: 214,  type: 'stamp', text: 'DANKE GIANNA.',  color: 'cyan' },
 
-      // 15i: gianna nannini hommage-quote
-      { from: 214, to: 219,  type: 'quote1', mark: '»', text: 'grazie a gianna nannini —', text2: '1986 → <span class="codeword">2026</span>.' },
+      // 15i: hommage-quote (deutsch)
+      { from: 214, to: 219,  type: 'quote1', mark: '»', text: 'danke an gianna nannini —', text2: '1986 → <span class="codeword">2026</span>.' },
 
-      // 15j: endcard auf 6s gekürzt (war 11s tot)
-      { from: 219, to: 225,  type: 'endcard', cta: 'BELLO E IMPOSSIBILE.', mail: 'agent.stepharo@gmail.com', tag: '→ ma già fatto.', cyan: true },
+      // 15j: endcard reprise (6s, deutsch)
+      { from: 219, to: 225,  type: 'endcard', cta: 'SCHÖN UND UNMÖGLICH.', mail: 'agent.stepharo@gmail.com', tag: '→ trotzdem gemacht.', cyan: true },
 
-      // 15k: crash-reprise (nicht statisch — bewegt)
-      { from: 225, to: 229,  type: 'crash', stay: 'dicono impossibile —', crash: 'GIÀ FATTO.' },
+      // 15k: crash-reprise
+      { from: 225, to: 229,  type: 'crash', stay: 'sie sagen unmöglich —', crash: 'SCHON LÄNGST GEMACHT.' },
 
       // 15l: zweite kinetische puls-folge
-      { from: 229, to: 231,  type: 'stamp', text: 'CHIAMAMI.',      color: 'cyan' },
-      { from: 231, to: 233,  type: 'stamp', text: 'OGGI.',          color: 'white' },
-      { from: 233, to: 235,  type: 'stamp', text: 'PROTOTIPO.',     color: 'cyan' },
+      { from: 229, to: 231,  type: 'stamp', text: 'RUF AN.',    color: 'cyan' },
+      { from: 231, to: 233,  type: 'stamp', text: 'HEUTE.',     color: 'white' },
+      { from: 233, to: 235,  type: 'stamp', text: 'PROTOTYP.',  color: 'cyan' },
 
       // 15m: big email-flash
       { from: 235, to: 239,  type: 'big', text: 'AGENT.STEPHARO@GMAIL.COM' },
 
-      // 15n: marquee final loop (verkürzt, name raus)
+      // 15n: marquee final loop (deutsch)
       { from: 239, to: 245,  type: 'marquee', rows: [
         '→ AGENT.STEPHARO@GMAIL.COM ·  → AGENT.STEPHARO@GMAIL.COM ·',
-        '· MA FATTO · MA FATTO · MA FATTO · MA FATTO · MA FATTO ·',
-        'BELLO E IMPOSSIBILE · BELLO E IMPOSSIBILE · BELLO E IMPOSSIBILE ·'
+        '· TROTZDEM GEMACHT · TROTZDEM GEMACHT · TROTZDEM GEMACHT ·',
+        'SCHÖN UND UNMÖGLICH · SCHÖN UND UNMÖGLICH · SCHÖN UND UNMÖGLICH ·'
       ]},
 
       // 15o: letzter slam vor outro
-      { from: 245, to: 248,  type: 'big', text: 'MA FATTO.' },
+      { from: 245, to: 248,  type: 'big', text: 'TROTZDEM GEMACHT.' },
 
       // 15p: ultra-kurze signature (3s zum fade)
       { from: 248, to: 251,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','bello e impossibile · ma fatto','grazie · gianna nannini · 1986'] },
+        meta: ['agent.stepharo@gmail.com','schön und unmöglich · trotzdem gemacht','danke · gianna nannini · 1986'] },
     ],
   }
 };
