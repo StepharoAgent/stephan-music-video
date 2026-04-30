@@ -45,70 +45,93 @@ const TRACKS = {
       { from: 56,   to: 60,   type: 'subline', text: 'weil ki kein assistent ist —', sub: 'SONDERN MEIN HEBEL.' },
       { from: 60,   to: 66,   type: 'quote1', mark: '»', text: 'trilliarden tokens unter mir —', text2: '<span class="codeword">tage</span> statt monate.' },
 
-      // PHASE 6 — KLEINER Proof-Block (Firmen als Beweis, nicht als Show)
+      // PHASE 6 — Proof: als CTO im Team — NICHT solo (das wäre gelogen)
       { from: 66,   to: 70,   type: 'stamp', text: 'PROOF.', color: 'red' },
-      { from: 70,   to: 76,   type: 'subline', text: '10+ jahre · 22 länder · 2,5m kunden —', sub: '11TEAMSPORTS · NIKE · JAKO.' },
-      { from: 76,   to: 82,   type: 'stats', items: [
-        { num: 1000, final: '1000%', slot: true, label: 'umsatzwachstum geliefert' },
-        { num: 22,   final: '22',    slot: true, label: 'länder ausgerollt' },
-        { num: 25,   final: '2,5M',                label: 'kunden bedient' },
-        { num: 10,   final: '10+',                 label: 'jahre operativ live' },
+      { from: 70,   to: 75,   type: 'subline', text: 'als cto · im team von 1000+ —', sub: '11TEAMSPORTS · NIKE · JAKO.' },
+      { from: 75,   to: 82,   type: 'stats', items: [
+        { num: 1000, final: '1000%', slot: true, label: 'umsatz · mitverantwortet' },
+        { num: 22,   final: '22',    slot: true, label: 'länder · live skaliert' },
+        { num: 25,   final: '2,5M',                label: 'kunden · im shop bedient' },
+        { num: 10,   final: '10+',                 label: 'jahre · als cto' },
       ]},
+      { from: 82,   to: 86,   type: 'quote1', mark: '»', text: 'kein lone wolf —', text2: 'sondern <span class="codeword">architekt</span> im team.' },
 
       // PHASE 7 — Anti-Bullshit (was er NICHT mitbringt)
-      { from: 82,   to: 85,   type: 'antiline', text: 'kein pitch deck.' },
-      { from: 85,   to: 88,   type: 'antiline', text: 'kein agency-overhead.' },
-      { from: 88,   to: 91,   type: 'antiline', text: 'kein „lass uns mal syncen“.' },
+      { from: 86,   to: 89,   type: 'antiline', text: 'kein pitch deck.' },
+      { from: 89,   to: 92,   type: 'antiline', text: 'kein agency-overhead.' },
+      { from: 92,   to: 95,   type: 'antiline', text: 'kein „lass uns mal syncen“.' },
 
       // PHASE 8 — der eigentliche USP
-      { from: 91,   to: 95,   type: 'subline', text: 'ich bin kein dienstleister —', sub: 'ICH BIN EINE ABKÜRZUNG.' },
-      { from: 95,   to: 100,  type: 'quote1', mark: '»', text: 'deine roadmap —', text2: 'läuft schon in meiner <span class="codeword">pipeline</span>.' },
+      { from: 95,   to: 99,   type: 'subline', text: 'ich bin kein dienstleister —', sub: 'ICH BIN EINE ABKÜRZUNG.' },
+      { from: 99,   to: 104,  type: 'quote1', mark: '»', text: 'deine roadmap —', text2: 'läuft schon in meiner <span class="codeword">pipeline</span>.' },
 
       // PHASE 9 — Geschwindigkeit (Verb-Triade, kürzer & härter)
-      { from: 100, to: 104,  type: 'slam', text: 'DENKEN.',  color: 'white' },
-      { from: 104, to: 108,  type: 'slam', text: 'BAUEN.',   color: 'red' },
-      { from: 108, to: 112,  type: 'slam', text: 'LIEFERN.', color: 'white' },
-      { from: 112, to: 118,  type: 'crash', stay: 'was andere noch planen —', crash: 'HAB ICH SCHON DEPLOYED.' },
+      { from: 104, to: 108,  type: 'slam', text: 'DENKEN.',  color: 'white' },
+      { from: 108, to: 112,  type: 'slam', text: 'BAUEN.',   color: 'red' },
+      { from: 112, to: 116,  type: 'slam', text: 'LIEFERN.', color: 'white' },
+      { from: 116, to: 122,  type: 'crash', stay: 'was andere noch planen —', crash: 'HAB ICH SCHON DEPLOYED.' },
 
       // PHASE 10 — Verstärkung
-      { from: 118, to: 122,  type: 'twobeat', a: 'KLINGT GROSS.', b: 'IST ES AUCH.' },
-      { from: 122, to: 128,  type: 'repeatquote', a: 'live im einsatz —', b: 'NICHT IM SLIDEDECK.' },
+      { from: 122, to: 126,  type: 'twobeat', a: 'KLINGT GROSS.', b: 'IST ES AUCH.' },
+      { from: 126, to: 132,  type: 'repeatquote', a: 'live im einsatz —', b: 'NICHT IM SLIDEDECK.' },
 
-      // PHASE 11 — marquee (Stephans Eigenschaften, nicht Firmenliste)
-      { from: 128, to: 135,  type: 'marquee', rows: [
+      // PHASE 11 — marquee
+      { from: 132, to: 139,  type: 'marquee', rows: [
         'STEPHAN RÖTTGER ·  POLYMATH ·  OPERATOR ·  MULTIPLIKATOR ·',
         'DENKEN · BAUEN · ANTREIBEN · LIEFERN · DENKEN · BAUEN · ANTREIBEN · LIEFERN ·',
-        'EIN KOPF · ZEHN LEUTE LEISTUNG · EIN KOPF · ZEHN LEUTE LEISTUNG ·'
+        'CTO · ARCHITEKT · IM TEAM VON 1000+ ·'
       ]},
 
       // PHASE 12 — buildup zur Botschaft
-      { from: 135, to: 138,  type: 'buildup', text: 'BYE-BYE',    size: 'sm' },
-      { from: 138, to: 141,  type: 'buildup', text: 'RIESIGE',    size: 'md' },
-      { from: 141, to: 144,  type: 'buildup', text: 'TEURE',      size: 'lg' },
-      { from: 144, to: 152,  type: 'buildup', text: 'AGENTUREN.', size: 'xl', red: true },
+      { from: 139, to: 142,  type: 'buildup', text: 'BYE-BYE',    size: 'sm' },
+      { from: 142, to: 145,  type: 'buildup', text: 'RIESIGE',    size: 'md' },
+      { from: 145, to: 148,  type: 'buildup', text: 'TEURE',      size: 'lg' },
+      { from: 148, to: 156,  type: 'buildup', text: 'AGENTUREN.', size: 'xl', red: true },
 
       // PHASE 13 — climax
-      { from: 152, to: 168,  type: 'climax', a: 'KAUF MICH', b: 'NICHT.', sub: '→ HOL MICH AN BORD.' },
+      { from: 156, to: 170,  type: 'climax', a: 'KAUF MICH', b: 'NICHT.', sub: '→ HOL MICH AN BORD.' },
 
-      // PHASE 14 — endcard (CTA bleibt sichtbar, Mail blinkt, Tag fadet)
-      { from: 168, to: 184,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'kein pitch · keine agentur · nur lieferung' },
+      // ============================================================
+      // LETZTE MINUTE — viele kurze cuts, kein toter screen
+      // ============================================================
 
-      // PHASE 15 — repeat-twist (zweite welle)
-      { from: 184, to: 192,  type: 'repeatquote', a: 'kauf mich nicht —', b: 'STELL MICH EIN.' },
+      // 14a: erste endcard, kurz
+      { from: 170, to: 178,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'kein pitch · keine agentur · nur lieferung' },
 
-      // PHASE 16 — endcard 2 (anderer cta, gleiches setup)
-      { from: 192, to: 208,  type: 'endcard', cta: 'STELL MICH EIN.', mail: 'agent.stepharo@gmail.com', tag: 'verfügbar ab sofort · remote oder vor ort' },
+      // 14b: drei kurze stamps in folge (jeder 2.3s) — rhythmisch wie ein outro-drum
+      { from: 178, to: 180,  type: 'stamp', text: 'EIN.',   color: 'white' },
+      { from: 180, to: 182,  type: 'stamp', text: 'CALL.',  color: 'red' },
+      { from: 182, to: 184,  type: 'stamp', text: 'EINE.',  color: 'white' },
+      { from: 184, to: 186,  type: 'stamp', text: 'ANTWORT.', color: 'red' },
 
-      // PHASE 17 — closing marquee (lebt weiter, kein toter screen)
-      { from: 208, to: 218,  type: 'marquee', rows: [
+      // 14c: punchline mini-quote
+      { from: 186, to: 190,  type: 'quote1', mark: '»', text: 'erste woche —', text2: '<span class="codeword">prototype</span> live.' },
+
+      // 14d: anti-zeile (warum nicht Agentur)
+      { from: 190, to: 193,  type: 'antiline', text: 'kein onboarding-marathon.' },
+      { from: 193, to: 196,  type: 'antiline', text: 'kein 6-monats-roadshow.' },
+
+      // 14e: zweite endcard, anderer CTA
+      { from: 196, to: 204,  type: 'endcard', cta: 'STELL MICH EIN.', mail: 'agent.stepharo@gmail.com', tag: 'verfügbar ab sofort · remote oder vor ort' },
+
+      // 14f: repeat-twist auf den Songtitel
+      { from: 204, to: 208,  type: 'repeatquote', a: 'kauf mich nicht —', b: 'HOL MICH AN BORD.' },
+
+      // 14g: closing marquee mit email
+      { from: 208, to: 215,  type: 'marquee', rows: [
         '→ AGENT.STEPHARO@GMAIL.COM ·  → AGENT.STEPHARO@GMAIL.COM ·',
-        'STEPHAN RÖTTGER · POLYMATH · OPERATOR · MULTIPLIKATOR ·',
-        'KAUF MICH NICHT · STELL MICH EIN · KAUF MICH NICHT · STELL MICH EIN ·'
+        'KAUF MICH NICHT · STELL MICH EIN · KAUF MICH NICHT · STELL MICH EIN ·',
+        'CTO · ARCHITEKT · POLYMATH · OPERATOR · MULTIPLIKATOR ·'
       ]},
 
-      // PHASE 18 — outro signature (kurz, knapp, würdig)
-      { from: 218, to: 240,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','polymath · operator · multiplikator','signiert · stepharo · 2026'] },
+      // 14h: drei finale stamps als outro-puls
+      { from: 215, to: 217,  type: 'stamp', text: 'STEPHAN.',  color: 'white' },
+      { from: 217, to: 219,  type: 'stamp', text: 'RÖTTGER.',  color: 'red' },
+      { from: 219, to: 221,  type: 'stamp', text: '· 2026 ·',   color: 'white' },
+
+      // 14i: kurze signature (4s, dann fade ins schwarze)
+      { from: 221, to: 226,  type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','signiert · stepharo · 2026'] },
     ],
   },
 
@@ -161,22 +184,23 @@ const TRACKS = {
       // PHASE 8 — die Haltung (groß, einfach, hart)
       { from: 81,   to: 88,   type: 'big', text: 'MA FATTO.' },
 
-      // PHASE 9 — KLEINER Proof (Firmen nur Fußnote)
+      // PHASE 9 — Proof: als CTO im Team — NICHT solo (das wäre gelogen)
       { from: 88,   to: 92,   type: 'stamp', text: 'PROOF.', color: 'cyan' },
-      { from: 92,   to: 98,   type: 'subline', text: '10+ jahre · 22 länder · 2,5m kunden —', sub: 'EUROPA AUFGEROLLT. SOLO.' },
+      { from: 92,   to: 97,   type: 'subline', text: 'als cto · im team von 1000+ —', sub: '22 LÄNDER · 2,5M KUNDEN · 1000% WACHSTUM.' },
+      { from: 97,   to: 102,  type: 'quote1', mark: '»', text: 'non da solo —', text2: 'ma <span class="codeword">architetto</span> nel team.' },
 
       // PHASE 10 — marquee (Hook-Phrasen, beat)
-      { from: 98,   to: 108,  type: 'marquee', rows: [
+      { from: 102,  to: 110,  type: 'marquee', rows: [
         'BELLO ·  E ·  IMPOSSIBILE ·  BELLO ·  E ·  IMPOSSIBILE ·',
         'MA FATTO · MA FATTO · MA FATTO · MA FATTO · MA FATTO ·',
-        'UNA PERSONA · DIECI PERSONE · UNA PERSONA · DIECI PERSONE ·'
+        'CTO · ARCHITETTO · NEL TEAM · CTO · ARCHITETTO · NEL TEAM ·'
       ]},
 
       // PHASE 11 — die Kernfrage
-      { from: 108,  to: 116,  type: 'qa', q: '// perché funziona', a: 'PERCHÉ LO FACCIO IO.', mode: 'fall' },
+      { from: 110,  to: 118,  type: 'qa', q: '// perché funziona', a: 'PERCHÉ LO FACCIO IO.', mode: 'fall' },
 
-      // PHASE 12 — Verstärkung (zweisprachig: hook + payoff)
-      { from: 116,  to: 124,  type: 'repeatquote', a: 'dicono che è impossibile —', b: 'IO L\'HO GIÀ DEPLOYATO.' },
+      // PHASE 12 — Verstärkung
+      { from: 118,  to: 124,  type: 'repeatquote', a: 'dicono che è impossibile —', b: 'IO L\'HO GIÀ DEPLOYATO.' },
 
       // PHASE 13 — buildup
       { from: 124,  to: 128,  type: 'buildup', text: 'NIENTE',        size: 'sm' },
@@ -187,25 +211,60 @@ const TRACKS = {
       // PHASE 14 — climax (auf den Songtitel)
       { from: 146,  to: 162,  type: 'climax', a: 'BELLO E', b: 'IMPOSSIBILE.', sub: '→ MA FATTO.', cyan: true },
 
-      // PHASE 15 — endcard (CTA blinkend, mail, tag)
-      { from: 162, to: 178,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'una persona · dieci persone · zero agenzie', cyan: true },
+      // ============================================================
+      // LETZTE PHASE — viele kurze cuts, kein toter screen
+      // ============================================================
 
-      // PHASE 16 — repeat-twist
-      { from: 178, to: 186,  type: 'repeatquote', a: 'bello e impossibile —', b: 'MA GIÀ FATTO.' },
+      // 15a: erste endcard, kurz
+      { from: 162, to: 170,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'cto · architetto · nel team da subito', cyan: true },
 
-      // PHASE 17 — endcard 2 (italienisch CTA)
-      { from: 186, to: 202,  type: 'endcard', cta: 'CHIAMAMI.', mail: 'agent.stepharo@gmail.com', tag: 'disponibile subito · remoto oppure on-site', cyan: true },
+      // 15b: drei kurze stamps in folge — outro-puls
+      { from: 170, to: 172,  type: 'stamp', text: 'BELLO.',       color: 'cyan' },
+      { from: 172, to: 174,  type: 'stamp', text: 'E.',           color: 'white' },
+      { from: 174, to: 176,  type: 'stamp', text: 'IMPOSSIBILE.', color: 'cyan' },
+      { from: 176, to: 178,  type: 'stamp', text: 'MA FATTO.',    color: 'white' },
 
-      // PHASE 18 — closing marquee
-      { from: 202, to: 215,  type: 'marquee', rows: [
+      // 15c: punchline mini-quote
+      { from: 178, to: 182,  type: 'quote1', mark: '»', text: 'una settimana —', text2: '<span class="codeword">prototipo</span> in produzione.' },
+
+      // 15d: anti-zeilen (warum nicht Agentur)
+      { from: 182, to: 185,  type: 'antiline', text: 'niente onboarding di sei mesi.' },
+      { from: 185, to: 188,  type: 'antiline', text: 'niente comitato di steering.' },
+
+      // 15e: zweite endcard, italo CTA
+      { from: 188, to: 196,  type: 'endcard', cta: 'CHIAMAMI.', mail: 'agent.stepharo@gmail.com', tag: 'disponibile subito · remoto o on-site', cyan: true },
+
+      // 15f: repeat-twist auf den Songtitel
+      { from: 196, to: 200,  type: 'repeatquote', a: 'bello e impossibile —', b: 'MA GIÀ FATTO.' },
+
+      // 15g: closing marquee
+      { from: 200, to: 208,  type: 'marquee', rows: [
         '→ AGENT.STEPHARO@GMAIL.COM ·  → AGENT.STEPHARO@GMAIL.COM ·',
-        'STEPHAN RÖTTGER · BELLO E IMPOSSIBILE · MA FATTO ·',
+        'BELLO E IMPOSSIBILE · MA FATTO · BELLO E IMPOSSIBILE · MA FATTO ·',
         'PENSARE · COSTRUIRE · FARE · PENSARE · COSTRUIRE · FARE ·'
       ]},
 
-      // PHASE 19 — outro signature
-      { from: 215, to: 251,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','bello e impossibile · ma fatto','grazie a gianna nannini · 1986','signiert · stepharo · 2026'] },
+      // 15h: drei finale stamps
+      { from: 208, to: 210,  type: 'stamp', text: 'STEPHAN.',  color: 'white' },
+      { from: 210, to: 212,  type: 'stamp', text: 'RÖTTGER.',  color: 'cyan' },
+      { from: 212, to: 214,  type: 'stamp', text: 'GRAZIE.',   color: 'white' },
+
+      // 15i: zwischen-quote (gianna nannini hommage)
+      { from: 214, to: 219,  type: 'quote1', mark: '»', text: 'grazie a gianna nannini —', text2: '1986 → <span class="codeword">2026</span>.' },
+
+      // 15j: nochmal endcard 3 (final cta)
+      { from: 219, to: 230,  type: 'endcard', cta: 'BELLO E IMPOSSIBILE.', mail: 'agent.stepharo@gmail.com', tag: '→ ma già fatto.', cyan: true },
+
+      // 15k: marquee final loop
+      { from: 230, to: 240,  type: 'marquee', rows: [
+        '· STEPHAN RÖTTGER · STEPHAN RÖTTGER · STEPHAN RÖTTGER ·',
+        '→ AGENT.STEPHARO@GMAIL.COM ·  → AGENT.STEPHARO@GMAIL.COM ·',
+        '· MA FATTO · MA FATTO · MA FATTO · MA FATTO · MA FATTO ·'
+      ]},
+
+      // 15l: kurze signature (8s, dann fade)
+      { from: 240, to: 251,  type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','cto · architetto · nel team','grazie a gianna nannini · 1986','signiert · stepharo · 2026'] },
     ],
   }
 };
