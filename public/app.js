@@ -690,9 +690,13 @@ function animateCounter(el) {
   const final = el.dataset.final;
   const num = parseInt(el.dataset.num, 10);
   if (el.classList.contains('slot') && !isNaN(num)) {
-    const target = String(num);
+    // Split final into numeric prefix (slot-animated) and suffix (e.g. "%", "M")
+    const finalStr = final || String(num);
+    const m = finalStr.match(/^(\d+)(.*)$/);
+    const digits = m ? m[1] : String(num);
+    const suffix = m ? m[2] : '';
     el.innerHTML = '';
-    [...target].forEach((targetDigit, i) => {
+    [...digits].forEach((targetDigit, i) => {
       const tgt = parseInt(targetDigit, 10);
       const wrap = document.createElement('span'); wrap.className = 'digit';
       const reel = document.createElement('span'); reel.className = 'reel';
@@ -705,10 +709,17 @@ function animateCounter(el) {
       const fin = document.createElement('span'); fin.textContent = tgt; reel.appendChild(fin);
       wrap.appendChild(reel); el.appendChild(wrap);
       requestAnimationFrame(() => {
-        const offset = (cycles * 10 + tgt);
+        // fin lives at index cycles*10 → translate by exactly cycles*10 em to land on it
+        const offset = cycles * 10;
         reel.style.transform = `translateY(-${offset}em)`;
       });
     });
+    if (suffix) {
+      const sfx = document.createElement('span');
+      sfx.className = 'slot-suffix';
+      sfx.textContent = suffix;
+      el.appendChild(sfx);
+    }
     return;
   }
   if (isNaN(num)) {
