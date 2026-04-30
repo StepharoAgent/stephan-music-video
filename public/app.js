@@ -88,11 +88,27 @@ const TRACKS = {
       { from: 144, to: 152,  type: 'buildup', text: 'AGENTUREN.', size: 'xl', red: true },
 
       // PHASE 13 — climax
-      { from: 152, to: 170,  type: 'climax', a: 'KAUF MICH', b: 'NICHT.', sub: '→ HOL MICH AN BORD.' },
+      { from: 152, to: 168,  type: 'climax', a: 'KAUF MICH', b: 'NICHT.', sub: '→ HOL MICH AN BORD.' },
 
-      // PHASE 14 — outro
-      { from: 170, to: 230,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','polymath · operator · multiplikator','politik → code → ai','signiert · stepharo · 2026'] },
+      // PHASE 14 — endcard (CTA bleibt sichtbar, Mail blinkt, Tag fadet)
+      { from: 168, to: 184,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'kein pitch · keine agentur · nur lieferung' },
+
+      // PHASE 15 — repeat-twist (zweite welle)
+      { from: 184, to: 192,  type: 'repeatquote', a: 'kauf mich nicht —', b: 'STELL MICH EIN.' },
+
+      // PHASE 16 — endcard 2 (anderer cta, gleiches setup)
+      { from: 192, to: 208,  type: 'endcard', cta: 'STELL MICH EIN.', mail: 'agent.stepharo@gmail.com', tag: 'verfügbar ab sofort · remote oder vor ort' },
+
+      // PHASE 17 — closing marquee (lebt weiter, kein toter screen)
+      { from: 208, to: 218,  type: 'marquee', rows: [
+        '→ AGENT.STEPHARO@GMAIL.COM ·  → AGENT.STEPHARO@GMAIL.COM ·',
+        'STEPHAN RÖTTGER · POLYMATH · OPERATOR · MULTIPLIKATOR ·',
+        'KAUF MICH NICHT · STELL MICH EIN · KAUF MICH NICHT · STELL MICH EIN ·'
+      ]},
+
+      // PHASE 18 — outro signature (kurz, knapp, würdig)
+      { from: 218, to: 240,  type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','polymath · operator · multiplikator','signiert · stepharo · 2026'] },
     ],
   },
 
@@ -100,78 +116,96 @@ const TRACKS = {
   // UNMÖGLICH — die Mindset-Variante: Trotz, Skill-Triade, Wandel
   // 4:11 / 251s
   // ============================================================
+  // ============================================================
+  // BELLO E IMPOSSIBILE — Gianna Nannini, 1986 → Stephan-Edit, 2026
+  // intern key bleibt 'unmoeglich' wegen file path
+  // ============================================================
   unmoeglich: {
     file: '/track-unmoeglich.mp3',
-    name: 'UNMÖGLICH',
-    theme: 'TROTZ.OS',
+    name: 'BELLO E IMPOSSIBILE',
+    theme: 'NANNINI.86',
     bodyClass: 'theme-cyan',
-    ticker: '· STEPHAN RÖTTGER · EIN KOPF GEGEN DAS SYSTEM · LIMIT GIBT ES NICHT · TEAM-GRÖSSE EINS · AUSREDE KEINE · POLITIK → CODE → AI · DENKEN · BAUEN · DURCHZIEHEN · GEHT NICHT? — DOCH. · ',
+    ticker: '· GIANNA NANNINI · BELLO E IMPOSSIBILE · 1986 → 2026 · STEPHAN RÖTTGER · DICONO IMPOSSIBILE — IO RISPONDO: GIÀ FATTO · UNA PERSONA · OUTPUT DI DIECI · MA FATTO · ',
     scenes: [
-      // PHASE 1 — boot + name
-      { from: 0,    to: 4,    type: 'boot', lines: ['> trotz.os // boot…','> lade kopf.dat','> ein kopf gegen das system','> bereit.'] },
-      { from: 4,    to: 10,   type: 'name', name1: 'UN', name2: 'MÖGLICH', sub: 'ein kopf, der nicht aufhört.' },
+      // PHASE 1 — boot + name (italienisch eingestimmt)
+      { from: 0,    to: 4,    type: 'boot', lines: ['> nannini.sys // boot…','> caricamento bello.dat','> 1986 → 2026','> pronto.'] },
+      { from: 4,    to: 10,   type: 'name', name1: 'STEPHAN', name2: 'RÖTTGER', sub: 'bello e impossibile · ma fatto.' },
 
-      // PHASE 2 — die Provokation (frage / antwort)
-      { from: 10,   to: 14,   type: 'subline', text: 'andere fragen:', sub: 'GEHT DAS ÜBERHAUPT?' },
-      { from: 14,   to: 18,   type: 'subline', text: 'ich frage:',     sub: 'WANN BIST DU FERTIG?' },
+      // PHASE 2 — Title-Drop (Songtitel als Statement, italienisch)
+      { from: 10,   to: 15,   type: 'slam', text: 'BELLO.',         color: 'cyan' },
+      { from: 15,   to: 20,   type: 'slam', text: 'E IMPOSSIBILE.', color: 'white' },
+      { from: 20,   to: 25,   type: 'subline', text: 'gianna nannini, 1986 —', sub: 'STEPHAN RÖTTGER, 2026.' },
 
-      // PHASE 3 — Mindset (kurz, hart, gegen alle Ausreden)
-      { from: 18,   to: 22,   type: 'qa', q: '// limit',      a: 'GIBT ES NICHT.', mode: 'glitch' },
-      { from: 22,   to: 26,   type: 'qa', q: '// team-größe', a: 'EINS.',          mode: 'glitch' },
-      { from: 26,   to: 30,   type: 'qa', q: '// ausrede',    a: 'KEINE.',         mode: 'glitch' },
+      // PHASE 3 — die Provokation (italienisch / kontert das „impossibile")
+      { from: 25,   to: 29,   type: 'qa', q: '// dicono',       a: 'IMPOSSIBILE.', mode: 'glitch' },
+      { from: 29,   to: 33,   type: 'qa', q: '// io rispondo',  a: 'GIÀ FATTO.',   mode: 'glitch' },
 
-      // PHASE 4 — der Werdegang als Beleg fürs Mindset
-      { from: 30,   to: 34,   type: 'subline', text: 'von',  sub: 'POLITIK' },
-      { from: 34,   to: 38,   type: 'subline', text: 'über', sub: 'CODE' },
-      { from: 38,   to: 42,   type: 'subline', text: 'zu',   sub: 'AI.' },
-      { from: 42,   to: 47,   type: 'quote1', mark: '»', text: 'weil lernen nie aufhört —', text2: 'weil <span class="codeword">aufhören</span> nie eine option war.' },
+      // PHASE 4 — Lyric-Hooks aus dem Song (visuell eingebaut)
+      { from: 33,   to: 38,   type: 'quote1', mark: '»', text: 'forte come un airbag —', text2: 'fest wie ein <span class="codeword">airbag</span>.' },
+      { from: 38,   to: 43,   type: 'quote1', mark: '»', text: 'tu sei un\'autostrada —', text2: 'eine <span class="codeword">autobahn</span>, kein umweg.' },
 
-      // PHASE 5 — die Skill-Triade
-      { from: 47,   to: 53,   type: 'slam', text: '(i.) DENKEN.',     color: 'cyan' },
-      { from: 53,   to: 59,   type: 'slam', text: '(ii.) BAUEN.',     color: 'white' },
-      { from: 59,   to: 65,   type: 'slam', text: '(iii.) DURCHZIEHEN.', color: 'cyan' },
+      // PHASE 5 — Skill-Triade italienisch
+      { from: 43,   to: 49,   type: 'slam', text: '(i.) PENSARE.',   color: 'cyan'  }, // denken
+      { from: 49,   to: 55,   type: 'slam', text: '(ii.) COSTRUIRE.', color: 'white' }, // bauen
+      { from: 55,   to: 61,   type: 'slam', text: '(iii.) FARE.',     color: 'cyan'  }, // machen
 
-      // PHASE 6 — wie das aussieht
-      { from: 65,   to: 70,   type: 'quote1', mark: '»', text: 'live im einsatz —', text2: 'nicht im <span class="codeword">slidedeck</span>.' },
-      { from: 70,   to: 76,   type: 'crash', stay: 'ein kopf —', crash: 'OUTPUT VON ZEHN.' },
+      // PHASE 6 — die Kernaussage
+      { from: 61,   to: 67,   type: 'crash', stay: 'una persona —', crash: 'OUTPUT DI DIECI.' },
+      { from: 67,   to: 72,   type: 'subline', text: 'live im einsatz —', sub: 'NON NEL SLIDEDECK.' },
 
-      // PHASE 7 — Anti-Ausreden
-      { from: 76,   to: 79,   type: 'antiline', text: 'kein „das geht nicht“.' },
-      { from: 79,   to: 82,   type: 'antiline', text: 'kein „dafür brauchen wir ein team“.' },
-      { from: 82,   to: 85,   type: 'antiline', text: 'kein „lass uns ne agentur fragen“.' },
+      // PHASE 7 — Anti-Ausreden (italianisiert)
+      { from: 72,   to: 75,   type: 'antiline', text: 'niente „non si può“.' },
+      { from: 75,   to: 78,   type: 'antiline', text: 'niente „ci serve un team di dieci“.' },
+      { from: 78,   to: 81,   type: 'antiline', text: 'niente „chiediamo a un\'agenzia“.' },
 
-      // PHASE 8 — die Haltung als großes Statement
-      { from: 85,   to: 92,   type: 'big', text: 'EINFACH MACHEN.' },
+      // PHASE 8 — die Haltung (groß, einfach, hart)
+      { from: 81,   to: 88,   type: 'big', text: 'MA FATTO.' },
 
-      // PHASE 9 — KLEINER Proof (Firmen nur als Fußnote)
-      { from: 92,   to: 96,   type: 'stamp', text: 'PROOF.', color: 'cyan' },
-      { from: 96,   to: 102,  type: 'subline', text: '10+ jahre · 22 länder · 2,5m kunden —', sub: 'EUROPA AUFGEROLLT. SOLO.' },
+      // PHASE 9 — KLEINER Proof (Firmen nur Fußnote)
+      { from: 88,   to: 92,   type: 'stamp', text: 'PROOF.', color: 'cyan' },
+      { from: 92,   to: 98,   type: 'subline', text: '10+ jahre · 22 länder · 2,5m kunden —', sub: 'EUROPA AUFGEROLLT. SOLO.' },
 
-      // PHASE 10 — marquee (Mindset, nicht Stack)
-      { from: 102,  to: 110,  type: 'marquee', rows: [
-        'GEHT NICHT? · DOCH. · GEHT NICHT? · DOCH. · GEHT NICHT? · DOCH. ·',
-        'EIN KOPF · ZEHN LEUTE LEISTUNG · EIN KOPF · ZEHN LEUTE LEISTUNG ·',
-        'DENKEN · BAUEN · DURCHZIEHEN · DENKEN · BAUEN · DURCHZIEHEN ·'
+      // PHASE 10 — marquee (Hook-Phrasen, beat)
+      { from: 98,   to: 108,  type: 'marquee', rows: [
+        'BELLO ·  E ·  IMPOSSIBILE ·  BELLO ·  E ·  IMPOSSIBILE ·',
+        'MA FATTO · MA FATTO · MA FATTO · MA FATTO · MA FATTO ·',
+        'UNA PERSONA · DIECI PERSONE · UNA PERSONA · DIECI PERSONE ·'
       ]},
 
       // PHASE 11 — die Kernfrage
-      { from: 110,  to: 118,  type: 'qa', q: '// warum geht das', a: 'WEIL ICH ES MACHE.', mode: 'fall' },
+      { from: 108,  to: 116,  type: 'qa', q: '// perché funziona', a: 'PERCHÉ LO FACCIO IO.', mode: 'fall' },
 
-      // PHASE 12 — Verstärkung
-      { from: 118,  to: 124,  type: 'repeatquote', a: 'andere planen es —', b: 'ICH HAB ES SCHON DEPLOYED.' },
+      // PHASE 12 — Verstärkung (zweisprachig: hook + payoff)
+      { from: 116,  to: 124,  type: 'repeatquote', a: 'dicono che è impossibile —', b: 'IO L\'HO GIÀ DEPLOYATO.' },
 
       // PHASE 13 — buildup
-      { from: 124,  to: 128,  type: 'buildup', text: 'NICHTS',     size: 'sm' },
-      { from: 128,  to: 132,  type: 'buildup', text: 'AN MIR',     size: 'md' },
-      { from: 132,  to: 136,  type: 'buildup', text: 'IST',        size: 'lg' },
-      { from: 136,  to: 146,  type: 'buildup', text: 'UNMÖGLICH.', size: 'xl', cyan: true },
+      { from: 124,  to: 128,  type: 'buildup', text: 'NIENTE',        size: 'sm' },
+      { from: 128,  to: 132,  type: 'buildup', text: 'È',             size: 'md' },
+      { from: 132,  to: 136,  type: 'buildup', text: 'DAVVERO',       size: 'lg' },
+      { from: 136,  to: 146,  type: 'buildup', text: 'IMPOSSIBILE.',  size: 'xl', cyan: true },
 
-      // PHASE 14 — climax
-      { from: 146,  to: 165,  type: 'climax', a: 'GEHT NICHT?', b: 'DOCH.', sub: '→ FRAG MICH.', cyan: true },
+      // PHASE 14 — climax (auf den Songtitel)
+      { from: 146,  to: 162,  type: 'climax', a: 'BELLO E', b: 'IMPOSSIBILE.', sub: '→ MA FATTO.', cyan: true },
 
-      // PHASE 15 — outro
-      { from: 165,  to: 260,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','ein kopf, der nicht aufhört','politik → code → ai','signiert · stepharo · 2026'] },
+      // PHASE 15 — endcard (CTA blinkend, mail, tag)
+      { from: 162, to: 178,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'una persona · dieci persone · zero agenzie', cyan: true },
+
+      // PHASE 16 — repeat-twist
+      { from: 178, to: 186,  type: 'repeatquote', a: 'bello e impossibile —', b: 'MA GIÀ FATTO.' },
+
+      // PHASE 17 — endcard 2 (italienisch CTA)
+      { from: 186, to: 202,  type: 'endcard', cta: 'CHIAMAMI.', mail: 'agent.stepharo@gmail.com', tag: 'disponibile subito · remoto oppure on-site', cyan: true },
+
+      // PHASE 18 — closing marquee
+      { from: 202, to: 215,  type: 'marquee', rows: [
+        '→ AGENT.STEPHARO@GMAIL.COM ·  → AGENT.STEPHARO@GMAIL.COM ·',
+        'STEPHAN RÖTTGER · BELLO E IMPOSSIBILE · MA FATTO ·',
+        'PENSARE · COSTRUIRE · FARE · PENSARE · COSTRUIRE · FARE ·'
+      ]},
+
+      // PHASE 19 — outro signature
+      { from: 215, to: 251,  type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','bello e impossibile · ma fatto','grazie a gianna nannini · 1986','signiert · stepharo · 2026'] },
     ],
   }
 };
@@ -389,6 +423,14 @@ function renderScene(s) {
           ${[...s.b].map((c) => c === ' ' ? `<span class="sp"> </span>` : `<span class="bang">${c}</span>`).join('')}
         </div>
         <div class="climax-sub mono">${esc(s.sub)}</div>
+      </div>`;
+    }
+    case 'endcard': {
+      const color = s.cyan ? 'endcard-cyan' : 'endcard-red';
+      return `<div class="endcard ${color}">
+        <div class="endcard-cta">${[...s.cta].map((c) => c === ' ' ? `<span class="sp"> </span>` : `<span class="ec-lt">${c}</span>`).join('')}</div>
+        <div class="endcard-mail mono"><span class="ec-cur">▌</span>${esc(s.mail)}</div>
+        <div class="endcard-tag mono">${esc(s.tag || '')}</div>
       </div>`;
     }
     case 'outro':
@@ -767,6 +809,10 @@ function onSceneEnter(scene) {
     setTimeout(() => { triggerZoom(); triggerRedwash(); triggerAberrate(); triggerShake(); triggerShockwave(); triggerInvert(); }, 1650);
     setTimeout(() => { triggerFlash(); triggerShockwave(); }, 2050);
     setTimeout(triggerVhs, 2400);
+  }
+  if (scene.classList.contains('scene-endcard')) {
+    setTimeout(() => { triggerShockwave(); triggerAberrate(); }, 80);
+    setTimeout(() => triggerVhs(), 1200);
   }
 
   // QA glitch headline → scramble it

@@ -1038,6 +1038,89 @@ body.theme-cyan .bio-p .hl { background: linear-gradient(180deg, transparent 60%
 .scene-outro { align-items: center; }
 
 /* ============================================================
+   ENDCARD — bridge between climax and signature outro
+   ============================================================ */
+.scene-endcard { align-items: center; justify-content: center; }
+.endcard {
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 1.4rem;
+  padding: 2rem;
+}
+.endcard-cta {
+  font-family: var(--f-display);
+  font-size: clamp(2.8rem, 9vw, 8rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  filter: drop-shadow(0 0 calc(20px * var(--bass, 0.3)) currentColor);
+  animation: ecBreath 1.4s ease-in-out infinite alternate;
+}
+.endcard-cta .ec-lt {
+  display: inline-block;
+  animation: ecLetterIn 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) backwards;
+}
+.endcard-cta .ec-lt:nth-child(2) { animation-delay: 0.04s; }
+.endcard-cta .ec-lt:nth-child(3) { animation-delay: 0.08s; }
+.endcard-cta .ec-lt:nth-child(4) { animation-delay: 0.12s; }
+.endcard-cta .ec-lt:nth-child(5) { animation-delay: 0.16s; }
+.endcard-cta .ec-lt:nth-child(6) { animation-delay: 0.20s; }
+.endcard-cta .ec-lt:nth-child(7) { animation-delay: 0.24s; }
+.endcard-cta .ec-lt:nth-child(8) { animation-delay: 0.28s; }
+.endcard-cta .ec-lt:nth-child(9) { animation-delay: 0.32s; }
+.endcard-cta .ec-lt:nth-child(10){ animation-delay: 0.36s; }
+.endcard-cta .ec-lt:nth-child(11){ animation-delay: 0.40s; }
+.endcard-cta .ec-lt:nth-child(12){ animation-delay: 0.44s; }
+.endcard-cta .ec-lt:nth-child(13){ animation-delay: 0.48s; }
+.endcard-cta .ec-lt:nth-child(14){ animation-delay: 0.52s; }
+.endcard-cta .ec-lt:nth-child(15){ animation-delay: 0.56s; }
+.endcard-cta .ec-lt:nth-child(16){ animation-delay: 0.60s; }
+.endcard-cta .ec-lt:nth-child(17){ animation-delay: 0.64s; }
+.endcard-cta .ec-lt:nth-child(18){ animation-delay: 0.68s; }
+.endcard-cta .ec-lt:nth-child(19){ animation-delay: 0.72s; }
+.endcard-cta .ec-lt:nth-child(20){ animation-delay: 0.76s; }
+
+.endcard-red .endcard-cta { color: var(--red); }
+.endcard-cyan .endcard-cta { color: var(--cyan); }
+
+.endcard-mail {
+  font-size: clamp(1rem, 2.2vw, 1.6rem);
+  letter-spacing: 0.18em;
+  color: var(--fg);
+  opacity: 0; animation: fadeIn 0.6s 0.9s forwards;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  text-transform: lowercase;
+}
+.endcard-mail .ec-cur {
+  display: inline-block;
+  animation: ecBlink 0.85s steps(2) infinite;
+  color: currentColor;
+  opacity: 0.85;
+}
+.endcard-red  .endcard-mail .ec-cur { color: var(--red); }
+.endcard-cyan .endcard-mail .ec-cur { color: var(--cyan); }
+
+.endcard-tag {
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  opacity: 0; animation: fadeIn 0.6s 1.4s forwards;
+}
+
+@keyframes ecBreath {
+  0%   { transform: scale(1.00); }
+  100% { transform: scale(1.04); }
+}
+@keyframes ecLetterIn {
+  0%   { opacity: 0; transform: translateY(40px) rotate(-3deg); }
+  100% { opacity: 1; transform: translateY(0)    rotate(0); }
+}
+@keyframes ecBlink {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ============================================================
    v4 — kleine Korrekturen
    ============================================================ */
 body.playing #lyrics-layer { /* nur sichtbar im world */ }
