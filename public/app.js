@@ -43,16 +43,21 @@ const TRACKS = {
       // PHASE 5 — das KAUFARGUMENT (Hebel-Effekt durch AI)
       { from: 50,   to: 56,   type: 'crash', stay: 'eine person —', crash: 'OUTPUT VON ZEHN.' },
       { from: 56,   to: 60,   type: 'subline', text: 'weil ki kein assistent ist —', sub: 'SONDERN MEIN HEBEL.' },
-      { from: 60,   to: 66,   type: 'quote1', mark: '»', text: 'trilliarden tokens unter mir —', text2: '<span class="codeword">tage</span> statt monate.' },
+
+      // 🆕 image scene — neural network as backdrop for the token claim
+      { from: 60,   to: 66,   type: 'image', src: '/img/neural.png', tint: 'red',
+        tag: '// scale', text: 'TRILLIONS.', sub: 'tokens unter mir · tage statt monate.' },
 
       // PHASE 6 — Hintergrund (indirekt: stationen, nicht eigenleistung)
       { from: 66,   to: 70,   type: 'stamp', text: 'STATIONEN.', color: 'red' },
       { from: 70,   to: 75,   type: 'subline', text: 'wo gelernt:', sub: '11TS · NIKE · JAKO.' },
-      { from: 75,   to: 82,   type: 'stats', items: [
-        { num: 1000, final: '1000%', slot: true, label: 'wachstum · 11ts' },
-        { num: 22,   final: '22',    slot: true, label: 'länder · online' },
-        { num: 25,   final: '2,5M',                label: 'kunden · im shop' },
-        { num: 10,   final: '10+',                 label: 'jahre · dort' },
+
+      // 🆕 chart scene — real metrics statt nur slot-machine zahlen
+      { from: 75,   to: 82,   type: 'chart', title: 'PROOF.', bars: [
+        { label: 'lighthouse', value: 100, max: 100, suffix: '/100', color: 'red' },
+        { label: 'deploy',     value: 8,   max: 60,  suffix: 's',    color: 'cyan' },
+        { label: 'p99 latency',value: 47,  max: 500, suffix: 'ms',   color: 'red' },
+        { label: 'agency cost',value: 0,   max: 100, suffix: '%',    color: 'green' },
       ]},
       { from: 82,   to: 86,   type: 'quote1', mark: '»', text: 'großes team. großes ergebnis.', text2: '<span class="codeword">dabei</span> gewesen. davon gelernt.' },
 
@@ -69,11 +74,23 @@ const TRACKS = {
       { from: 104, to: 108,  type: 'slam', text: 'DENKEN.',  color: 'white' },
       { from: 108, to: 112,  type: 'slam', text: 'BAUEN.',   color: 'red' },
       { from: 112, to: 116,  type: 'slam', text: 'LIEFERN.', color: 'white' },
-      { from: 116, to: 122,  type: 'crash', stay: 'was andere noch planen —', crash: 'HAB ICH SCHON DEPLOYED.' },
 
-      // PHASE 10 — Verstärkung
-      { from: 122, to: 126,  type: 'twobeat', a: 'KLINGT GROSS.', b: 'IST ES AUCH.' },
-      { from: 126, to: 132,  type: 'repeatquote', a: 'live im einsatz —', b: 'NICHT IM SLIDEDECK.' },
+      // 🆕 terminal scene — live deploy als beweis, nicht als behauptung
+      { from: 116, to: 128,  type: 'terminal', title: 'agent.stepharo @ ~/projects/customer', lines: [
+        { prompt: '$', text: 'git push origin main', delay: 35, pause: 200 },
+        { output: 'Counting objects: 47, done.', color: 'grey', delay: 50 },
+        { output: 'Writing objects: 100% (47/47), 12.3 KiB', color: 'grey', delay: 50 },
+        { output: "To github.com:customer/landing.git", color: 'cyan', delay: 50 },
+        { prompt: '$', text: 'wrangler pages deploy public', delay: 35, pause: 250 },
+        { output: '⛅️ wrangler 4.86.0', color: 'grey', delay: 60 },
+        { output: 'Uploading... (5/5)', color: 'grey', delay: 80 },
+        { output: '✨ Success! Uploaded 5 files (0.71 sec)', color: 'green', delay: 80 },
+        { output: '✨ Deployment complete!', color: 'green', delay: 80 },
+        { output: '🌎 https://customer.com — live in 8s.', color: 'cyan', delay: 100 },
+      ]},
+
+      // PHASE 10 — Verstärkung (twobeat raus, terminal war schon der proof)
+      { from: 128, to: 132,  type: 'repeatquote', a: 'live im einsatz —', b: 'NICHT IM SLIDEDECK.' },
 
       // PHASE 11 — marquee (eigenschaften, keine team-pose)
       { from: 132, to: 139,  type: 'marquee', rows: [
@@ -167,8 +184,9 @@ const TRACKS = {
       { from: 25,   to: 29,   type: 'qa', q: '// alle sagen', a: 'UNMÖGLICH.',     mode: 'glitch' },
       { from: 29,   to: 33,   type: 'qa', q: '// ich sage',   a: 'SCHON GEMACHT.', mode: 'glitch' },
 
-      // PHASE 4 — Lyric-Hooks (Songbezug, aber komplett deutsch)
-      { from: 33,   to: 38,   type: 'quote1', mark: '»', text: 'fest wie ein airbag —', text2: 'beim aufprall <span class="codeword">halten</span>.' },
+      // PHASE 4 — Lyric-Hooks (Songbezug, deutsch) — eine als image für visuellen impact
+      { from: 33,   to: 38,   type: 'image', src: '/img/neural.png', tint: 'cyan',
+        tag: '// halt', text: 'AIRBAG.', sub: 'fest beim aufprall.' },
       { from: 38,   to: 43,   type: 'quote1', mark: '»', text: 'eine autobahn —', text2: 'kein <span class="codeword">umweg</span>.' },
 
       // PHASE 5 — Skill-Triade DEUTSCH
@@ -176,8 +194,9 @@ const TRACKS = {
       { from: 49,   to: 55,   type: 'slam', text: '(ii.) BAUEN.',  color: 'white' },
       { from: 55,   to: 61,   type: 'slam', text: '(iii.) MACHEN.', color: 'cyan'  },
 
-      // PHASE 6 — die Kernaussage
-      { from: 61,   to: 67,   type: 'crash', stay: 'eine person —', crash: 'OUTPUT VON ZEHN.' },
+      // PHASE 6 — die Kernaussage als image-statement (neon deploy backdrop)
+      { from: 61,   to: 67,   type: 'image', src: '/img/deploy.png', tint: 'cyan',
+        tag: '// hebel', text: 'EINE × ZEHN.', sub: 'output einer person · output von zehn.' },
       { from: 67,   to: 72,   type: 'subline', text: 'live im einsatz —', sub: 'NICHT IM SLIDEDECK.' },
 
       // PHASE 7 — Anti-Ausreden (deutsch)
@@ -188,9 +207,13 @@ const TRACKS = {
       // PHASE 8 — die Haltung (gross, einfach, hart)
       { from: 81,   to: 88,   type: 'big', text: 'TROTZDEM GEMACHT.' },
 
-      // PHASE 9 — Hintergrund (indirekt)
-      { from: 88,   to: 92,   type: 'stamp', text: 'STATIONEN.', color: 'cyan' },
-      { from: 92,   to: 97,   type: 'subline', text: 'wo gelernt:', sub: '11TS · NIKE · JAKO.' },
+      // PHASE 9 — Hintergrund (indirekt) + chart als beweis
+      { from: 88,   to: 97,   type: 'chart', title: 'BEWIESEN.', bars: [
+        { label: 'tage zu live',  value: 7,   max: 180, suffix: 'd',    color: 'cyan' },
+        { label: 'meetings',      value: 0,   max: 50,  suffix: '',     color: 'cyan' },
+        { label: 'lighthouse',    value: 100, max: 100, suffix: '/100', color: 'cyan' },
+        { label: 'team größe',    value: 1,   max: 10,  suffix: '',     color: 'cyan' },
+      ]},
       { from: 97,   to: 102,  type: 'quote1', mark: '»', text: 'großes team. großes ergebnis.', text2: '<span class="codeword">dabei</span> gewesen. davon gelernt.' },
 
       // PHASE 10 — marquee (deutsche hook-phrasen)
@@ -228,12 +251,17 @@ const TRACKS = {
       { from: 174, to: 176,  type: 'stamp', text: 'UNMÖGLICH.', color: 'cyan' },
       { from: 176, to: 178,  type: 'stamp', text: 'GEMACHT.',   color: 'white' },
 
-      // 15c: punchline mini-quote
-      { from: 178, to: 182,  type: 'quote1', mark: '»', text: 'eine woche —', text2: '<span class="codeword">prototyp</span> live.' },
+      // 15c: punchline als live-terminal — proof statt claim
+      { from: 178, to: 188,  type: 'terminal', title: 'agent.stepharo @ ~/projects/proto', lines: [
+        { prompt: '$', text: 'npm run build && wrangler deploy', delay: 35, pause: 200 },
+        { output: 'vite v6.0.0 building for production...', color: 'grey', delay: 60 },
+        { output: '✓ 234 modules transformed.', color: 'grey', delay: 60 },
+        { output: '✨ Built in 2.34s', color: 'green', delay: 70 },
+        { output: '✨ Deployment complete!', color: 'green', delay: 70 },
+        { output: '🌎 https://kunde.de — eine woche · live.', color: 'cyan', delay: 100 },
+      ]},
 
-      // 15d: anti-zeilen
-      { from: 182, to: 185,  type: 'antiline', text: 'kein onboarding-marathon.' },
-      { from: 185, to: 188,  type: 'antiline', text: 'kein steering-comittee.' },
+      // 15d: (anti-zeilen entfernt — terminal ist der bessere proof)
 
       // 15e: zweite endcard
       { from: 188, to: 196,  type: 'endcard', cta: 'STELL MICH EIN.', mail: 'agent.stepharo@gmail.com', tag: 'sofort verfügbar · remote oder vor ort', cyan: true },
@@ -515,6 +543,40 @@ function renderScene(s) {
         <div class="sig-name">— ${esc(s.name)}</div>
         <div class="sig-meta mono">${s.meta.map((m) => `<span>${m}</span>`).join('')}</div>
       </div>`;
+    case 'image': {
+      const tint = s.tint ? `tint-${s.tint}` : '';
+      return `<div class="img-wrap ${tint}">
+        <img src="${esc(s.src)}" alt="" />
+        <div class="img-overlay">
+          ${s.tag ? `<div class="img-overlay-tag">${esc(s.tag)}</div>` : ''}
+          ${s.text ? `<div class="img-overlay-text">${esc(s.text)}</div>` : ''}
+          ${s.sub ? `<div class="img-overlay-sub">${esc(s.sub)}</div>` : ''}
+        </div>
+      </div>`;
+    }
+    case 'terminal': {
+      return `<div class="terminal">
+        <div class="term-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="title">${esc(s.title || 'agent.stepharo @ deploy')}</span>
+        </div>
+        <div class="term-body" data-lines='${JSON.stringify(s.lines).replace(/'/g, "&#39;")}'>
+          <span class="term-cursor"></span>
+        </div>
+      </div>`;
+    }
+    case 'chart': {
+      return `<div class="chart">
+        <div class="chart-title">${esc(s.title || 'PROOF.')}</div>
+        ${s.bars.map((b, i) => `
+          <div class="chart-row" data-i="${i}" data-target="${b.value}" data-max="${b.max || 100}" data-suffix="${esc(b.suffix || '')}">
+            <div class="chart-label">${esc(b.label)}</div>
+            <div class="chart-track"><div class="chart-bar ${b.color || ''}"></div></div>
+            <div class="chart-value">0${esc(b.suffix || '')}</div>
+          </div>
+        `).join('')}
+      </div>`;
+    }
     default:
       return '';
   }
@@ -855,6 +917,75 @@ class Scrambler {
 }
 
 // =============================================================
+// TERMINAL — live-typed deploy log
+// =============================================================
+async function runTerminal(body) {
+  if (!body || body.dataset.ran === '1') return;
+  body.dataset.ran = '1';
+  let lines;
+  try { lines = JSON.parse(body.dataset.lines.replace(/&#39;/g, "'")); }
+  catch (e) { return; }
+  const cursor = body.querySelector('.term-cursor');
+  for (const ln of lines) {
+    const lineEl = document.createElement('div');
+    lineEl.className = 'term-line';
+    body.insertBefore(lineEl, cursor);
+    if (ln.prompt) {
+      const p = document.createElement('span');
+      p.className = 'term-prompt'; p.textContent = ln.prompt + ' ';
+      lineEl.appendChild(p);
+      const cmd = document.createElement('span');
+      cmd.className = 'term-cmd'; lineEl.appendChild(cmd);
+      const text = ln.text || '';
+      for (let i = 0; i < text.length; i++) {
+        cmd.textContent = text.slice(0, i + 1);
+        await sleep((ln.delay || 35) + Math.random() * 25);
+      }
+      await sleep(ln.pause || 220);
+    } else {
+      const span = document.createElement('span');
+      span.className = 'term-' + (ln.color || 'grey');
+      span.textContent = ln.output || '';
+      lineEl.appendChild(span);
+      await sleep(ln.delay || 60);
+    }
+    body.scrollTop = body.scrollHeight;
+  }
+}
+function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
+
+// =============================================================
+// CHART — animate horizontal bars from 0 to value
+// =============================================================
+function runChart(scene) {
+  const rows = scene.querySelectorAll('.chart-row');
+  rows.forEach((row, i) => {
+    setTimeout(() => {
+      const target = parseFloat(row.dataset.target);
+      const max    = parseFloat(row.dataset.max) || 100;
+      const suffix = row.dataset.suffix || '';
+      const bar    = row.querySelector('.chart-bar');
+      const val    = row.querySelector('.chart-value');
+      const pct    = Math.min(100, (target / max) * 100);
+      bar.style.width = pct + '%';
+      // count up the displayed value
+      const dur = 1300; const start = performance.now();
+      const isFloat = !Number.isInteger(target);
+      const step = (now) => {
+        const t = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const v = eased * target;
+        val.textContent = (isFloat ? v.toFixed(1) : Math.floor(v)) + suffix;
+        if (t < 1) requestAnimationFrame(step);
+        else val.textContent = (isFloat ? target.toFixed(1) : target) + suffix;
+      };
+      requestAnimationFrame(step);
+      row.classList.add('shown');
+    }, 250 + i * 280);
+  });
+}
+
+// =============================================================
 // SCENE TRANSITIONS
 // =============================================================
 let currentSceneIdx = -1;
@@ -901,6 +1032,17 @@ function onSceneEnter(scene) {
   if (scene.classList.contains('scene-endcard')) {
     setTimeout(() => { triggerShockwave(); triggerAberrate(); }, 80);
     setTimeout(() => triggerVhs(), 1200);
+  }
+  if (scene.classList.contains('scene-image')) {
+    setTimeout(() => { triggerVhs(); triggerAberrate(); }, 80);
+  }
+  if (scene.classList.contains('scene-terminal')) {
+    setTimeout(() => triggerAberrate(), 80);
+    runTerminal(scene.querySelector('.term-body'));
+  }
+  if (scene.classList.contains('scene-chart')) {
+    setTimeout(() => triggerShake(), 100);
+    runChart(scene);
   }
 
   // QA glitch headline → scramble it
