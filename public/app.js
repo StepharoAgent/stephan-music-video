@@ -18,83 +18,81 @@ const TRACKS = {
     name: 'KAUF MICH',
     theme: 'PUNK.OS',
     bodyClass: 'theme-red',
-    ticker: '· STEPHAN RÖTTGER · CTO &amp; GESCHÄFTSLEITUNG · 11TEAMSPORTS · NIKE · JAKO · 1000% UMSATZWACHSTUM · 22 LÄNDER · 2,5M KUNDEN · 100+ PROFI-VEREINE · BYE-BYE AGENTUREN · BUILT WITH AI · ',
+    ticker: '· STEPHAN RÖTTGER · POLYMATH · OPERATOR · MULTIPLIKATOR · EIN KOPF — ZEHN LEUTE OUTPUT · POLITIK → CODE → AI · DENKEN · BAUEN · ANTREIBEN · LIEFERN · WAS ANDERE PLANEN — HAB ICH DEPLOYED · BYE-BYE AGENTUREN · ',
     scenes: [
-      // PHASE 1 — boot + name
-      { from: 0,    to: 3,    type: 'boot', lines: ['> sr.os // boot…','> lade lebenslauf.dat','> politik.exe → code.exe → ai.exe','> bereit.'] },
-      { from: 3,   to: 8,    type: 'name', name1: 'STEPHAN', name2: 'RÖTTGER', sub: 'cto · geschäftsleitung · 10+ jahre webshop' },
+      // PHASE 1 — boot + name (Stephan zuerst, ohne Firmen)
+      { from: 0,    to: 3,    type: 'boot', lines: ['> sr.os // boot…','> lade kopf.dat','> ein kopf · zehn leute output','> bereit.'] },
+      { from: 3,    to: 9,    type: 'name', name1: 'STEPHAN', name2: 'RÖTTGER', sub: 'polymath · operator · multiplikator' },
 
-      // PHASE 2 — Wer war ich vorher (Politik)
-      { from: 8,   to: 11,   type: 'subline', text: 'vor diesem jahrzehnt:', sub: 'POLITIK.' },
-      { from: 11,  to: 14,   type: 'subline', text: 'dann selbst', sub: 'PROGRAMMIEREN BEIGEBRACHT.' },
-      { from: 14,  to: 18,   type: 'quote1', mark: '»', text: 'in einer zeit', text2: 'in der das noch <span class="codeword">handarbeit</span> war.' },
+      // PHASE 2 — was er IST (3 Eigenschaften, nicht 3 Firmen)
+      { from: 9,    to: 13,   type: 'subline', text: 'kein spezialist —', sub: 'POLYMATH.' },
+      { from: 13,   to: 17,   type: 'subline', text: 'kein berater —',   sub: 'OPERATOR.' },
+      { from: 17,   to: 21,   type: 'subline', text: 'kein copilot —',   sub: 'MULTIPLIKATOR.' },
 
-      // PHASE 3 — Karriere-Stationen
-      { from: 18,  to: 22,   type: 'stamp', text: 'NIKE.', color: 'white' },
-      { from: 22,  to: 26,   type: 'stamp', text: 'JAKO.', color: 'red' },
-      { from: 26,  to: 32,   type: 'stamp', text: '11TEAMSPORTS.', color: 'white' },
+      // PHASE 3 — der ungewöhnliche Werdegang als USP (Politik → Code → AI)
+      { from: 21,   to: 25,   type: 'qa', q: '// vorher', a: 'POLITIK.', mode: 'glitch' },
+      { from: 25,   to: 29,   type: 'qa', q: '// dann',   a: 'CODE.',    mode: 'glitch' },
+      { from: 29,   to: 33,   type: 'qa', q: '// jetzt',  a: 'AI.',      mode: 'glitch' },
+      { from: 33,   to: 38,   type: 'quote1', mark: '»', text: 'drei welten in einem kopf —', text2: 'selten. <span class="codeword">wertvoll</span>.' },
 
-      // PHASE 4 — was ich da gebaut habe
-      { from: 32,  to: 35,   type: 'slam', text: 'HAUPTSHOP.',          color: 'white', align: 'right' },
-      { from: 35,  to: 38,   type: 'slam', text: 'adidas TEAMPORTAL.',  color: 'red',   align: 'right' },
-      { from: 38,  to: 41,   type: 'slam', text: 'VEREINSEXPRESS.',     color: 'white', align: 'right' },
-      { from: 41,  to: 44,   type: 'slam', text: 'SOCCERBOOTS.',        color: 'red',   align: 'right' },
-      { from: 44,  to: 48,   type: 'slam', text: '100+ B2B-SHOPS.',     color: 'white', align: 'right' },
+      // PHASE 4 — Skill-Triade (das KÖNNEN, vorne im Track)
+      { from: 38,   to: 42,   type: 'slam', text: '(i.) DENKEN.',     color: 'white' },
+      { from: 42,   to: 46,   type: 'slam', text: '(ii.) BAUEN.',     color: 'red' },
+      { from: 46,   to: 50,   type: 'slam', text: '(iii.) ANTREIBEN.',color: 'white' },
 
-      // PHASE 5 — die ECHTEN Zahlen
-      { from: 48,  to: 56,   type: 'stats', items: [
-        { num: 1000, final: '1000%', slot: true, label: 'umsatzwachstum / 2 jahre' },
-        { num: 22,   final: '22',    slot: true, label: 'länder live' },
-        { num: 25,   final: '2,5M',                label: 'kunden im online-shop' },
-        { num: 100,  final: '100+',                label: 'profi-vereine ausgerüstet' },
+      // PHASE 5 — das KAUFARGUMENT (Hebel-Effekt durch AI)
+      { from: 50,   to: 56,   type: 'crash', stay: 'eine person —', crash: 'OUTPUT VON ZEHN.' },
+      { from: 56,   to: 60,   type: 'subline', text: 'weil ki kein assistent ist —', sub: 'SONDERN MEIN HEBEL.' },
+      { from: 60,   to: 66,   type: 'quote1', mark: '»', text: 'trilliarden tokens unter mir —', text2: '<span class="codeword">tage</span> statt monate.' },
+
+      // PHASE 6 — KLEINER Proof-Block (Firmen als Beweis, nicht als Show)
+      { from: 66,   to: 70,   type: 'stamp', text: 'PROOF.', color: 'red' },
+      { from: 70,   to: 76,   type: 'subline', text: '10+ jahre · 22 länder · 2,5m kunden —', sub: '11TEAMSPORTS · NIKE · JAKO.' },
+      { from: 76,   to: 82,   type: 'stats', items: [
+        { num: 1000, final: '1000%', slot: true, label: 'umsatzwachstum geliefert' },
+        { num: 22,   final: '22',    slot: true, label: 'länder ausgerollt' },
+        { num: 25,   final: '2,5M',                label: 'kunden bedient' },
+        { num: 10,   final: '10+',                 label: 'jahre operativ live' },
       ]},
-      { from: 56,  to: 60,   type: 'subline', text: 'europas größter', sub: 'ONLINE-HÄNDLER FÜR FUSSBALL.' },
 
-      // PHASE 6 — daily ops
-      { from: 60,  to: 66,   type: 'quote1', mark: '»', text: 'tausende bestellungen.', text2: '<span class="codeword">millionen-umsätze</span>. täglich.' },
-      { from: 66,  to: 70,   type: 'qa', q: '// scale', a: '1000+ MITARBEITER.', mode: 'glitch' },
+      // PHASE 7 — Anti-Bullshit (was er NICHT mitbringt)
+      { from: 82,   to: 85,   type: 'antiline', text: 'kein pitch deck.' },
+      { from: 85,   to: 88,   type: 'antiline', text: 'kein agency-overhead.' },
+      { from: 88,   to: 91,   type: 'antiline', text: 'kein „lass uns mal syncen“.' },
 
-      // PHASE 7 — Bruch / Wandlung
-      { from: 70,  to: 74,   type: 'subline', text: 'in den letzten jahren:', sub: 'BEWUSST ZURÜCKGEZOGEN.' },
-      { from: 74,  to: 78,   type: 'subline', text: 'um platz zu schaffen', sub: 'FÜR NEUES.' },
+      // PHASE 8 — der eigentliche USP
+      { from: 91,   to: 95,   type: 'subline', text: 'ich bin kein dienstleister —', sub: 'ICH BIN EINE ABKÜRZUNG.' },
+      { from: 95,   to: 100,  type: 'quote1', mark: '»', text: 'deine roadmap —', text2: 'läuft schon in meiner <span class="codeword">pipeline</span>.' },
 
-      // PHASE 8 — die neue Phase
-      { from: 78,  to: 82,   type: 'stamp', text: 'AI.', color: 'red' },
-      { from: 82,  to: 86,   type: 'stamp', text: 'TAG UND NACHT.', color: 'white' },
-      { from: 86,  to: 92,   type: 'quote1', mark: '»', text: 'trilliarden tokens.', text2: '<span class="codeword">tage</span> statt monate.' },
-      { from: 92,  to: 96,   type: 'qa', q: '// stack 2026', a: 'CLAUDE · GPT · OSS-LLMS.', mode: 'run' },
-      { from: 96,  to: 100,  type: 'qa', q: '// runtime',    a: 'CLOUDFLARE · SUPABASE · TELEGRAM.', mode: 'run' },
+      // PHASE 9 — Geschwindigkeit (Verb-Triade, kürzer & härter)
+      { from: 100, to: 104,  type: 'slam', text: 'DENKEN.',  color: 'white' },
+      { from: 104, to: 108,  type: 'slam', text: 'BAUEN.',   color: 'red' },
+      { from: 108, to: 112,  type: 'slam', text: 'LIEFERN.', color: 'white' },
+      { from: 112, to: 118,  type: 'crash', stay: 'was andere noch planen —', crash: 'HAB ICH SCHON DEPLOYED.' },
 
-      // PHASE 9 — Kompetenzen (i. ii. iii.)
-      { from: 100, to: 104,  type: 'slam', text: 'BAUEN.',          color: 'white' },
-      { from: 104, to: 108,  type: 'slam', text: 'ANTREIBEN.',      color: 'red' },
-      { from: 108, to: 112,  type: 'slam', text: 'SICHTBAR MACHEN.',color: 'white' },
-
-      // PHASE 10 — die Kernaussage
-      { from: 112, to: 118,  type: 'crash', stay: 'eine person macht', crash: 'WAS EIN TEAM VON ZEHN MACHT.' },
+      // PHASE 10 — Verstärkung
       { from: 118, to: 122,  type: 'twobeat', a: 'KLINGT GROSS.', b: 'IST ES AUCH.' },
+      { from: 122, to: 128,  type: 'repeatquote', a: 'live im einsatz —', b: 'NICHT IM SLIDEDECK.' },
 
-      // PHASE 11 — Anti-Bullshit
-      { from: 122, to: 125,  type: 'antiline', text: 'kein pitch deck.' },
-      { from: 125, to: 128,  type: 'antiline', text: 'kein agency-overhead.' },
-      { from: 128, to: 131,  type: 'antiline', text: 'kein „lass uns mal syncen“.' },
+      // PHASE 11 — marquee (Stephans Eigenschaften, nicht Firmenliste)
+      { from: 128, to: 135,  type: 'marquee', rows: [
+        'STEPHAN RÖTTGER ·  POLYMATH ·  OPERATOR ·  MULTIPLIKATOR ·',
+        'DENKEN · BAUEN · ANTREIBEN · LIEFERN · DENKEN · BAUEN · ANTREIBEN · LIEFERN ·',
+        'EIN KOPF · ZEHN LEUTE LEISTUNG · EIN KOPF · ZEHN LEUTE LEISTUNG ·'
+      ]},
 
-      // PHASE 12 — marquee + repeat-quote
-      { from: 131, to: 138,  type: 'marquee', rows: ['STEPHAN RÖTTGER ·  STEPHAN RÖTTGER ·  STEPHAN RÖTTGER ·', '11TEAMSPORTS · NIKE · JAKO · 11TEAMSPORTS · NIKE · JAKO ·', 'CTO · BUILDER · OPERATOR · CTO · BUILDER · OPERATOR ·'] },
-      { from: 138, to: 144,  type: 'repeatquote', a: 'live im einsatz.', b: 'NICHT IM SLIDEDECK.' },
+      // PHASE 12 — buildup zur Botschaft
+      { from: 135, to: 138,  type: 'buildup', text: 'BYE-BYE',    size: 'sm' },
+      { from: 138, to: 141,  type: 'buildup', text: 'RIESIGE',    size: 'md' },
+      { from: 141, to: 144,  type: 'buildup', text: 'TEURE',      size: 'lg' },
+      { from: 144, to: 152,  type: 'buildup', text: 'AGENTUREN.', size: 'xl', red: true },
 
-      // PHASE 13 — buildup zur Botschaft
-      { from: 144, to: 147,  type: 'buildup', text: 'BYE-BYE',     size: 'sm' },
-      { from: 147, to: 150,  type: 'buildup', text: 'RIESIGE',     size: 'md' },
-      { from: 150, to: 153,  type: 'buildup', text: 'TEURE',       size: 'lg' },
-      { from: 153, to: 160,  type: 'buildup', text: 'AGENTUREN.',  size: 'xl', red: true },
+      // PHASE 13 — climax
+      { from: 152, to: 170,  type: 'climax', a: 'KAUF MICH', b: 'NICHT.', sub: '→ HOL MICH AN BORD.' },
 
-      // PHASE 14 — climax
-      { from: 160, to: 175,  type: 'climax', a: 'KAUF MICH', b: 'NICHT.', sub: '→ HOL MICH AN BORD.' },
-
-      // PHASE 15 — outro
-      { from: 175, to: 230,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','cto · 11teamsports · nike · jako','politik → code → ai','signiert · stepharo · 2026'] },
+      // PHASE 14 — outro
+      { from: 170, to: 230,  type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','polymath · operator · multiplikator','politik → code → ai','signiert · stepharo · 2026'] },
     ],
   },
 
@@ -107,76 +105,73 @@ const TRACKS = {
     name: 'UNMÖGLICH',
     theme: 'TROTZ.OS',
     bodyClass: 'theme-cyan',
-    ticker: '· EINE PERSON. ZEHN MENSCHEN ARBEIT. · TELEGRAM = STEUERSTAND · CLOUDFLARE = HINTERGRUND · SUPABASE = DATEN · POLITIK → CODE → AI · LIVE IM EINSATZ NICHT IM SLIDEDECK · STEPHAN RÖTTGER · ',
+    ticker: '· STEPHAN RÖTTGER · EIN KOPF GEGEN DAS SYSTEM · LIMIT GIBT ES NICHT · TEAM-GRÖSSE EINS · AUSREDE KEINE · POLITIK → CODE → AI · DENKEN · BAUEN · DURCHZIEHEN · GEHT NICHT? — DOCH. · ',
     scenes: [
       // PHASE 1 — boot + name
-      { from: 0,    to: 4,    type: 'boot', lines: ['> trotz.os // boot…','> lade lebenslang_lernen.dat','> politik → code → ai','> bereit.'] },
-      { from: 4,    to: 10,   type: 'name', name1: 'UN', name2: 'MÖGLICH', sub: 'aber gemacht. von einer person.' },
+      { from: 0,    to: 4,    type: 'boot', lines: ['> trotz.os // boot…','> lade kopf.dat','> ein kopf gegen das system','> bereit.'] },
+      { from: 4,    to: 10,   type: 'name', name1: 'UN', name2: 'MÖGLICH', sub: 'ein kopf, der nicht aufhört.' },
 
-      // PHASE 2 — die Provokation
-      { from: 10,   to: 14,   type: 'subline', text: 'andere brauchen dafür', sub: 'EIN TEAM VON ZEHN.' },
-      { from: 14,   to: 18,   type: 'subline', text: 'ich brauche dafür', sub: 'EINEN AI-BAUKASTEN.' },
+      // PHASE 2 — die Provokation (frage / antwort)
+      { from: 10,   to: 14,   type: 'subline', text: 'andere fragen:', sub: 'GEHT DAS ÜBERHAUPT?' },
+      { from: 14,   to: 18,   type: 'subline', text: 'ich frage:',     sub: 'WANN BIST DU FERTIG?' },
 
-      // PHASE 3 — der Stack als Statement
-      { from: 18,   to: 22,   type: 'stamp', text: 'TELEGRAM.',   color: 'white' },
-      { from: 22,   to: 26,   type: 'stamp', text: 'CLOUDFLARE.', color: 'cyan' },
-      { from: 26,   to: 30,   type: 'stamp', text: 'SUPABASE.',   color: 'white' },
-      { from: 30,   to: 36,   type: 'subline', text: 'steuerstand · hintergrund · daten —', sub: 'EINE PERSON, EINE PIPELINE.' },
+      // PHASE 3 — Mindset (kurz, hart, gegen alle Ausreden)
+      { from: 18,   to: 22,   type: 'qa', q: '// limit',      a: 'GIBT ES NICHT.', mode: 'glitch' },
+      { from: 22,   to: 26,   type: 'qa', q: '// team-größe', a: 'EINS.',          mode: 'glitch' },
+      { from: 26,   to: 30,   type: 'qa', q: '// ausrede',    a: 'KEINE.',         mode: 'glitch' },
 
-      // PHASE 4 — Stats: das Verhältnis
-      { from: 36,   to: 44,   type: 'stats', items: [
-        { num: 1,   final: '1',  label: 'person · ich' },
-        { num: 10,  final: '10', slot: true, label: 'leute leistung' },
-        { num: 0,   final: '∞',  label: 'iterationen / tag' },
-        { num: 0,   final: '0',  label: 'meetings nötig' },
+      // PHASE 4 — der Werdegang als Beleg fürs Mindset
+      { from: 30,   to: 34,   type: 'subline', text: 'von',  sub: 'POLITIK' },
+      { from: 34,   to: 38,   type: 'subline', text: 'über', sub: 'CODE' },
+      { from: 38,   to: 42,   type: 'subline', text: 'zu',   sub: 'AI.' },
+      { from: 42,   to: 47,   type: 'quote1', mark: '»', text: 'weil lernen nie aufhört —', text2: 'weil <span class="codeword">aufhören</span> nie eine option war.' },
+
+      // PHASE 5 — die Skill-Triade
+      { from: 47,   to: 53,   type: 'slam', text: '(i.) DENKEN.',     color: 'cyan' },
+      { from: 53,   to: 59,   type: 'slam', text: '(ii.) BAUEN.',     color: 'white' },
+      { from: 59,   to: 65,   type: 'slam', text: '(iii.) DURCHZIEHEN.', color: 'cyan' },
+
+      // PHASE 6 — wie das aussieht
+      { from: 65,   to: 70,   type: 'quote1', mark: '»', text: 'live im einsatz —', text2: 'nicht im <span class="codeword">slidedeck</span>.' },
+      { from: 70,   to: 76,   type: 'crash', stay: 'ein kopf —', crash: 'OUTPUT VON ZEHN.' },
+
+      // PHASE 7 — Anti-Ausreden
+      { from: 76,   to: 79,   type: 'antiline', text: 'kein „das geht nicht“.' },
+      { from: 79,   to: 82,   type: 'antiline', text: 'kein „dafür brauchen wir ein team“.' },
+      { from: 82,   to: 85,   type: 'antiline', text: 'kein „lass uns ne agentur fragen“.' },
+
+      // PHASE 8 — die Haltung als großes Statement
+      { from: 85,   to: 92,   type: 'big', text: 'EINFACH MACHEN.' },
+
+      // PHASE 9 — KLEINER Proof (Firmen nur als Fußnote)
+      { from: 92,   to: 96,   type: 'stamp', text: 'PROOF.', color: 'cyan' },
+      { from: 96,   to: 102,  type: 'subline', text: '10+ jahre · 22 länder · 2,5m kunden —', sub: 'EUROPA AUFGEROLLT. SOLO.' },
+
+      // PHASE 10 — marquee (Mindset, nicht Stack)
+      { from: 102,  to: 110,  type: 'marquee', rows: [
+        'GEHT NICHT? · DOCH. · GEHT NICHT? · DOCH. · GEHT NICHT? · DOCH. ·',
+        'EIN KOPF · ZEHN LEUTE LEISTUNG · EIN KOPF · ZEHN LEUTE LEISTUNG ·',
+        'DENKEN · BAUEN · DURCHZIEHEN · DENKEN · BAUEN · DURCHZIEHEN ·'
       ]},
 
-      // PHASE 5 — der Lebensweg (lebenslanges Lernen)
-      { from: 44,   to: 48,   type: 'qa', q: '// wo komme ich her', a: 'POLITIK.', mode: 'glitch' },
-      { from: 48,   to: 52,   type: 'qa', q: '// dann',             a: 'CODE.',    mode: 'glitch' },
-      { from: 52,   to: 56,   type: 'qa', q: '// jetzt',            a: 'AI.',      mode: 'glitch' },
+      // PHASE 11 — die Kernfrage
+      { from: 110,  to: 118,  type: 'qa', q: '// warum geht das', a: 'WEIL ICH ES MACHE.', mode: 'fall' },
 
-      // PHASE 6 — die 3 Skill-Säulen
-      { from: 56,   to: 62,   type: 'slam', text: '(i.) BAUEN.',          color: 'cyan' },
-      { from: 62,   to: 68,   type: 'slam', text: '(ii.) ANTREIBEN.',     color: 'white' },
-      { from: 68,   to: 74,   type: 'slam', text: '(iii.) SICHTBAR MACHEN.', color: 'cyan' },
+      // PHASE 12 — Verstärkung
+      { from: 118,  to: 124,  type: 'repeatquote', a: 'andere planen es —', b: 'ICH HAB ES SCHON DEPLOYED.' },
 
-      // PHASE 7 — quote: live, nicht slide
-      { from: 74,   to: 80,   type: 'quote1', mark: '»', text: 'live im einsatz.', text2: 'nicht im <span class="codeword">slidedeck</span>.' },
+      // PHASE 13 — buildup
+      { from: 124,  to: 128,  type: 'buildup', text: 'NICHTS',     size: 'sm' },
+      { from: 128,  to: 132,  type: 'buildup', text: 'AN MIR',     size: 'md' },
+      { from: 132,  to: 136,  type: 'buildup', text: 'IST',        size: 'lg' },
+      { from: 136,  to: 146,  type: 'buildup', text: 'UNMÖGLICH.', size: 'xl', cyan: true },
 
-      // PHASE 8 — die alte Welt
-      { from: 80,   to: 84,   type: 'antiline', text: 'kein „das geht nicht“.' },
-      { from: 84,   to: 88,   type: 'antiline', text: 'kein „dafür brauchen wir ein team“.' },
-      { from: 88,   to: 92,   type: 'antiline', text: 'kein „lass uns ne agentur fragen“.' },
+      // PHASE 14 — climax
+      { from: 146,  to: 165,  type: 'climax', a: 'GEHT NICHT?', b: 'DOCH.', sub: '→ FRAG MICH.', cyan: true },
 
-      // PHASE 9 — was ich tue
-      { from: 92,   to: 100,  type: 'big', text: 'EINFACH BAUEN.' },
-
-      // PHASE 10 — marquee
-      { from: 100,  to: 108,  type: 'marquee', rows: ['EINE PERSON ·  ZEHN LEUTE ARBEIT ·  EINE PERSON ·  ZEHN LEUTE ARBEIT ·', 'TROTZDEM · TROTZDEM · TROTZDEM · TROTZDEM ·', 'TELEGRAM · CLOUDFLARE · SUPABASE · TELEGRAM · CLOUDFLARE · SUPABASE ·'] },
-
-      // PHASE 11 — Kontext: was ich vorher abgeliefert hab
-      { from: 108,  to: 114,  type: 'crash', stay: 'das gleiche prinzip', crash: '1000% UMSATZWACHSTUM BEI 11TEAMSPORTS.' },
-      { from: 114,  to: 120,  type: 'subline', text: '22 länder · 2,5m kunden · 100+ profi-vereine —', sub: 'GEBAUT, NICHT GEPLANT.' },
-
-      // PHASE 12 — repeat
-      { from: 120,  to: 128,  type: 'repeatquote', a: 'tausende bestellungen täglich.', b: 'MILLIONEN-UMSÄTZE TÄGLICH.' },
-
-      // PHASE 13 — die Kernfrage
-      { from: 128,  to: 136,  type: 'qa', q: '// warum geht das', a: 'WEIL ICH ES MACHE.', mode: 'fall' },
-
-      // PHASE 14 — buildup
-      { from: 136,  to: 140,  type: 'buildup', text: 'NICHTS',     size: 'sm' },
-      { from: 140,  to: 144,  type: 'buildup', text: 'AN MIR',     size: 'md' },
-      { from: 144,  to: 148,  type: 'buildup', text: 'IST',        size: 'lg' },
-      { from: 148,  to: 158,  type: 'buildup', text: 'UNMÖGLICH.', size: 'xl', cyan: true },
-
-      // PHASE 15 — climax
-      { from: 158,  to: 175,  type: 'climax', a: 'GEHT NICHT?', b: 'DOCH.', sub: '→ FRAG MICH.', cyan: true },
-
-      // PHASE 16 — outro
-      { from: 175,  to: 260,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','politik → code → ai','one person — ten people output','signiert · stepharo · 2026'] },
+      // PHASE 15 — outro
+      { from: 165,  to: 260,  type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','ein kopf, der nicht aufhört','politik → code → ai','signiert · stepharo · 2026'] },
     ],
   }
 };
