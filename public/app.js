@@ -9,162 +9,175 @@ const PW = '369';
 // TRACK-KONFIGURATION
 // =============================================================
 const TRACKS = {
+  // ============================================================
+  // KAUF MICH — die echte CV-Variante: Karriere, Zahlen, Wandlung
+  // 3:45 / 225s
+  // ============================================================
   kaufmich: {
     file: '/track.mp3',
     name: 'KAUF MICH',
     theme: 'PUNK.OS',
     bodyClass: 'theme-red',
-    ticker: '· KEIN HYPE · NUR OUTPUT · WENN ETWAS ZWEIMAL PASSIERT, SCHREIB ICH EIN SKRIPT · 24/7 · TELEGRAM · CLOUDFLARE · SUPABASE · PLAYWRIGHT · CLAUDE · GPT · GLM · GEBAUT MIT KI &amp; KOFFEIN · ',
-    // Scenes: tighter, more cuts, beat-aligned
+    ticker: '· STEPHAN RÖTTGER · CTO &amp; GESCHÄFTSLEITUNG · 11TEAMSPORTS · NIKE · JAKO · 1000% UMSATZWACHSTUM · 22 LÄNDER · 2,5M KUNDEN · 100+ PROFI-VEREINE · BYE-BYE AGENTUREN · BUILT WITH AI · ',
     scenes: [
-      { from: 0,    to: 3.5,  type: 'boot', lines: ['> sr.os // boot…','> lade identität.dat','> patche kommerz.exe','> bereit.'] },
-      { from: 3.5,  to: 8,    type: 'name', name1: 'STEPHAN', name2: 'RÖTTGER', sub: 'operator · builder · signal' },
-      { from: 8,    to: 10,   type: 'slam', text: 'ICH BAU.',     color: 'white' },
-      { from: 10,   to: 12,   type: 'slam', text: 'ICH LIEFER.',  color: 'red' },
-      { from: 12,   to: 14,   type: 'slam', text: 'ich schweig.', color: 'quiet' },
-      { from: 14,   to: 17,   type: 'qa', q: '// wer', a: 'EIN MENSCH', mode: 'glitch' },
-      { from: 17,   to: 20,   type: 'qa', q: '// und?', a: 'MIT MASCHINEN.', mode: 'glitch' },
-      { from: 20,   to: 23,   type: 'stamp', text: 'BUILDER.',     color: 'white' },
-      { from: 23,   to: 26,   type: 'stamp', text: 'OPERATOR.',    color: 'red' },
-      { from: 26,   to: 29,   type: 'stamp', text: 'ORCHESTRATOR.',color: 'white' },
-      { from: 29,   to: 32,   type: 'subline', text: 'andere reden über KI.', sub: 'ich lass sie ARBEITEN.' },
-      { from: 32,   to: 38,   type: 'stats', items: [
-        { num: 0, final: '∞',  label: 'skripte statt klicks' },
-        { num: 247, final: '247', slot: true, label: 'agenten-stunden / woche' },
-        { num: 0, final: '0',  label: 'bullshit toleriert' },
-        { num: 1, final: '1',  label: 'prinzip · ship it' },
+      // PHASE 1 — boot + name
+      { from: 0,    to: 3,    type: 'boot', lines: ['> sr.os // boot…','> lade lebenslauf.dat','> politik.exe → code.exe → ai.exe','> bereit.'] },
+      { from: 3,   to: 8,    type: 'name', name1: 'STEPHAN', name2: 'RÖTTGER', sub: 'cto · geschäftsleitung · 10+ jahre webshop' },
+
+      // PHASE 2 — Wer war ich vorher (Politik)
+      { from: 8,   to: 11,   type: 'subline', text: 'vor diesem jahrzehnt:', sub: 'POLITIK.' },
+      { from: 11,  to: 14,   type: 'subline', text: 'dann selbst', sub: 'PROGRAMMIEREN BEIGEBRACHT.' },
+      { from: 14,  to: 18,   type: 'quote1', mark: '»', text: 'in einer zeit', text2: 'in der das noch <span class="codeword">handarbeit</span> war.' },
+
+      // PHASE 3 — Karriere-Stationen
+      { from: 18,  to: 22,   type: 'stamp', text: 'NIKE.', color: 'white' },
+      { from: 22,  to: 26,   type: 'stamp', text: 'JAKO.', color: 'red' },
+      { from: 26,  to: 32,   type: 'stamp', text: '11TEAMSPORTS.', color: 'white' },
+
+      // PHASE 4 — was ich da gebaut habe
+      { from: 32,  to: 35,   type: 'slam', text: 'HAUPTSHOP.',          color: 'white', align: 'right' },
+      { from: 35,  to: 38,   type: 'slam', text: 'adidas TEAMPORTAL.',  color: 'red',   align: 'right' },
+      { from: 38,  to: 41,   type: 'slam', text: 'VEREINSEXPRESS.',     color: 'white', align: 'right' },
+      { from: 41,  to: 44,   type: 'slam', text: 'SOCCERBOOTS.',        color: 'red',   align: 'right' },
+      { from: 44,  to: 48,   type: 'slam', text: '100+ B2B-SHOPS.',     color: 'white', align: 'right' },
+
+      // PHASE 5 — die ECHTEN Zahlen
+      { from: 48,  to: 56,   type: 'stats', items: [
+        { num: 1000, final: '1000%', slot: true, label: 'umsatzwachstum / 2 jahre' },
+        { num: 22,   final: '22',    slot: true, label: 'länder live' },
+        { num: 25,   final: '2,5M',                label: 'kunden im online-shop' },
+        { num: 100,  final: '100+',                label: 'profi-vereine ausgerüstet' },
       ]},
-      { from: 38,   to: 42,   type: 'qa', q: '// was', a: 'AGENTEN, DIE LAUFEN.', mode: 'run' },
-      { from: 42,   to: 44,   type: 'slam', text: 'TELEGRAM',   color: 'white', align: 'right' },
-      { from: 44,   to: 46,   type: 'slam', text: 'CLOUDFLARE', color: 'red',   align: 'right' },
-      { from: 46,   to: 48,   type: 'slam', text: 'SUPABASE',   color: 'white', align: 'right' },
-      { from: 48,   to: 50,   type: 'slam', text: 'PLAYWRIGHT', color: 'red',   align: 'right' },
-      { from: 50,   to: 52,   type: 'slam', text: 'CLAUDE · GPT · GLM', color: 'white', align: 'right' },
-      { from: 52,   to: 58,   type: 'quote1', mark: '»', text: 'wenn etwas ZWEIMAL passiert', text2: 'schreib ich ein <span class="codeword">skript</span>.' },
-      { from: 58,   to: 60,   type: 'twobeat', a: 'ERST DENKEN.', b: 'DANN SHIPPEN.' },
-      { from: 60,   to: 66,   type: 'crash', stay: 'plan-modus schlägt', crash: 'DRAUFLOS-MODUS.' },
-      { from: 66,   to: 68,   type: 'antiline', text: 'kein pitch deck.' },
-      { from: 68,   to: 70,   type: 'antiline', text: 'kein linkedin-buzzword.' },
-      { from: 70,   to: 72,   type: 'antiline', text: 'kein „lass uns mal syncen".' },
-      { from: 72,   to: 76,   type: 'big',     text: 'NUR OUTPUT.' },
-      { from: 76,   to: 84,   type: 'marquee', rows: ['BUILT BY STEPHAN ·  BUILT BY STEPHAN ·  BUILT BY STEPHAN ·', '2026 · 2026 · 2026 · 2026 · 2026 · 2026 ·', 'BUILT BY STEPHAN ·  BUILT BY STEPHAN ·  BUILT BY STEPHAN ·'] },
-      { from: 84,   to: 90,   type: 'repeatquote', a: 'lieber EINMAL denken', b: 'als ZEHNMAL debuggen.' },
-      { from: 90,   to: 96,   type: 'qa', q: '// warum', a: 'WEIL NIEMAND WARTET.', mode: 'fall' },
-      { from: 96,   to: 98,   type: 'buildup', text: 'DAS HIER', size: 'sm' },
-      { from: 98,   to: 100,  type: 'buildup', text: 'IST',      size: 'md' },
-      { from: 100,  to: 102,  type: 'buildup', text: 'KEIN',     size: 'lg' },
-      { from: 102,  to: 110,  type: 'buildup', text: 'PRODUKT.', size: 'xl', red: true },
-      { from: 110,  to: 130,  type: 'climax', a: 'KAUF MICH', b: 'NICHT', sub: '→ bau mit mir.' },
-      { from: 130,  to: 200,  type: 'outro', name: 'Stephan', meta: ['gebaut zuhause · 2026','musik · die toten hosen — kauf mich!','code · ki & koffein','signiert · stepharo'] },
+      { from: 56,  to: 60,   type: 'subline', text: 'europas größter', sub: 'ONLINE-HÄNDLER FÜR FUSSBALL.' },
+
+      // PHASE 6 — daily ops
+      { from: 60,  to: 66,   type: 'quote1', mark: '»', text: 'tausende bestellungen.', text2: '<span class="codeword">millionen-umsätze</span>. täglich.' },
+      { from: 66,  to: 70,   type: 'qa', q: '// scale', a: '1000+ MITARBEITER.', mode: 'glitch' },
+
+      // PHASE 7 — Bruch / Wandlung
+      { from: 70,  to: 74,   type: 'subline', text: 'in den letzten jahren:', sub: 'BEWUSST ZURÜCKGEZOGEN.' },
+      { from: 74,  to: 78,   type: 'subline', text: 'um platz zu schaffen', sub: 'FÜR NEUES.' },
+
+      // PHASE 8 — die neue Phase
+      { from: 78,  to: 82,   type: 'stamp', text: 'AI.', color: 'red' },
+      { from: 82,  to: 86,   type: 'stamp', text: 'TAG UND NACHT.', color: 'white' },
+      { from: 86,  to: 92,   type: 'quote1', mark: '»', text: 'trilliarden tokens.', text2: '<span class="codeword">tage</span> statt monate.' },
+      { from: 92,  to: 96,   type: 'qa', q: '// stack 2026', a: 'CLAUDE · GPT · OSS-LLMS.', mode: 'run' },
+      { from: 96,  to: 100,  type: 'qa', q: '// runtime',    a: 'CLOUDFLARE · SUPABASE · TELEGRAM.', mode: 'run' },
+
+      // PHASE 9 — Kompetenzen (i. ii. iii.)
+      { from: 100, to: 104,  type: 'slam', text: 'BAUEN.',          color: 'white' },
+      { from: 104, to: 108,  type: 'slam', text: 'ANTREIBEN.',      color: 'red' },
+      { from: 108, to: 112,  type: 'slam', text: 'SICHTBAR MACHEN.',color: 'white' },
+
+      // PHASE 10 — die Kernaussage
+      { from: 112, to: 118,  type: 'crash', stay: 'eine person macht', crash: 'WAS EIN TEAM VON ZEHN MACHT.' },
+      { from: 118, to: 122,  type: 'twobeat', a: 'KLINGT GROSS.', b: 'IST ES AUCH.' },
+
+      // PHASE 11 — Anti-Bullshit
+      { from: 122, to: 125,  type: 'antiline', text: 'kein pitch deck.' },
+      { from: 125, to: 128,  type: 'antiline', text: 'kein agency-overhead.' },
+      { from: 128, to: 131,  type: 'antiline', text: 'kein „lass uns mal syncen“.' },
+
+      // PHASE 12 — marquee + repeat-quote
+      { from: 131, to: 138,  type: 'marquee', rows: ['STEPHAN RÖTTGER ·  STEPHAN RÖTTGER ·  STEPHAN RÖTTGER ·', '11TEAMSPORTS · NIKE · JAKO · 11TEAMSPORTS · NIKE · JAKO ·', 'CTO · BUILDER · OPERATOR · CTO · BUILDER · OPERATOR ·'] },
+      { from: 138, to: 144,  type: 'repeatquote', a: 'live im einsatz.', b: 'NICHT IM SLIDEDECK.' },
+
+      // PHASE 13 — buildup zur Botschaft
+      { from: 144, to: 147,  type: 'buildup', text: 'BYE-BYE',     size: 'sm' },
+      { from: 147, to: 150,  type: 'buildup', text: 'RIESIGE',     size: 'md' },
+      { from: 150, to: 153,  type: 'buildup', text: 'TEURE',       size: 'lg' },
+      { from: 153, to: 160,  type: 'buildup', text: 'AGENTUREN.',  size: 'xl', red: true },
+
+      // PHASE 14 — climax
+      { from: 160, to: 175,  type: 'climax', a: 'KAUF MICH', b: 'NICHT.', sub: '→ HOL MICH AN BORD.' },
+
+      // PHASE 15 — outro
+      { from: 175, to: 230,  type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','cto · 11teamsports · nike · jako','politik → code → ai','signiert · stepharo · 2026'] },
     ],
-    // Lyrics overlay — kürzer, ironischer Kommentar zur Musik (eigene Texte)
-    lyrics: [
-      { t: 6,    text: 'KAUF MICH' },
-      { t: 9,    text: 'ICH BAU.' },
-      { t: 11,   text: 'ICH LIEFER.' },
-      { t: 13,   text: 'ich schweig.' },
-      { t: 15.5, text: 'EIN MENSCH' },
-      { t: 18,   text: 'MIT MASCHINEN.' },
-      { t: 21,   text: 'builder · operator · orchestrator' },
-      { t: 30,   text: 'andere reden. ich liefere.' },
-      { t: 33,   text: '247 stunden · agenten · pro woche' },
-      { t: 39,   text: 'agenten — die WIRKLICH laufen.' },
-      { t: 43,   text: 'telegram · cloudflare · supabase · playwright' },
-      { t: 53,   text: 'wenn etwas zweimal passiert →' },
-      { t: 56,   text: '→ schreib ich ein skript.' },
-      { t: 59,   text: 'erst denken. dann shippen.' },
-      { t: 62,   text: 'plan-modus > drauflos-modus.' },
-      { t: 67,   text: 'kein pitch deck.' },
-      { t: 69,   text: 'kein buzzword.' },
-      { t: 71,   text: 'kein meeting.' },
-      { t: 73,   text: 'NUR OUTPUT.' },
-      { t: 78,   text: 'built by stephan · 2026 · 2026 · 2026' },
-      { t: 86,   text: 'lieber einmal denken als zehnmal debuggen.' },
-      { t: 91,   text: 'weil niemand auf dich wartet.' },
-      { t: 97,   text: 'das hier' },
-      { t: 99,   text: 'ist' },
-      { t: 101,  text: 'kein' },
-      { t: 103,  text: 'PRODUKT.' },
-      { t: 112,  text: 'KAUF MICH' },
-      { t: 116,  text: 'NICHT.' },
-      { t: 122,  text: '→ bau mit mir.' },
-      { t: 132,  text: '— stephan' },
-    ]
   },
 
+  // ============================================================
+  // UNMÖGLICH — die Mindset-Variante: Trotz, Skill-Triade, Wandel
+  // 4:11 / 251s
+  // ============================================================
   unmoeglich: {
     file: '/track-unmoeglich.mp3',
     name: 'UNMÖGLICH',
     theme: 'TROTZ.OS',
     bodyClass: 'theme-cyan',
-    ticker: '· UNMÖGLICH IST KEIN ARGUMENT · WO ANDERE AUFHÖREN, FANGE ICH AN · TROTZDEM · IMMER NOCH · WEITER · NICHT SCHLAFEN · 24/7 · IST EGAL · STEPHAN RÖTTGER · ',
+    ticker: '· EINE PERSON. ZEHN MENSCHEN ARBEIT. · TELEGRAM = STEUERSTAND · CLOUDFLARE = HINTERGRUND · SUPABASE = DATEN · POLITIK → CODE → AI · LIVE IM EINSATZ NICHT IM SLIDEDECK · STEPHAN RÖTTGER · ',
     scenes: [
-      { from: 0,    to: 4,    type: 'boot', lines: ['> sr.os // boot…','> lade trotz.dat','> ignoriere niederlage.exe','> bereit.'] },
-      { from: 4,    to: 10,   type: 'name', name1: 'UN', name2: 'MÖGLICH', sub: 'aber gemacht. trotzdem.' },
-      { from: 10,   to: 14,   type: 'slam', text: 'GEHT NICHT?', color: 'cyan' },
-      { from: 14,   to: 18,   type: 'slam', text: 'GIBT&apos;S NICHT.', color: 'white' },
-      { from: 18,   to: 22,   type: 'slam', text: 'mach trotzdem.', color: 'quiet' },
-      { from: 22,   to: 28,   type: 'qa', q: '// regel #1', a: 'NICHT FRAGEN.', mode: 'glitch' },
-      { from: 28,   to: 34,   type: 'qa', q: '// regel #2', a: 'EINFACH BAUEN.', mode: 'glitch' },
-      { from: 34,   to: 38,   type: 'stamp', text: 'ANFANGEN.',  color: 'white' },
-      { from: 38,   to: 42,   type: 'stamp', text: 'WEITERMACHEN.', color: 'cyan' },
-      { from: 42,   to: 46,   type: 'stamp', text: 'NIE AUFHÖREN.', color: 'white' },
-      { from: 46,   to: 52,   type: 'subline', text: 'wenn alle sagen — geht nicht …', sub: 'ist es ZEIT anzufangen.' },
-      { from: 52,   to: 60,   type: 'stats', items: [
-        { num: 0, final: '0',   label: 'mal aufgegeben' },
-        { num: 100, final: '∞', label: 'mal weitergemacht' },
-        { num: 0, final: '0',   label: 'plan b nötig' },
-        { num: 1, final: '1',   label: 'richtung · vorwärts' },
+      // PHASE 1 — boot + name
+      { from: 0,    to: 4,    type: 'boot', lines: ['> trotz.os // boot…','> lade lebenslang_lernen.dat','> politik → code → ai','> bereit.'] },
+      { from: 4,    to: 10,   type: 'name', name1: 'UN', name2: 'MÖGLICH', sub: 'aber gemacht. von einer person.' },
+
+      // PHASE 2 — die Provokation
+      { from: 10,   to: 14,   type: 'subline', text: 'andere brauchen dafür', sub: 'EIN TEAM VON ZEHN.' },
+      { from: 14,   to: 18,   type: 'subline', text: 'ich brauche dafür', sub: 'EINEN AI-BAUKASTEN.' },
+
+      // PHASE 3 — der Stack als Statement
+      { from: 18,   to: 22,   type: 'stamp', text: 'TELEGRAM.',   color: 'white' },
+      { from: 22,   to: 26,   type: 'stamp', text: 'CLOUDFLARE.', color: 'cyan' },
+      { from: 26,   to: 30,   type: 'stamp', text: 'SUPABASE.',   color: 'white' },
+      { from: 30,   to: 36,   type: 'subline', text: 'steuerstand · hintergrund · daten —', sub: 'EINE PERSON, EINE PIPELINE.' },
+
+      // PHASE 4 — Stats: das Verhältnis
+      { from: 36,   to: 44,   type: 'stats', items: [
+        { num: 1,   final: '1',  label: 'person · ich' },
+        { num: 10,  final: '10', slot: true, label: 'leute leistung' },
+        { num: 0,   final: '∞',  label: 'iterationen / tag' },
+        { num: 0,   final: '0',  label: 'meetings nötig' },
       ]},
-      { from: 60,   to: 66,   type: 'qa', q: '// wo andere aufhören', a: 'DA FÄNGT MEINS AN.', mode: 'run' },
-      { from: 66,   to: 72,   type: 'quote1', mark: '»', text: 'die meisten scheitern,', text2: 'weil sie aufhören zu <span class="codeword">probieren</span>.' },
-      { from: 72,   to: 78,   type: 'crash', stay: 'unmöglich ist', crash: 'NUR EINE MEINUNG.' },
-      { from: 78,   to: 82,   type: 'antiline', text: 'kein „das ist zu schwer".' },
-      { from: 82,   to: 86,   type: 'antiline', text: 'kein „das hat noch keiner gemacht".' },
-      { from: 86,   to: 90,   type: 'antiline', text: 'kein „lass uns warten".' },
-      { from: 90,   to: 96,   type: 'big', text: 'EINFACH MACHEN.' },
-      { from: 96,   to: 104,  type: 'marquee', rows: ['TROTZDEM ·  TROTZDEM ·  TROTZDEM ·  TROTZDEM ·', 'WEITER · WEITER · WEITER · WEITER · WEITER ·', 'TROTZDEM ·  TROTZDEM ·  TROTZDEM ·  TROTZDEM ·'] },
-      { from: 104,  to: 110,  type: 'repeatquote', a: 'jeder NEIN macht', b: 'das nächste JA wertvoller.' },
-      { from: 110,  to: 118,  type: 'qa', q: '// warum', a: 'WEIL ICH KANN.', mode: 'fall' },
-      { from: 118,  to: 121,  type: 'buildup', text: 'DAS HIER', size: 'sm' },
-      { from: 121,  to: 124,  type: 'buildup', text: 'IST',      size: 'md' },
-      { from: 124,  to: 127,  type: 'buildup', text: 'NICHT',    size: 'lg' },
-      { from: 127,  to: 134,  type: 'buildup', text: 'UNMÖGLICH.', size: 'xl', cyan: true },
-      { from: 134,  to: 175,  type: 'climax', a: 'GEHT NICHT', b: '— DOCH.', sub: '→ und du weißt es.', cyan: true },
-      { from: 175,  to: 260,  type: 'outro', name: 'Stephan', meta: ['gebaut zuhause · 2026','musik · die toten hosen — unmöglich','code · trotz &amp; geduld','signiert · stepharo'] },
+
+      // PHASE 5 — der Lebensweg (lebenslanges Lernen)
+      { from: 44,   to: 48,   type: 'qa', q: '// wo komme ich her', a: 'POLITIK.', mode: 'glitch' },
+      { from: 48,   to: 52,   type: 'qa', q: '// dann',             a: 'CODE.',    mode: 'glitch' },
+      { from: 52,   to: 56,   type: 'qa', q: '// jetzt',            a: 'AI.',      mode: 'glitch' },
+
+      // PHASE 6 — die 3 Skill-Säulen
+      { from: 56,   to: 62,   type: 'slam', text: '(i.) BAUEN.',          color: 'cyan' },
+      { from: 62,   to: 68,   type: 'slam', text: '(ii.) ANTREIBEN.',     color: 'white' },
+      { from: 68,   to: 74,   type: 'slam', text: '(iii.) SICHTBAR MACHEN.', color: 'cyan' },
+
+      // PHASE 7 — quote: live, nicht slide
+      { from: 74,   to: 80,   type: 'quote1', mark: '»', text: 'live im einsatz.', text2: 'nicht im <span class="codeword">slidedeck</span>.' },
+
+      // PHASE 8 — die alte Welt
+      { from: 80,   to: 84,   type: 'antiline', text: 'kein „das geht nicht“.' },
+      { from: 84,   to: 88,   type: 'antiline', text: 'kein „dafür brauchen wir ein team“.' },
+      { from: 88,   to: 92,   type: 'antiline', text: 'kein „lass uns ne agentur fragen“.' },
+
+      // PHASE 9 — was ich tue
+      { from: 92,   to: 100,  type: 'big', text: 'EINFACH BAUEN.' },
+
+      // PHASE 10 — marquee
+      { from: 100,  to: 108,  type: 'marquee', rows: ['EINE PERSON ·  ZEHN LEUTE ARBEIT ·  EINE PERSON ·  ZEHN LEUTE ARBEIT ·', 'TROTZDEM · TROTZDEM · TROTZDEM · TROTZDEM ·', 'TELEGRAM · CLOUDFLARE · SUPABASE · TELEGRAM · CLOUDFLARE · SUPABASE ·'] },
+
+      // PHASE 11 — Kontext: was ich vorher abgeliefert hab
+      { from: 108,  to: 114,  type: 'crash', stay: 'das gleiche prinzip', crash: '1000% UMSATZWACHSTUM BEI 11TEAMSPORTS.' },
+      { from: 114,  to: 120,  type: 'subline', text: '22 länder · 2,5m kunden · 100+ profi-vereine —', sub: 'GEBAUT, NICHT GEPLANT.' },
+
+      // PHASE 12 — repeat
+      { from: 120,  to: 128,  type: 'repeatquote', a: 'tausende bestellungen täglich.', b: 'MILLIONEN-UMSÄTZE TÄGLICH.' },
+
+      // PHASE 13 — die Kernfrage
+      { from: 128,  to: 136,  type: 'qa', q: '// warum geht das', a: 'WEIL ICH ES MACHE.', mode: 'fall' },
+
+      // PHASE 14 — buildup
+      { from: 136,  to: 140,  type: 'buildup', text: 'NICHTS',     size: 'sm' },
+      { from: 140,  to: 144,  type: 'buildup', text: 'AN MIR',     size: 'md' },
+      { from: 144,  to: 148,  type: 'buildup', text: 'IST',        size: 'lg' },
+      { from: 148,  to: 158,  type: 'buildup', text: 'UNMÖGLICH.', size: 'xl', cyan: true },
+
+      // PHASE 15 — climax
+      { from: 158,  to: 175,  type: 'climax', a: 'GEHT NICHT?', b: 'DOCH.', sub: '→ FRAG MICH.', cyan: true },
+
+      // PHASE 16 — outro
+      { from: 175,  to: 260,  type: 'outro', name: 'Stephan Röttger',
+        meta: ['agent.stepharo@gmail.com','politik → code → ai','one person — ten people output','signiert · stepharo · 2026'] },
     ],
-    lyrics: [
-      { t: 6,    text: 'UNMÖGLICH.' },
-      { t: 11,   text: 'geht nicht?' },
-      { t: 15,   text: 'gibt’s nicht.' },
-      { t: 19,   text: 'mach trotzdem.' },
-      { t: 24,   text: 'regel 1 · nicht fragen.' },
-      { t: 30,   text: 'regel 2 · einfach bauen.' },
-      { t: 35,   text: 'anfangen.' },
-      { t: 39,   text: 'weitermachen.' },
-      { t: 43,   text: 'nie aufhören.' },
-      { t: 48,   text: 'wenn alle sagen → geht nicht …' },
-      { t: 50,   text: '… ist es zeit anzufangen.' },
-      { t: 54,   text: 'aufgegeben · 0 · weiter · ∞' },
-      { t: 62,   text: 'wo andere aufhören →' },
-      { t: 64,   text: '→ da fängt meins an.' },
-      { t: 68,   text: 'die meisten scheitern, weil sie aufhören zu probieren.' },
-      { t: 74,   text: 'unmöglich ist nur eine meinung.' },
-      { t: 80,   text: 'kein „zu schwer".' },
-      { t: 84,   text: 'kein „nicht möglich".' },
-      { t: 88,   text: 'kein „später".' },
-      { t: 92,   text: 'EINFACH MACHEN.' },
-      { t: 98,   text: 'trotzdem · trotzdem · trotzdem' },
-      { t: 106,  text: 'jedes nein macht das nächste ja wertvoller.' },
-      { t: 112,  text: 'warum?' },
-      { t: 114,  text: 'weil ich kann.' },
-      { t: 119,  text: 'das hier ist nicht …' },
-      { t: 128,  text: '… UNMÖGLICH.' },
-      { t: 136,  text: 'GEHT NICHT —' },
-      { t: 142,  text: 'DOCH.' },
-      { t: 150,  text: '→ und du weißt es.' },
-      { t: 178,  text: '— stephan' },
-    ]
   }
 };
 
@@ -182,7 +195,6 @@ const picker = $('#picker');
 const world = $('#world');
 const audio = $('#track');
 const sceneRoot = $('#scenes');
-const lyricsLine = $('#lyrics-line');
 const trackName = $('#track-name');
 const themeTag = $('#theme-tag');
 const tickerText = $('#ticker-text');
@@ -207,21 +219,33 @@ function tryUnlock() {
     showPicker();
   }
 }
+function unlockSuccess() {
+  sessionStorage.setItem(STORAGE_KEY, '1');
+  gate.classList.add('gone');
+  setTimeout(() => { gate.hidden = true; showPicker(); }, 600);
+}
+function unlockFail() {
+  gateErr.textContent = '> falsch.';
+  gatePw.value = '';
+  gatePw.focus();
+  gate.classList.add('shake-gate');
+  setTimeout(() => gate.classList.remove('shake-gate'), 400);
+  setTimeout(() => gateErr.textContent = '', 1800);
+}
+// Auto-submit: sobald 369 eingetippt wurde, OHNE Enter weiter
+gatePw.addEventListener('input', () => {
+  const v = gatePw.value.trim();
+  if (v.length >= PW.length) {
+    if (v === PW) unlockSuccess();
+    else unlockFail();
+  }
+});
+// Enter funktioniert weiterhin (form submit als Fallback)
 gateForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const v = gatePw.value.trim();
-  if (v === PW) {
-    sessionStorage.setItem(STORAGE_KEY, '1');
-    gate.classList.add('gone');
-    setTimeout(() => { gate.hidden = true; showPicker(); }, 600);
-  } else {
-    gateErr.textContent = '> falsch.';
-    gatePw.value = '';
-    gatePw.focus();
-    gate.classList.add('shake-gate');
-    setTimeout(() => gate.classList.remove('shake-gate'), 400);
-    setTimeout(() => gateErr.textContent = '', 1800);
-  }
+  if (v === PW) unlockSuccess();
+  else unlockFail();
 });
 
 // =============================================================
@@ -273,9 +297,7 @@ function backToPicker() {
   document.body.classList.remove('playing');
   world.hidden = true;
   currentSceneIdx = -1;
-  currentLyricIdx = -1;
   sceneRoot.innerHTML = '';
-  lyricsLine.textContent = '';
   showPicker();
 }
 backBtn.addEventListener('click', backToPicker);
@@ -711,7 +733,6 @@ class Scrambler {
 // SCENE TRANSITIONS
 // =============================================================
 let currentSceneIdx = -1;
-let currentLyricIdx = -1;
 
 function updateScenes(time) {
   if (!currentSong) return;
@@ -763,29 +784,6 @@ function onSceneEnter(scene) {
 }
 
 // =============================================================
-// LIVE LYRICS (mitsingen)
-// =============================================================
-function updateLyrics(time) {
-  if (!currentSong) return;
-  const lyrics = currentSong.lyrics;
-  let idx = -1;
-  for (let i = 0; i < lyrics.length; i++) {
-    if (time >= lyrics[i].t) idx = i; else break;
-  }
-  if (idx !== currentLyricIdx) {
-    currentLyricIdx = idx;
-    if (idx >= 0) {
-      lyricsLine.innerHTML = lyrics[idx].text;
-      lyricsLine.classList.remove('flash-in');
-      void lyricsLine.offsetWidth;
-      lyricsLine.classList.add('flash-in');
-    } else {
-      lyricsLine.textContent = '';
-    }
-  }
-}
-
-// =============================================================
 // BASS-REACTIVE GLOW VARS
 // =============================================================
 function pulseHeadlines() {
@@ -814,7 +812,6 @@ function loop() {
     const total = audio.duration || 1;
     drawBG(performance.now());
     updateScenes(t);
-    updateLyrics(t);
     pulseHeadlines();
     if (progress) progress.style.width = ((t / total) * 100) + '%';
     if (timeEl) timeEl.textContent = `${fmt(t)} / ${fmt(total)}`;
@@ -833,7 +830,7 @@ muteBtn.addEventListener('click', () => {
   audio.muted = !audio.muted;
   muteBtn.querySelector('.ic').textContent = audio.muted ? '🔇' : '🔊';
 });
-restartBtn.addEventListener('click', () => { audio.currentTime = 0; audio.play(); currentSceneIdx = -1; currentLyricIdx = -1; });
+restartBtn.addEventListener('click', () => { audio.currentTime = 0; audio.play(); currentSceneIdx = -1; });
 fsBtn.addEventListener('click', () => {
   if (!document.fullscreenElement) document.documentElement.requestFullscreen();
   else document.exitFullscreen();
