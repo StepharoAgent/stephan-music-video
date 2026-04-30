@@ -48,9 +48,9 @@ const TRACKS = {
       { from: 60,   to: 66,   type: 'image', src: '/img/neural.png', tint: 'red',
         tag: '// scale', text: 'TRILLIONS.', sub: 'tokens unter mir · tage statt monate.' },
 
-      // PHASE 6 — Hintergrund (indirekt: stationen, nicht eigenleistung)
-      { from: 66,   to: 70,   type: 'stamp', text: 'STATIONEN.', color: 'red' },
-      { from: 70,   to: 75,   type: 'subline', text: 'wo gelernt:', sub: '11TS · NIKE · JAKO.' },
+      // PHASE 6 — Selbstbild, ohne fremde marken
+      { from: 66,   to: 70,   type: 'stamp', text: 'SOLO.', color: 'red' },
+      { from: 70,   to: 75,   type: 'subline', text: 'kein team im rücken —', sub: 'NUR DIE EIGENE PIPELINE.' },
 
       // 🆕 chart scene — real metrics statt nur slot-machine zahlen
       { from: 75,   to: 82,   type: 'chart', title: 'PROOF.', bars: [
@@ -59,7 +59,7 @@ const TRACKS = {
         { label: 'p99 latency',value: 47,  max: 500, suffix: 'ms',   color: 'red' },
         { label: 'agency cost',value: 0,   max: 100, suffix: '%',    color: 'green' },
       ]},
-      { from: 82,   to: 86,   type: 'quote1', mark: '»', text: 'großes team. großes ergebnis.', text2: '<span class="codeword">dabei</span> gewesen. davon gelernt.' },
+      { from: 82,   to: 86,   type: 'quote1', mark: '»', text: 'eine person —', text2: 'eine <span class="codeword">pipeline</span>. ein ergebnis.' },
 
       // PHASE 7 — Anti-Bullshit (was er NICHT mitbringt)
       { from: 86,   to: 89,   type: 'antiline', text: 'kein pitch deck.' },
@@ -92,11 +92,11 @@ const TRACKS = {
       // PHASE 10 — Verstärkung (twobeat raus, terminal war schon der proof)
       { from: 128, to: 132,  type: 'repeatquote', a: 'live im einsatz —', b: 'NICHT IM SLIDEDECK.' },
 
-      // PHASE 11 — marquee (eigenschaften, keine team-pose)
+      // PHASE 11 — marquee (eigenschaften, keine fremden marken)
       { from: 132, to: 139,  type: 'marquee', rows: [
         'STEPHAN RÖTTGER ·  POLYMATH ·  OPERATOR ·  MULTIPLIKATOR ·',
         'DENKEN · BAUEN · ANTREIBEN · LIEFERN · DENKEN · BAUEN · ANTREIBEN · LIEFERN ·',
-        '11TEAMSPORTS · NIKE · JAKO · 11TEAMSPORTS · NIKE · JAKO ·'
+        'AI · CODE · SHIP · AI · CODE · SHIP · AI · CODE · SHIP ·'
       ]},
 
       // PHASE 12 — buildup zur Botschaft
@@ -207,20 +207,20 @@ const TRACKS = {
       // PHASE 8 — die Haltung (gross, einfach, hart)
       { from: 81,   to: 88,   type: 'big', text: 'TROTZDEM GEMACHT.' },
 
-      // PHASE 9 — Hintergrund (indirekt) + chart als beweis
+      // PHASE 9 — chart als beweis (eigene metriken, keine fremden marken)
       { from: 88,   to: 97,   type: 'chart', title: 'BEWIESEN.', bars: [
         { label: 'tage zu live',  value: 7,   max: 180, suffix: 'd',    color: 'cyan' },
         { label: 'meetings',      value: 0,   max: 50,  suffix: '',     color: 'cyan' },
         { label: 'lighthouse',    value: 100, max: 100, suffix: '/100', color: 'cyan' },
         { label: 'team größe',    value: 1,   max: 10,  suffix: '',     color: 'cyan' },
       ]},
-      { from: 97,   to: 102,  type: 'quote1', mark: '»', text: 'großes team. großes ergebnis.', text2: '<span class="codeword">dabei</span> gewesen. davon gelernt.' },
+      { from: 97,   to: 102,  type: 'quote1', mark: '»', text: 'kein team. kein meeting.', text2: 'nur <span class="codeword">output</span>.' },
 
-      // PHASE 10 — marquee (deutsche hook-phrasen)
+      // PHASE 10 — marquee (deutsche hook-phrasen, ohne fremde marken)
       { from: 102,  to: 110,  type: 'marquee', rows: [
         'UNMÖGLICH ·  SCHON GEMACHT ·  UNMÖGLICH ·  SCHON GEMACHT ·',
         'DENKEN · BAUEN · MACHEN · DENKEN · BAUEN · MACHEN ·',
-        '11TS · NIKE · JAKO · 11TS · NIKE · JAKO ·'
+        'SOLO · STACK · SHIP · SOLO · STACK · SHIP · SOLO · STACK · SHIP ·'
       ]},
 
       // PHASE 11 — Kernfrage
