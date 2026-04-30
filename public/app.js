@@ -45,16 +45,16 @@ const TRACKS = {
       { from: 56,   to: 60,   type: 'subline', text: 'weil ki kein assistent ist —', sub: 'SONDERN MEIN HEBEL.' },
       { from: 60,   to: 66,   type: 'quote1', mark: '»', text: 'trilliarden tokens unter mir —', text2: '<span class="codeword">tage</span> statt monate.' },
 
-      // PHASE 6 — Proof: als CTO im Team — NICHT solo (das wäre gelogen)
-      { from: 66,   to: 70,   type: 'stamp', text: 'PROOF.', color: 'red' },
-      { from: 70,   to: 75,   type: 'subline', text: 'als cto · im team von 1000+ —', sub: '11TEAMSPORTS · NIKE · JAKO.' },
+      // PHASE 6 — Hintergrund (indirekt: stationen, nicht eigenleistung)
+      { from: 66,   to: 70,   type: 'stamp', text: 'STATIONEN.', color: 'red' },
+      { from: 70,   to: 75,   type: 'subline', text: 'wo gelernt:', sub: '11TEAMSPORTS · NIKE · JAKO.' },
       { from: 75,   to: 82,   type: 'stats', items: [
-        { num: 1000, final: '1000%', slot: true, label: 'umsatz · mitverantwortet' },
-        { num: 22,   final: '22',    slot: true, label: 'länder · live skaliert' },
-        { num: 25,   final: '2,5M',                label: 'kunden · im shop bedient' },
-        { num: 10,   final: '10+',                 label: 'jahre · als cto' },
+        { num: 1000, final: '1000%', slot: true, label: 'wachstum · 11ts' },
+        { num: 22,   final: '22',    slot: true, label: 'länder · online' },
+        { num: 25,   final: '2,5M',                label: 'kunden · im shop' },
+        { num: 10,   final: '10+',                 label: 'jahre · dort' },
       ]},
-      { from: 82,   to: 86,   type: 'quote1', mark: '»', text: 'kein lone wolf —', text2: 'sondern <span class="codeword">architekt</span> im team.' },
+      { from: 82,   to: 86,   type: 'quote1', mark: '»', text: 'großes team. großes ergebnis.', text2: '<span class="codeword">dabei</span> gewesen. davon gelernt.' },
 
       // PHASE 7 — Anti-Bullshit (was er NICHT mitbringt)
       { from: 86,   to: 89,   type: 'antiline', text: 'kein pitch deck.' },
@@ -75,11 +75,11 @@ const TRACKS = {
       { from: 122, to: 126,  type: 'twobeat', a: 'KLINGT GROSS.', b: 'IST ES AUCH.' },
       { from: 126, to: 132,  type: 'repeatquote', a: 'live im einsatz —', b: 'NICHT IM SLIDEDECK.' },
 
-      // PHASE 11 — marquee
+      // PHASE 11 — marquee (eigenschaften, keine team-pose)
       { from: 132, to: 139,  type: 'marquee', rows: [
         'STEPHAN RÖTTGER ·  POLYMATH ·  OPERATOR ·  MULTIPLIKATOR ·',
         'DENKEN · BAUEN · ANTREIBEN · LIEFERN · DENKEN · BAUEN · ANTREIBEN · LIEFERN ·',
-        'CTO · ARCHITEKT · IM TEAM VON 1000+ ·'
+        '11TEAMSPORTS · NIKE · JAKO · 11TEAMSPORTS · NIKE · JAKO ·'
       ]},
 
       // PHASE 12 — buildup zur Botschaft
@@ -184,16 +184,16 @@ const TRACKS = {
       // PHASE 8 — die Haltung (groß, einfach, hart)
       { from: 81,   to: 88,   type: 'big', text: 'MA FATTO.' },
 
-      // PHASE 9 — Proof: als CTO im Team — NICHT solo (das wäre gelogen)
-      { from: 88,   to: 92,   type: 'stamp', text: 'PROOF.', color: 'cyan' },
-      { from: 92,   to: 97,   type: 'subline', text: 'als cto · im team von 1000+ —', sub: '22 LÄNDER · 2,5M KUNDEN · 1000% WACHSTUM.' },
-      { from: 97,   to: 102,  type: 'quote1', mark: '»', text: 'non da solo —', text2: 'ma <span class="codeword">architetto</span> nel team.' },
+      // PHASE 9 — Hintergrund (indirekt: stationen, nicht eigenleistung)
+      { from: 88,   to: 92,   type: 'stamp', text: 'STAZIONI.', color: 'cyan' },
+      { from: 92,   to: 97,   type: 'subline', text: 'dove imparato:', sub: '11TEAMSPORTS · NIKE · JAKO.' },
+      { from: 97,   to: 102,  type: 'quote1', mark: '»', text: 'grande squadra. grande risultato.', text2: 'io <span class="codeword">c\'ero</span>. ho imparato.' },
 
-      // PHASE 10 — marquee (Hook-Phrasen, beat)
+      // PHASE 10 — marquee (hook-phrasen, ohne eigenpose)
       { from: 102,  to: 110,  type: 'marquee', rows: [
         'BELLO ·  E ·  IMPOSSIBILE ·  BELLO ·  E ·  IMPOSSIBILE ·',
         'MA FATTO · MA FATTO · MA FATTO · MA FATTO · MA FATTO ·',
-        'CTO · ARCHITETTO · NEL TEAM · CTO · ARCHITETTO · NEL TEAM ·'
+        '11TEAMSPORTS · NIKE · JAKO · 11TEAMSPORTS · NIKE · JAKO ·'
       ]},
 
       // PHASE 11 — die Kernfrage
@@ -216,7 +216,7 @@ const TRACKS = {
       // ============================================================
 
       // 15a: erste endcard, kurz
-      { from: 162, to: 170,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'cto · architetto · nel team da subito', cyan: true },
+      { from: 162, to: 170,  type: 'endcard', cta: 'HOL MICH AN BORD.', mail: 'agent.stepharo@gmail.com', tag: 'una persona · disponibile subito', cyan: true },
 
       // 15b: drei kurze stamps in folge — outro-puls
       { from: 170, to: 172,  type: 'stamp', text: 'BELLO.',       color: 'cyan' },
@@ -264,7 +264,7 @@ const TRACKS = {
 
       // 15l: kurze signature (8s, dann fade)
       { from: 240, to: 251,  type: 'outro', name: 'Stephan Röttger',
-        meta: ['agent.stepharo@gmail.com','cto · architetto · nel team','grazie a gianna nannini · 1986','signiert · stepharo · 2026'] },
+        meta: ['agent.stepharo@gmail.com','bello e impossibile · ma fatto','grazie a gianna nannini · 1986','signiert · stepharo · 2026'] },
     ],
   }
 };
